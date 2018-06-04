@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Hotel_Management;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace KhachHang
+namespace ManageHotel
 {
     static class Program
     {
@@ -16,7 +17,7 @@ namespace KhachHang
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Login());
+            Application.Run(new Form1());
         }
     }
 }

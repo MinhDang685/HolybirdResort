@@ -31,8 +31,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.btnLogin = new DevComponents.DotNetBar.ButtonX();
             this.labelX3 = new DevComponents.DotNetBar.LabelX();
-            this.txtboxPWD = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.textBoxX1 = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.txtboxUserName = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.textBoxPassword = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.SuspendLayout();
             // 
             // btnLogin
@@ -45,8 +45,9 @@
             this.btnLogin.Size = new System.Drawing.Size(75, 23);
             this.btnLogin.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnLogin.TabIndex = 4;
-            this.btnLogin.Text = "Đăng nhập";
+            this.btnLogin.Text = "Sign In";
             this.btnLogin.TextColor = System.Drawing.Color.Black;
+            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
             // 
             // labelX3
             // 
@@ -55,50 +56,51 @@
             // 
             // 
             this.labelX3.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX3.Font = new System.Drawing.Font("Porter FT Round", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelX3.Font = new System.Drawing.Font("Microsoft Sans Serif", 28F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelX3.ForeColor = System.Drawing.Color.White;
-            this.labelX3.Location = new System.Drawing.Point(308, 216);
+            this.labelX3.Location = new System.Drawing.Point(58, 23);
             this.labelX3.Name = "labelX3";
-            this.labelX3.Size = new System.Drawing.Size(142, 44);
+            this.labelX3.Size = new System.Drawing.Size(391, 60);
             this.labelX3.TabIndex = 5;
             this.labelX3.Text = " HolyBird Resort";
+            this.labelX3.TextAlignment = System.Drawing.StringAlignment.Center;
             // 
-            // txtboxPWD
+            // txtboxUserName
             // 
-            this.txtboxPWD.BackColor = System.Drawing.Color.White;
-            // 
-            // 
-            // 
-            this.txtboxPWD.Border.Class = "TextBoxBorder";
-            this.txtboxPWD.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.txtboxPWD.DisabledBackColor = System.Drawing.Color.White;
-            this.txtboxPWD.ForeColor = System.Drawing.Color.Black;
-            this.txtboxPWD.Location = new System.Drawing.Point(296, 255);
-            this.txtboxPWD.Name = "txtboxPWD";
-            this.txtboxPWD.PreventEnterBeep = true;
-            this.txtboxPWD.Size = new System.Drawing.Size(164, 20);
-            this.txtboxPWD.TabIndex = 0;
-            this.txtboxPWD.WatermarkFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtboxPWD.WatermarkText = "Tên đăng nhập";
-            this.txtboxPWD.TextChanged += new System.EventHandler(this.txtboxPWD_TextChanged);
-            // 
-            // textBoxX1
-            // 
-            this.textBoxX1.BackColor = System.Drawing.Color.White;
+            this.txtboxUserName.BackColor = System.Drawing.Color.White;
             // 
             // 
             // 
-            this.textBoxX1.Border.Class = "TextBoxBorder";
-            this.textBoxX1.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.textBoxX1.DisabledBackColor = System.Drawing.Color.White;
-            this.textBoxX1.ForeColor = System.Drawing.Color.Black;
-            this.textBoxX1.Location = new System.Drawing.Point(296, 281);
-            this.textBoxX1.Name = "textBoxX1";
-            this.textBoxX1.PreventEnterBeep = true;
-            this.textBoxX1.Size = new System.Drawing.Size(164, 20);
-            this.textBoxX1.TabIndex = 0;
-            this.textBoxX1.WatermarkFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxX1.WatermarkText = "Mật khẩu";
+            this.txtboxUserName.Border.Class = "TextBoxBorder";
+            this.txtboxUserName.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtboxUserName.DisabledBackColor = System.Drawing.Color.White;
+            this.txtboxUserName.ForeColor = System.Drawing.Color.Black;
+            this.txtboxUserName.Location = new System.Drawing.Point(296, 255);
+            this.txtboxUserName.Name = "txtboxUserName";
+            this.txtboxUserName.PreventEnterBeep = true;
+            this.txtboxUserName.Size = new System.Drawing.Size(164, 20);
+            this.txtboxUserName.TabIndex = 0;
+            this.txtboxUserName.WatermarkFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtboxUserName.WatermarkText = "Username";
+            this.txtboxUserName.TextChanged += new System.EventHandler(this.txtboxPWD_TextChanged);
+            // 
+            // textBoxPassword
+            // 
+            this.textBoxPassword.BackColor = System.Drawing.Color.White;
+            // 
+            // 
+            // 
+            this.textBoxPassword.Border.Class = "TextBoxBorder";
+            this.textBoxPassword.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.textBoxPassword.DisabledBackColor = System.Drawing.Color.White;
+            this.textBoxPassword.ForeColor = System.Drawing.Color.Black;
+            this.textBoxPassword.Location = new System.Drawing.Point(296, 281);
+            this.textBoxPassword.Name = "textBoxPassword";
+            this.textBoxPassword.PreventEnterBeep = true;
+            this.textBoxPassword.Size = new System.Drawing.Size(164, 20);
+            this.textBoxPassword.TabIndex = 0;
+            this.textBoxPassword.WatermarkFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxPassword.WatermarkText = "Password ";
             // 
             // Form1
             // 
@@ -108,9 +110,9 @@
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(501, 377);
-            this.Controls.Add(this.txtboxPWD);
+            this.Controls.Add(this.txtboxUserName);
             this.Controls.Add(this.labelX3);
-            this.Controls.Add(this.textBoxX1);
+            this.Controls.Add(this.textBoxPassword);
             this.Controls.Add(this.btnLogin);
             this.Name = "Form1";
             this.Text = "Đăng nhập";
@@ -121,8 +123,8 @@
         #endregion
         private DevComponents.DotNetBar.ButtonX btnLogin;
         private DevComponents.DotNetBar.LabelX labelX3;
-        private DevComponents.DotNetBar.Controls.TextBoxX txtboxPWD;
-        private DevComponents.DotNetBar.Controls.TextBoxX textBoxX1;
+        private DevComponents.DotNetBar.Controls.TextBoxX txtboxUserName;
+        private DevComponents.DotNetBar.Controls.TextBoxX textBoxPassword;
     }
 }
 

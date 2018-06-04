@@ -5,7 +5,7 @@ VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hotel-Management", "Hotel-Management\Hotel-Management.csproj", "{3F48D183-1774-4C14-93C4-7814BAAA1DF7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KhachHang", "KhachHang\KhachHang.csproj", "{153AD637-FCF0-4820-A75E-78D5ED7F9CD7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppKhachHang", "KhachHang\AppKhachHang.csproj", "{153AD637-FCF0-4820-A75E-78D5ED7F9CD7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
