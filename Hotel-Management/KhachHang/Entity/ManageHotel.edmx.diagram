@@ -11,22 +11,22 @@
         <EntityTypeShape EntityType="ManageHotelModel.Hang" Width="1.5" PointX="0.75" PointY="1.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ManageHotelModel.HeThong" Width="1.5" PointX="8" PointY="5.875" IsExpanded="true" />
         <EntityTypeShape EntityType="ManageHotelModel.HinhThuc" Width="1.5" PointX="0.75" PointY="4.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="ManageHotelModel.KhachHang" Width="1.5" PointX="3" PointY="11.125" IsExpanded="true" />
         <EntityTypeShape EntityType="ManageHotelModel.LoaiHeThong" Width="1.5" PointX="5.75" PointY="6.125" IsExpanded="true" />
         <EntityTypeShape EntityType="ManageHotelModel.NhanVien" Width="1.5" PointX="10.25" PointY="5.875" IsExpanded="true" />
         <EntityTypeShape EntityType="ManageHotelModel.Phong" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="ManageHotelModel.TinhTrangGiaoDich" Width="1.5" PointX="5.75" PointY="8.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ManageHotelModel.TrangThaiPhong" Width="1.5" PointX="0.75" PointY="7.25" IsExpanded="true" />
         <AssociationConnector Association="ManageHotelModel.FK__ChiTietGi__ID_Gi__21B6055D" ManuallyRouted="false" />
-        <AssociationConnector Association="ManageHotelModel.FK__ChiTietGi__ID_Kh__239E4DCF" ManuallyRouted="false" />
         <AssociationConnector Association="ManageHotelModel.FK__ChiTietGi__ID_Ma__22AA2996" ManuallyRouted="false" />
         <AssociationConnector Association="ManageHotelModel.FK__DichVuPho__ID_Ch__267ABA7A" ManuallyRouted="false" />
-        <AssociationConnector Association="ManageHotelModel.FK__KhachHang__ID_Gi__1ED998B2" ManuallyRouted="false" />
         <AssociationConnector Association="ManageHotelModel.FK__Phong__Hang__164452B1" ManuallyRouted="false" />
         <AssociationConnector Association="ManageHotelModel.FK__HeThong__ID_Loai__2B3F6F97" ManuallyRouted="false" />
         <AssociationConnector Association="ManageHotelModel.FK_NV_HT" ManuallyRouted="false" />
         <AssociationConnector Association="ManageHotelModel.FK__Phong__HinhThuc__173876EA" ManuallyRouted="false" />
         <AssociationConnector Association="ManageHotelModel.FK__Phong__TrangThai__182C9B23" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="ManageHotelModel.KhachHang" Width="1.5" PointX="5.25" PointY="11.5" />
+        <AssociationConnector Association="ManageHotelModel.FK__ChiTietGi__ID_Kh__239E4DCF" />
+        <AssociationConnector Association="ManageHotelModel.FK__KhachHang__ID_Gi__1ED998B2" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -31,11 +31,11 @@ namespace ManageHotel
         public virtual DbSet<Hang> Hangs { get; set; }
         public virtual DbSet<HeThong> HeThongs { get; set; }
         public virtual DbSet<HinhThuc> HinhThucs { get; set; }
-        public virtual DbSet<KhachHang> KhachHangs { get; set; }
         public virtual DbSet<LoaiHeThong> LoaiHeThongs { get; set; }
         public virtual DbSet<NhanVien> NhanViens { get; set; }
         public virtual DbSet<Phong> Phongs { get; set; }
         public virtual DbSet<TinhTrangGiaoDich> TinhTrangGiaoDiches { get; set; }
         public virtual DbSet<TrangThaiPhong> TrangThaiPhongs { get; set; }
+        public virtual DbSet<KhachHang> KhachHangs { get; set; }
     }
 }

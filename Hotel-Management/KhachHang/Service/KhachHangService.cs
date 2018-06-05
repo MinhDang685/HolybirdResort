@@ -17,5 +17,17 @@ namespace Service
                 return khachhang;
             }
         }
+        public bool checkLoginUserName(String CMND, String Password){
+            KhachHang user = this.getKhachHangByCMND(CMND);
+            if (user == null) {
+                return false;
+            }
+            else{
+                if (user.MatKhau == Password) {
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 }

@@ -78,6 +78,7 @@ create table KhachHang (
 	ID_GiaoDich int foreign key references GiaoDich(ID),
 	HoTen nvarchar(100),
 	CMND varchar(50),
+	MatKhau nvarchar(100),
 	PRIMARY KEY (ID)
 );
 

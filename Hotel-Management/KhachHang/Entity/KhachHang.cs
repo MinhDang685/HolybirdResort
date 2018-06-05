@@ -23,6 +23,7 @@ namespace ManageHotel
         public Nullable<int> ID_GiaoDich { get; set; }
         public string HoTen { get; set; }
         public string CMND { get; set; }
+        public string MatKhau { get; set; }
     
         public virtual ICollection<ChiTietGiaoDich> ChiTietGiaoDiches { get; set; }
         public virtual GiaoDich GiaoDich { get; set; }
