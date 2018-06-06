@@ -18,12 +18,13 @@ go
 create table HinhThuc(
 	ID int IDENTITY(1,1),
 	ThongTin nvarchar(100), /*1 giường đôi, 1 giường đơn, 2 giường đôi, 2 giường đơn*/
+	SoLuongCho int,
 	PRIMARY KEY (ID)
 );
-insert into HinhThuc (ThongTin) values (N'1 giường đôi');
-insert into HinhThuc (ThongTin) values (N'1 giường đơn');
-insert into HinhThuc (ThongTin) values (N'2 giường đôi');
-insert into HinhThuc (ThongTin) values (N'2 giường đơn');
+insert into HinhThuc (ThongTin, SoLuongCho) values (N'1 giường đôi');
+insert into HinhThuc (ThongTin, SoLuongCho) values (N'1 giường đơn');
+insert into HinhThuc (ThongTin, SoLuongCho) values (N'2 giường đôi');
+insert into HinhThuc (ThongTin, SoLuongCho) values (N'2 giường đơn');
 go
 
 create table TrangThaiPhong(
