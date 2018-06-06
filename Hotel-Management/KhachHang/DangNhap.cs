@@ -1,4 +1,5 @@
 ﻿using ManageHotel;
+using ManageHotel.Service;
 using Service;
 using System;
 using System.Collections.Generic;
@@ -14,7 +15,7 @@ namespace Hotel_Management
 {
     public partial class Form1 : Form
     {
-        KhachHangService khService = new KhachHangService();
+        ComboboxItemService service  = new ComboboxItemService();
         public Form1()
         {
             InitializeComponent();
@@ -32,7 +33,7 @@ namespace Hotel_Management
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-           KhachHang tmp =  khService.getKhachHangByCMND("123456789");
+            List<String> tmp = service.getAllTang();
             int a = 0;
         }
     }
