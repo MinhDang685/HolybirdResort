@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="a0725ef6d8d04754b3f133208e635e61" Name="Diagram1">
+        <EntityTypeShape EntityType="HOLYBIRDRESORTModel.ChiTietGiaoDich" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="HOLYBIRDRESORTModel.DichVuPhong" Width="1.5" PointX="7.5" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="HOLYBIRDRESORTModel.GiaoDich" Width="1.5" PointX="3" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="HOLYBIRDRESORTModel.Hang" Width="1.5" PointX="0.75" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HOLYBIRDRESORTModel.HeThong" Width="1.5" PointX="8" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="HOLYBIRDRESORTModel.HinhThuc" Width="1.5" PointX="0.75" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="HOLYBIRDRESORTModel.KhachHang" Width="1.5" PointX="3" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="HOLYBIRDRESORTModel.LoaiHeThong" Width="1.5" PointX="5.75" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="HOLYBIRDRESORTModel.NhanVien" Width="1.5" PointX="10.25" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="HOLYBIRDRESORTModel.Phong" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="HOLYBIRDRESORTModel.TinhTrangGiaoDich" Width="1.5" PointX="5.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HOLYBIRDRESORTModel.TrangThaiPhong" Width="1.5" PointX="0.75" PointY="7.25" IsExpanded="true" />
+        <AssociationConnector Association="HOLYBIRDRESORTModel.FK__ChiTietGi__ID_Gi__21B6055D" ManuallyRouted="false" />
+        <AssociationConnector Association="HOLYBIRDRESORTModel.FK__ChiTietGi__ID_Kh__239E4DCF" ManuallyRouted="false" />
+        <AssociationConnector Association="HOLYBIRDRESORTModel.FK__ChiTietGi__ID_Ma__22AA2996" ManuallyRouted="false" />
+        <AssociationConnector Association="HOLYBIRDRESORTModel.FK__DichVuPho__ID_Ch__267ABA7A" ManuallyRouted="false" />
+        <AssociationConnector Association="HOLYBIRDRESORTModel.FK__KhachHang__ID_Gi__1ED998B2" ManuallyRouted="false" />
+        <AssociationConnector Association="HOLYBIRDRESORTModel.FK__Phong__Hang__164452B1" ManuallyRouted="false" />
+        <AssociationConnector Association="HOLYBIRDRESORTModel.FK__HeThong__ID_Loai__2B3F6F97" ManuallyRouted="false" />
+        <AssociationConnector Association="HOLYBIRDRESORTModel.FK_NV_HT" ManuallyRouted="false" />
+        <AssociationConnector Association="HOLYBIRDRESORTModel.FK__Phong__HinhThuc__173876EA" ManuallyRouted="false" />
+        <AssociationConnector Association="HOLYBIRDRESORTModel.FK__Phong__TrangThai__182C9B23" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

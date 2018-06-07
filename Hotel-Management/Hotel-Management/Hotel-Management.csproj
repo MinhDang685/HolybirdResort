@@ -55,8 +55,17 @@
     <Reference Include="DevComponents.DotNetBar.SuperGrid, Version=14.1.0.18, Culture=neutral, PublicKeyToken=7eb7c3a35b91de04, processorArchitecture=MSIL" />
     <Reference Include="DevComponents.DotNetBar2, Version=14.1.0.18, Culture=neutral, PublicKeyToken=7eb7c3a35b91de04, processorArchitecture=MSIL" />
     <Reference Include="DevComponents.Instrumentation, Version=14.1.0.18, Culture=neutral, PublicKeyToken=f90dc37c26666a67, processorArchitecture=MSIL" />
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -68,11 +77,56 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ChiTietGiaoDich.cs">
+      <DependentUpon>ManageHotelModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DangNhap.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="DangNhap.Designer.cs">
       <DependentUpon>DangNhap.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DichVuPhong.cs">
+      <DependentUpon>ManageHotelModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GiaoDich.cs">
+      <DependentUpon>ManageHotelModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Hang.cs">
+      <DependentUpon>ManageHotelModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HeThong.cs">
+      <DependentUpon>ManageHotelModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HinhThuc.cs">
+      <DependentUpon>ManageHotelModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="KhachHang.cs">
+      <DependentUpon>ManageHotelModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LoaiHeThong.cs">
+      <DependentUpon>ManageHotelModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ManageHotelModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ManageHotelModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ManageHotelModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ManageHotelModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ManageHotelModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ManageHotelModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="NhanVien.cs">
+      <DependentUpon>ManageHotelModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Phong.cs">
+      <DependentUpon>ManageHotelModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ThanhToan.cs">
       <SubType>Form</SubType>
@@ -88,6 +142,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TinhTrangGiaoDich.cs">
+      <DependentUpon>ManageHotelModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TrangThaiPhong.cs">
+      <DependentUpon>ManageHotelModel.tt</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="DangNhap.resx">
       <DependentUpon>DangNhap.cs</DependentUpon>
     </EmbeddedResource>
@@ -107,6 +167,25 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EntityDeploy Include="ManageHotelModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ManageHotelModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="App.Config" />
+    <None Include="ManageHotelModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ManageHotelModel.edmx</DependentUpon>
+      <LastGenOutput>ManageHotelModel.Context.cs</LastGenOutput>
+    </None>
+    <None Include="ManageHotelModel.edmx.diagram">
+      <DependentUpon>ManageHotelModel.edmx</DependentUpon>
+    </None>
+    <None Include="ManageHotelModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ManageHotelModel.edmx</DependentUpon>
+      <LastGenOutput>ManageHotelModel.cs</LastGenOutput>
+    </None>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -118,7 +197,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
