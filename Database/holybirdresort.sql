@@ -44,8 +44,6 @@ create table Phong (
 	Hang int foreign key references Hang(ID),
 	HinhThuc int foreign key references HinhThuc(ID),
 	DonGia int, 
-	NgayBatDau date,
-	NgayKetThuc date,
 	TrangThai int foreign key references TrangThaiPhong(ID),
 	PRIMARY KEY (ID)
 );
@@ -167,8 +165,8 @@ begin
 			set @hang = dbo.fRandomInteger(NewID(),1,5)
 			set @hinhThuc = dbo.fRandomInteger(NewID(),1,4)
 			set @donGia = @hang * 100000 + @hinhThuc * 50000
-			insert into Phong (MaPhong, ViTriTang, Hang, HinhThuc, DonGia, TrangThai, NgayBatDau, NgayKetThuc) 
-			values (@maPhong, @i, @hang, @hinhThuc, @donGia, 1, null, null)
+			insert into Phong (MaPhong, ViTriTang, Hang, HinhThuc, DonGia, TrangThai) 
+			values (@maPhong, @i, @hang, @hinhThuc, @donGia, 1)
 			set @j = @j + 1
 		end
 		set @j = 1
