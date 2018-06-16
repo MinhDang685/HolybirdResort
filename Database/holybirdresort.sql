@@ -179,6 +179,59 @@ EXEC sp_KhoiTaoDanhSachPhong 10, 10
 go
 
 
+/*Store Search Phong available*/
+create procedure sp_SearchAvailableRoom(
+		@floor int
+	  , @state int
+	  , @level int
+	  , @numberslot int
+	  , @datestart varchar(20)
+	  , @dateend varchar(20))
+AS
+BEGIN
+	select p.*, ht.ThongTin, h.ThongTin AS roomlevel
+	from Phong p, HinhThuc ht, Hang h
+	where	p.ViTriTang = @floor
+		AND p.TrangThai = @state
+		AND p.Hang = @level
+		AND p.HinhThuc = ht.ID
+		AND ht.ID = @numberslot
+		AND p.ID NOT IN(
+			select ct.ID_MaPhong
+			from ChiTietGiaoDich ct
+			where  CONVERT(varchar, ct.NgayBatDau, 111) between  @datestart AND @dateend
+				OR CONVERT(varchar, ct.NgayKetThuc, 111) between @datestart AND @dateend
+		)
+		AND p.Hang = h.ID
+END
+
+EXEC sp_SearchAvailableRoom 1, 1,5, 1, '2018/01/01', '2018/06/16'
+go
+
+
+create function fGetRoomPrice(@roomId int)
+returns int
+as
+begin 
+	declare @price int
+	select @price = DonGia
+	from Phong
+	where ID = @roomId
+	return @price
+end
+go
+
+create procedure sp_ThemChiTietGiaoDich @idGiaoDich int, @idPhong int, @idKhach int, 
+										@ngayBatDau Datetime, @ngayKetThuc Datetime
+as
+begin
+	declare @thanhTien int
+	set @thanhTien = dbo.fGetRoomPrice(@idPhong)
+	insert into ChiTietGiaoDich 
+				(ID_GiaoDich, ID_MaPhong, ID_KhachHang, NgayBatDau, NgayKetThuc, ThanhTien)
+		values (@idGiaoDich, @idPhong, @idKhach, @ngayBatDau, @ngayKetThuc, @thanhTien)
+end
+
 
 
 

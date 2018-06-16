@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ManageHotel.Entity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ManageHotel.Service
 {
-    class ComboboxItemService
+    public class ComboboxItemService
     {
         public List<Hang> getAllHang() {
             using (var db = new ManageHotelEntities())
@@ -24,5 +25,15 @@ namespace ManageHotel.Service
                 return hangphong;
             }
         }
+
+        public List<HinhThuc> getAllHinhThuc()
+        {
+            using (var db = new ManageHotelEntities())
+            {
+                List<HinhThuc> hinhthuc = db.HinhThucs.ToList();
+                return hinhthuc;
+            }
+        }
+
     }
 }

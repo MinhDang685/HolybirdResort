@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ManageHotel
+namespace ManageHotel.Entity
 {
     using System;
     using System.Collections.Generic;

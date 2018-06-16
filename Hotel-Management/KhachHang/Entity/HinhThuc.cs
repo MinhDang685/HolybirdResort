@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ManageHotel
+namespace ManageHotel.Entity
 {
     using System;
     using System.Collections.Generic;
@@ -21,6 +21,7 @@ namespace ManageHotel
     
         public int ID { get; set; }
         public string ThongTin { get; set; }
+        public Nullable<int> SoLuongCho { get; set; }
     
         public virtual ICollection<Phong> Phongs { get; set; }
     }

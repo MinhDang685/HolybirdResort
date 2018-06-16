@@ -10,22 +10,17 @@
 namespace ManageHotel.Entity
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class KhachHang
+    public partial class sp_SearchAvailableRoom_Result
     {
-        public KhachHang()
-        {
-            this.ChiTietGiaoDiches = new HashSet<ChiTietGiaoDich>();
-        }
-    
         public int ID { get; set; }
-        public Nullable<int> ID_GiaoDich { get; set; }
-        public string HoTen { get; set; }
-        public string CMND { get; set; }
-        public string MatKhau { get; set; }
-    
-        public virtual ICollection<ChiTietGiaoDich> ChiTietGiaoDiches { get; set; }
-        public virtual GiaoDich GiaoDich { get; set; }
+        public string MaPhong { get; set; }
+        public string ViTriTang { get; set; }
+        public Nullable<int> Hang { get; set; }
+        public Nullable<int> HinhThuc { get; set; }
+        public Nullable<int> DonGia { get; set; }
+        public Nullable<int> TrangThai { get; set; }
+        public string ThongTin { get; set; }
+        public string roomlevel { get; set; }
     }
 }

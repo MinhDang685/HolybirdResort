@@ -63,6 +63,7 @@
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ThongTin" Type="nvarchar" MaxLength="100" />
+          <Property Name="SoLuongCho" Type="int" />
         </EntityType>
         <EntityType Name="KhachHang">
           <Key>
@@ -236,6 +237,14 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="sp_SearchAvailableRoom" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="floor" Type="int" Mode="In" />
+          <Parameter Name="state" Type="int" Mode="In" />
+          <Parameter Name="level" Type="int" Mode="In" />
+          <Parameter Name="numberslot" Type="int" Mode="In" />
+          <Parameter Name="datestart" Type="varchar" Mode="In" />
+          <Parameter Name="dateend" Type="varchar" Mode="In" />
+        </Function>
         <EntityContainer Name="ManageHotelModelStoreContainer">
           <EntitySet Name="ChiTietGiaoDich" EntityType="Self.ChiTietGiaoDich" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DichVuPhong" EntityType="Self.DichVuPhong" Schema="dbo" store:Type="Tables" />
@@ -306,9 +315,9 @@
           <Property Name="NgayKetThuc" Type="DateTime" Precision="3" />
           <Property Name="ThanhTien" Type="Int32" />
           <NavigationProperty Name="GiaoDich" Relationship="Self.FK__ChiTietGi__ID_Gi__21B6055D" FromRole="ChiTietGiaoDich" ToRole="GiaoDich" />
+          <NavigationProperty Name="KhachHang" Relationship="Self.FK__ChiTietGi__ID_Kh__239E4DCF" FromRole="ChiTietGiaoDich" ToRole="KhachHang" />
           <NavigationProperty Name="Phong" Relationship="Self.FK__ChiTietGi__ID_Ma__22AA2996" FromRole="ChiTietGiaoDich" ToRole="Phong" />
           <NavigationProperty Name="DichVuPhongs" Relationship="Self.FK__DichVuPho__ID_Ch__267ABA7A" FromRole="ChiTietGiaoDich" ToRole="DichVuPhong" />
-          <NavigationProperty Name="KhachHang" Relationship="ManageHotelModel.FK__ChiTietGi__ID_Kh__239E4DCF" FromRole="ChiTietGiaoDich" ToRole="KhachHang" />
         </EntityType>
         <EntityType Name="DichVuPhong">
           <Key>
@@ -336,7 +345,7 @@
           <Property Name="TinhTrang" Type="Int32" />
           <Property Name="TongTien" Type="Int32" />
           <NavigationProperty Name="ChiTietGiaoDiches" Relationship="Self.FK__ChiTietGi__ID_Gi__21B6055D" FromRole="GiaoDich" ToRole="ChiTietGiaoDich" />
-          <NavigationProperty Name="KhachHangs" Relationship="ManageHotelModel.FK__KhachHang__ID_Gi__1ED998B2" FromRole="GiaoDich" ToRole="KhachHang" />
+          <NavigationProperty Name="KhachHangs" Relationship="Self.FK__KhachHang__ID_Gi__1ED998B2" FromRole="GiaoDich" ToRole="KhachHang" />
         </EntityType>
         <EntityType Name="Hang">
           <Key>
@@ -362,7 +371,20 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ThongTin" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="SoLuongCho" Type="Int32" />
           <NavigationProperty Name="Phongs" Relationship="Self.FK__Phong__HinhThuc__173876EA" FromRole="HinhThuc" ToRole="Phong" />
+        </EntityType>
+        <EntityType Name="KhachHang">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_GiaoDich" Type="Int32" />
+          <Property Name="HoTen" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CMND" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MatKhau" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ChiTietGiaoDiches" Relationship="Self.FK__ChiTietGi__ID_Kh__239E4DCF" FromRole="KhachHang" ToRole="ChiTietGiaoDich" />
+          <NavigationProperty Name="GiaoDich" Relationship="Self.FK__KhachHang__ID_Gi__1ED998B2" FromRole="KhachHang" ToRole="GiaoDich" />
         </EntityType>
         <EntityType Name="LoaiHeThong">
           <Key>
@@ -425,6 +447,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__ChiTietGi__ID_Kh__239E4DCF">
+          <End Role="KhachHang" Type="Self.KhachHang" Multiplicity="0..1" />
+          <End Role="ChiTietGiaoDich" Type="Self.ChiTietGiaoDich" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KhachHang">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ChiTietGiaoDich">
+              <PropertyRef Name="ID_KhachHang" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__ChiTietGi__ID_Ma__22AA2996">
           <End Role="Phong" Type="Self.Phong" Multiplicity="0..1" />
           <End Role="ChiTietGiaoDich" Type="Self.ChiTietGiaoDich" Multiplicity="*" />
@@ -446,6 +480,18 @@
             </Principal>
             <Dependent Role="DichVuPhong">
               <PropertyRef Name="ID_ChiTietGiaoDich" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__KhachHang__ID_Gi__1ED998B2">
+          <End Role="GiaoDich" Type="Self.GiaoDich" Multiplicity="0..1" />
+          <End Role="KhachHang" Type="Self.KhachHang" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GiaoDich">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="KhachHang">
+              <PropertyRef Name="ID_GiaoDich" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -516,6 +562,7 @@
           <EntitySet Name="Hangs" EntityType="Self.Hang" />
           <EntitySet Name="HeThongs" EntityType="Self.HeThong" />
           <EntitySet Name="HinhThucs" EntityType="Self.HinhThuc" />
+          <EntitySet Name="KhachHangs" EntityType="Self.KhachHang" />
           <EntitySet Name="LoaiHeThongs" EntityType="Self.LoaiHeThong" />
           <EntitySet Name="NhanViens" EntityType="Self.NhanVien" />
           <EntitySet Name="Phongs" EntityType="Self.Phong" />
@@ -525,6 +572,10 @@
             <End Role="GiaoDich" EntitySet="GiaoDiches" />
             <End Role="ChiTietGiaoDich" EntitySet="ChiTietGiaoDiches" />
           </AssociationSet>
+          <AssociationSet Name="FK__ChiTietGi__ID_Kh__239E4DCF" Association="Self.FK__ChiTietGi__ID_Kh__239E4DCF">
+            <End Role="KhachHang" EntitySet="KhachHangs" />
+            <End Role="ChiTietGiaoDich" EntitySet="ChiTietGiaoDiches" />
+          </AssociationSet>
           <AssociationSet Name="FK__ChiTietGi__ID_Ma__22AA2996" Association="Self.FK__ChiTietGi__ID_Ma__22AA2996">
             <End Role="Phong" EntitySet="Phongs" />
             <End Role="ChiTietGiaoDich" EntitySet="ChiTietGiaoDiches" />
@@ -532,6 +583,10 @@
           <AssociationSet Name="FK__DichVuPho__ID_Ch__267ABA7A" Association="Self.FK__DichVuPho__ID_Ch__267ABA7A">
             <End Role="ChiTietGiaoDich" EntitySet="ChiTietGiaoDiches" />
             <End Role="DichVuPhong" EntitySet="DichVuPhongs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__KhachHang__ID_Gi__1ED998B2" Association="Self.FK__KhachHang__ID_Gi__1ED998B2">
+            <End Role="GiaoDich" EntitySet="GiaoDiches" />
+            <End Role="KhachHang" EntitySet="KhachHangs" />
           </AssociationSet>
           <AssociationSet Name="FK__Phong__Hang__164452B1" Association="Self.FK__Phong__Hang__164452B1">
             <End Role="Hang" EntitySet="Hangs" />
@@ -553,52 +608,26 @@
             <End Role="TrangThaiPhong" EntitySet="TrangThaiPhongs" />
             <End Role="Phong" EntitySet="Phongs" />
           </AssociationSet>
-          <EntitySet Name="KhachHangs" EntityType="ManageHotelModel.KhachHang" />
-          <AssociationSet Name="FK__ChiTietGi__ID_Kh__239E4DCF" Association="ManageHotelModel.FK__ChiTietGi__ID_Kh__239E4DCF">
-            <End Role="KhachHang" EntitySet="KhachHangs" />
-            <End Role="ChiTietGiaoDich" EntitySet="ChiTietGiaoDiches" />
-          </AssociationSet>
-          <AssociationSet Name="FK__KhachHang__ID_Gi__1ED998B2" Association="ManageHotelModel.FK__KhachHang__ID_Gi__1ED998B2">
-            <End Role="GiaoDich" EntitySet="GiaoDiches" />
-            <End Role="KhachHang" EntitySet="KhachHangs" />
-          </AssociationSet>
+          <FunctionImport Name="sp_SearchAvailableRoom" ReturnType="Collection(ManageHotelModel.sp_SearchAvailableRoom_Result)">
+            <Parameter Name="floor" Mode="In" Type="Int32" />
+            <Parameter Name="state" Mode="In" Type="Int32" />
+            <Parameter Name="level" Mode="In" Type="Int32" />
+            <Parameter Name="numberslot" Mode="In" Type="Int32" />
+            <Parameter Name="datestart" Mode="In" Type="String" />
+            <Parameter Name="dateend" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
-        <EntityType Name="KhachHang">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ID_GiaoDich" Type="Int32" />
-          <Property Name="HoTen" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="CMND" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="MatKhau" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="ChiTietGiaoDiches" Relationship="ManageHotelModel.FK__ChiTietGi__ID_Kh__239E4DCF" FromRole="KhachHang" ToRole="ChiTietGiaoDich" />
-          <NavigationProperty Name="GiaoDich" Relationship="ManageHotelModel.FK__KhachHang__ID_Gi__1ED998B2" FromRole="KhachHang" ToRole="GiaoDich" />
-        </EntityType>
-        <Association Name="FK__ChiTietGi__ID_Kh__239E4DCF">
-          <End Type="ManageHotelModel.KhachHang" Role="KhachHang" Multiplicity="0..1" />
-          <End Type="ManageHotelModel.ChiTietGiaoDich" Role="ChiTietGiaoDich" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="KhachHang">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="ChiTietGiaoDich">
-              <PropertyRef Name="ID_KhachHang" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__KhachHang__ID_Gi__1ED998B2">
-          <End Type="ManageHotelModel.GiaoDich" Role="GiaoDich" Multiplicity="0..1" />
-          <End Type="ManageHotelModel.KhachHang" Role="KhachHang" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="GiaoDich">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="KhachHang">
-              <PropertyRef Name="ID_GiaoDich" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
+        <ComplexType Name="sp_SearchAvailableRoom_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="MaPhong" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="ViTriTang" Nullable="true" MaxLength="10" />
+          <Property Type="Int32" Name="Hang" Nullable="true" />
+          <Property Type="Int32" Name="HinhThuc" Nullable="true" />
+          <Property Type="Int32" Name="DonGia" Nullable="true" />
+          <Property Type="Int32" Name="TrangThai" Nullable="true" />
+          <Property Type="String" Name="ThongTin" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="roomlevel" Nullable="true" MaxLength="100" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -667,6 +696,18 @@
               <MappingFragment StoreEntitySet="HinhThuc">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="ThongTin" ColumnName="ThongTin" />
+                <ScalarProperty Name="SoLuongCho" ColumnName="SoLuongCho" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KhachHangs">
+            <EntityTypeMapping TypeName="ManageHotelModel.KhachHang">
+              <MappingFragment StoreEntitySet="KhachHang">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ID_GiaoDich" ColumnName="ID_GiaoDich" />
+                <ScalarProperty Name="HoTen" ColumnName="HoTen" />
+                <ScalarProperty Name="CMND" ColumnName="CMND" />
+                <ScalarProperty Name="MatKhau" ColumnName="MatKhau" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -717,17 +758,21 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="KhachHangs">
-            <EntityTypeMapping TypeName="ManageHotelModel.KhachHang">
-              <MappingFragment StoreEntitySet="KhachHang">
-                <ScalarProperty Name="MatKhau" ColumnName="MatKhau" />
-                <ScalarProperty Name="CMND" ColumnName="CMND" />
-                <ScalarProperty Name="HoTen" ColumnName="HoTen" />
-                <ScalarProperty Name="ID_GiaoDich" ColumnName="ID_GiaoDich" />
+          <FunctionImportMapping FunctionImportName="sp_SearchAvailableRoom" FunctionName="ManageHotelModel.Store.sp_SearchAvailableRoom">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ManageHotelModel.sp_SearchAvailableRoom_Result">
                 <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
+                <ScalarProperty Name="MaPhong" ColumnName="MaPhong" />
+                <ScalarProperty Name="ViTriTang" ColumnName="ViTriTang" />
+                <ScalarProperty Name="Hang" ColumnName="Hang" />
+                <ScalarProperty Name="HinhThuc" ColumnName="HinhThuc" />
+                <ScalarProperty Name="DonGia" ColumnName="DonGia" />
+                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+                <ScalarProperty Name="ThongTin" ColumnName="ThongTin" />
+                <ScalarProperty Name="roomlevel" ColumnName="roomlevel" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

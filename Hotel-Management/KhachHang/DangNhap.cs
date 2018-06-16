@@ -1,6 +1,5 @@
 ﻿using ManageHotel;
 using ManageHotel.Service;
-using Service;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

@@ -1,13 +1,14 @@
 ﻿using ManageHotel;
+using ManageHotel.Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Service
+namespace ManageHotel.Service
 {
-    class KhachHangService
+    public class KhachHangService
     {
         public KhachHang getKhachHangByCMND(String CMND) {
             using (var db = new ManageHotelEntities())

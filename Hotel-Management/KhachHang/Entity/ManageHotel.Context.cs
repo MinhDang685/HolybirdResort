@@ -7,11 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ManageHotel
+namespace ManageHotel.Entity
 {
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class ManageHotelEntities : DbContext
     {
@@ -31,11 +33,40 @@ namespace ManageHotel
         public virtual DbSet<Hang> Hangs { get; set; }
         public virtual DbSet<HeThong> HeThongs { get; set; }
         public virtual DbSet<HinhThuc> HinhThucs { get; set; }
+        public virtual DbSet<KhachHang> KhachHangs { get; set; }
         public virtual DbSet<LoaiHeThong> LoaiHeThongs { get; set; }
         public virtual DbSet<NhanVien> NhanViens { get; set; }
         public virtual DbSet<Phong> Phongs { get; set; }
         public virtual DbSet<TinhTrangGiaoDich> TinhTrangGiaoDiches { get; set; }
         public virtual DbSet<TrangThaiPhong> TrangThaiPhongs { get; set; }
-        public virtual DbSet<KhachHang> KhachHangs { get; set; }
+    
+        public virtual ObjectResult<sp_SearchAvailableRoom_Result> sp_SearchAvailableRoom(Nullable<int> floor, Nullable<int> state, Nullable<int> level, Nullable<int> numberslot, string datestart, string dateend)
+        {
+            var floorParameter = floor.HasValue ?
+                new ObjectParameter("floor", floor) :
+                new ObjectParameter("floor", typeof(int));
+    
+            var stateParameter = state.HasValue ?
+                new ObjectParameter("state", state) :
+                new ObjectParameter("state", typeof(int));
+    
+            var levelParameter = level.HasValue ?
+                new ObjectParameter("level", level) :
+                new ObjectParameter("level", typeof(int));
+    
+            var numberslotParameter = numberslot.HasValue ?
+                new ObjectParameter("numberslot", numberslot) :
+                new ObjectParameter("numberslot", typeof(int));
+    
+            var datestartParameter = datestart != null ?
+                new ObjectParameter("datestart", datestart) :
+                new ObjectParameter("datestart", typeof(string));
+    
+            var dateendParameter = dateend != null ?
+                new ObjectParameter("dateend", dateend) :
+                new ObjectParameter("dateend", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_SearchAvailableRoom_Result>("sp_SearchAvailableRoom", floorParameter, stateParameter, levelParameter, numberslotParameter, datestartParameter, dateendParameter);
+        }
     }
 }

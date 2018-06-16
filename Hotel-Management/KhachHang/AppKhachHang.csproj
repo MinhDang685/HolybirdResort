@@ -69,6 +69,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Clsss\ItemCombobox.cs" />
     <Compile Include="DangNhap.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -126,6 +127,9 @@
     <Compile Include="Entity\Phong.cs">
       <DependentUpon>ManageHotel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entity\sp_SearchAvailableRoom_Result.cs">
+      <DependentUpon>ManageHotel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entity\TinhTrangGiaoDich.cs">
       <DependentUpon>ManageHotel.tt</DependentUpon>
     </Compile>
@@ -136,6 +140,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\ComboboxItemService.cs" />
     <Compile Include="Service\KhachHangService.cs" />
+    <Compile Include="Service\ServiceSearchRoom.cs" />
     <EmbeddedResource Include="DangNhap.resx">
       <DependentUpon>DangNhap.cs</DependentUpon>
     </EmbeddedResource>
@@ -160,17 +165,14 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ManageHotel.edmx</DependentUpon>
       <LastGenOutput>ManageHotel.Context.cs</LastGenOutput>
-      <CustomToolNamespace>ManageHotel</CustomToolNamespace>
     </None>
     <None Include="Entity\ManageHotel.edmx.diagram">
       <DependentUpon>ManageHotel.edmx</DependentUpon>
-      <CustomToolNamespace>ManageHotel</CustomToolNamespace>
     </None>
     <None Include="Entity\ManageHotel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ManageHotel.edmx</DependentUpon>
       <LastGenOutput>ManageHotel.cs</LastGenOutput>
-      <CustomToolNamespace>ManageHotel</CustomToolNamespace>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -184,7 +186,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
