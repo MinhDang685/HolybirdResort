@@ -13,22 +13,31 @@ namespace ManageHotel.Entity
 {
 
 using System;
-    using System.Collections.Generic;
     
-public partial class NhanVien
+public partial class sp_LayThongTinDoan_Result
 {
 
     public int ID { get; set; }
+
+    public string MaDoan { get; set; }
 
     public string TenDangNhap { get; set; }
 
     public string MatKhau { get; set; }
 
-    public Nullable<int> ID_HeThong { get; set; }
+    public Nullable<int> ID_NguoiDaiDien { get; set; }
 
+    public Nullable<int> SoNguoi { get; set; }
 
+    public Nullable<int> SoPhong { get; set; }
 
-    public virtual HeThong HeThong { get; set; }
+    public Nullable<System.DateTime> NgayBatDau { get; set; }
+
+    public Nullable<System.DateTime> NgayKetThuc { get; set; }
+
+    public Nullable<int> TinhTrang { get; set; }
+
+    public Nullable<int> TongTien { get; set; }
 
 }
 

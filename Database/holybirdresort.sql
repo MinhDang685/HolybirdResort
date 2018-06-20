@@ -180,6 +180,7 @@ go
 
 
 /*Store Search Phong available*/
+
 create procedure sp_SearchAvailableRoom(
 		@floor int
 	  , @state int
@@ -189,7 +190,7 @@ create procedure sp_SearchAvailableRoom(
 	  , @dateend varchar(20))
 AS
 BEGIN
-	select p.*, ht.ThongTin, h.ThongTin AS roomlevel
+	select p.*, ht.ThongTin, h.ThongTin AS roomlevel, @datestart AS ngayBatDau, @dateend AS ngayKetThuc
 	from Phong p, HinhThuc ht, Hang h
 	where	p.ViTriTang = @floor
 		AND p.TrangThai = @state
@@ -204,6 +205,7 @@ BEGIN
 		)
 		AND p.Hang = h.ID
 END
+go
 
 EXEC sp_SearchAvailableRoom 1, 1,5, 1, '2018/01/01', '2018/06/16'
 go
@@ -221,16 +223,104 @@ begin
 end
 go
 
+create procedure sp_LayChiTietGiaoDichTheoDoan @idDoan int
+as
+begin
+	select ct.ID_GiaoDich as ID_GiaoDich, ct.ID_MaPhong as ID_MaPhong,
+	ct.ID_KhachHang as ID_KhachHang, ct.NgayBatDau as NgayBatDau, ct.NgayKetThuc as NgayKetThuc,
+	p.MaPhong as MaPhong, p.ViTriTang as ViTriTang, p.DonGia as DonGia, p.Hang as Hang, p.HinhThuc as HinhThuc, p.TrangThai as TrangThai,
+	kh.CMND as CMND, kh.HoTen as HoTen, kh.MatKhau as MatKhau
+	from GiaoDich gd, ChiTietGiaoDich ct, Phong p, KhachHang kh
+	where ct.ID_GiaoDich = gd.ID 
+	and ct.ID_MaPhong = p.ID
+	and ct.ID_KhachHang = kh.ID
+	and ct.ID_GiaoDich = @idDoan 
+end
+go
+
+exec sp_LayChiTietGiaoDichTheoDoan 1
+go
+
+create procedure sp_CapNhatChiTietGiaoDich @id int, @idGiaoDich int, @idPhong int, @idKhach int, 
+										@ngayBatDau Datetime, @ngayKetThuc Datetime
+as
+begin
+	declare @start int = DATEDIFF(dd, '12/30/1899', @ngayBatDau)
+	declare @end int = DATEDIFF(dd, '12/30/1899', @ngayKetThuc)
+	declare @thanhTien int = dbo.fGetRoomPrice(@idPhong) * (@start - @end + 1)
+	update ChiTietGiaoDich 
+	set ID_GiaoDich = @idGiaoDich, ID_MaPhong = @idPhong, ID_KhachHang = @idKhach, 
+	NgayBatDau = @ngayBatDau, NgayKetThuc = @ngayKetThuc, ThanhTien = @thanhTien
+	where ID = @id
+end
+go
+
+create procedure sp_XoaChiTietGiaoDich @id int
+as
+begin
+	delete from ChiTietGiaoDich
+	where ID = @id
+end
+go
+
+create procedure sp_XoaChiTietGiaoDichTheoDoan @id int
+as
+begin
+	delete from ChiTietGiaoDich
+	where ID_GiaoDich = @id
+end
+go
+
 create procedure sp_ThemChiTietGiaoDich @idGiaoDich int, @idPhong int, @idKhach int, 
 										@ngayBatDau Datetime, @ngayKetThuc Datetime
 as
 begin
 	declare @thanhTien int
-	set @thanhTien = dbo.fGetRoomPrice(@idPhong)
+	declare @start int = DATEDIFF(dd, '12/30/1899', @ngayBatDau)
+	declare @end int = DATEDIFF(dd, '12/30/1899', @ngayKetThuc)
+	set @thanhTien = dbo.fGetRoomPrice(@idPhong) * (@start - @end + 1)
 	insert into ChiTietGiaoDich 
 				(ID_GiaoDich, ID_MaPhong, ID_KhachHang, NgayBatDau, NgayKetThuc, ThanhTien)
 		values (@idGiaoDich, @idPhong, @idKhach, @ngayBatDau, @ngayKetThuc, @thanhTien)
 end
+go
+
+create procedure sp_LayThongTinDoan @id int
+as
+begin
+	select * from GiaoDich where ID = @id
+end
+go
+
+create procedure sp_LayThongTinPhong @id int
+as
+begin
+	select * from Phong where ID = @id
+end
+go
+
+create procedure sp_CapNhatTinhTrangGiaoDich @idDoan int, @idTinhTrang int
+as
+begin
+	update GiaoDich
+	set TinhTrang = @idTinhTrang
+	where ID = @idDoan
+end
+go
+
+
+
+
+
+
+insert into GiaoDich values('A001', 'userA001', '123', 1,5,4,'2018-06-26','2018-06-30',1,0)
+insert into KhachHang values(1,'A','123123','123')
+insert into KhachHang values(1,'B','123456','123')
+insert into KhachHang values(1,'C','123789','123')
+insert into KhachHang values(1,'D','456123','123')
+insert into KhachHang values(1,'E','456456','123')
+
+
 
 
 

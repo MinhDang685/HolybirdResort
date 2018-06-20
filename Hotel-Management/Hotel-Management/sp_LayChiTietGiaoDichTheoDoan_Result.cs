@@ -13,26 +13,23 @@ namespace ManageHotel.Entity
 {
 
 using System;
-    using System.Collections.Generic;
     
-public partial class Hang
+public partial class sp_LayChiTietGiaoDichTheoDoan_Result
 {
-
-    public Hang()
-    {
-
-        this.Phongs = new HashSet<Phong>();
-
-    }
-
 
     public int ID { get; set; }
 
-    public string ThongTin { get; set; }
+    public Nullable<int> ID_GiaoDich { get; set; }
 
+    public Nullable<int> ID_MaPhong { get; set; }
 
+    public Nullable<int> ID_KhachHang { get; set; }
 
-    public virtual ICollection<Phong> Phongs { get; set; }
+    public Nullable<System.DateTime> NgayBatDau { get; set; }
+
+    public Nullable<System.DateTime> NgayKetThuc { get; set; }
+
+    public Nullable<int> ThanhTien { get; set; }
 
 }
 

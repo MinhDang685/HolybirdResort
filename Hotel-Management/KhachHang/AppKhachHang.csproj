@@ -69,6 +69,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Clsss\Helper.cs" />
     <Compile Include="Clsss\ItemCombobox.cs" />
     <Compile Include="DangNhap.cs">
       <SubType>Form</SubType>
@@ -127,6 +128,18 @@
     <Compile Include="Entity\Phong.cs">
       <DependentUpon>ManageHotel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entity\sp_LayChiTietGiaoDichTheoDoan_Result.cs">
+      <DependentUpon>ManageHotel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\sp_LayDanhSachDoan_Result.cs">
+      <DependentUpon>ManageHotel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\sp_LayThongTinDoan_Result.cs">
+      <DependentUpon>ManageHotel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\sp_LayThongTinPhong_Result.cs">
+      <DependentUpon>ManageHotel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entity\sp_SearchAvailableRoom_Result.cs">
       <DependentUpon>ManageHotel.tt</DependentUpon>
     </Compile>
@@ -140,7 +153,20 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\ComboboxItemService.cs" />
     <Compile Include="Service\KhachHangService.cs" />
+    <Compile Include="Service\RoomService.cs" />
     <Compile Include="Service\ServiceSearchRoom.cs" />
+    <Compile Include="UserControls\UserControlGuest.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\UserControlGuest.Designer.cs">
+      <DependentUpon>UserControlGuest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UserControlRoom.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\UserControlRoom.Designer.cs">
+      <DependentUpon>UserControlRoom.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="DangNhap.resx">
       <DependentUpon>DangNhap.cs</DependentUpon>
     </EmbeddedResource>
@@ -157,6 +183,12 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="UserControls\UserControlGuest.resx">
+      <DependentUpon>UserControlGuest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\UserControlRoom.resx">
+      <DependentUpon>UserControlRoom.cs</DependentUpon>
+    </EmbeddedResource>
     <EntityDeploy Include="Entity\ManageHotel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>ManageHotel.Designer.cs</LastGenOutput>

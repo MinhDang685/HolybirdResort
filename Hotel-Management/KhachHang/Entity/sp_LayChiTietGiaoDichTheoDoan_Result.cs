@@ -11,18 +11,21 @@ namespace ManageHotel.Entity
 {
     using System;
     
-    public partial class sp_SearchAvailableRoom_Result
+    public partial class sp_LayChiTietGiaoDichTheoDoan_Result
     {
-        public int ID { get; set; }
+        public Nullable<int> ID_GiaoDich { get; set; }
+        public Nullable<int> ID_MaPhong { get; set; }
+        public Nullable<int> ID_KhachHang { get; set; }
+        public Nullable<System.DateTime> NgayBatDau { get; set; }
+        public Nullable<System.DateTime> NgayKetThuc { get; set; }
         public string MaPhong { get; set; }
         public string ViTriTang { get; set; }
+        public Nullable<int> DonGia { get; set; }
         public Nullable<int> Hang { get; set; }
         public Nullable<int> HinhThuc { get; set; }
-        public Nullable<int> DonGia { get; set; }
         public Nullable<int> TrangThai { get; set; }
-        public string ThongTin { get; set; }
-        public string roomlevel { get; set; }
-        public string ngayBatDau { get; set; }
-        public string ngayKetThuc { get; set; }
+        public string CMND { get; set; }
+        public string HoTen { get; set; }
+        public string MatKhau { get; set; }
     }
 }

@@ -171,7 +171,9 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>ManageHotelModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="App.Config" />
+    <None Include="App.Config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="ManageHotelModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ManageHotelModel.edmx</DependentUpon>
