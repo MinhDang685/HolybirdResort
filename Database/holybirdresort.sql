@@ -308,6 +308,14 @@ begin
 end
 go
 
+create procedure sp_LayDanhSachDoan @idDoan int
+as
+begin
+	select *
+	from KhachHang
+	where ID_GiaoDich = @idDoan
+end
+go
 
 
 
