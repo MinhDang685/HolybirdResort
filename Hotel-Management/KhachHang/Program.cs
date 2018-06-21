@@ -17,7 +17,7 @@ namespace ManageHotel
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new DatPhong());
+            Application.Run(new Form1());
         }
     }
 }

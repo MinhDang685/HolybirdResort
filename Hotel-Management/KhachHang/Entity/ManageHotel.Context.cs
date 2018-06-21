@@ -189,5 +189,14 @@ namespace ManageHotel.Entity
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_LayChiTietGiaoDichTheoDoan_Result>("sp_LayChiTietGiaoDichTheoDoan", idDoanParameter);
         }
+    
+        public virtual ObjectResult<sp_ChiTietGiaoDich_Result> sp_ChiTietGiaoDich(Nullable<int> idDoan)
+        {
+            var idDoanParameter = idDoan.HasValue ?
+                new ObjectParameter("idDoan", idDoan) :
+                new ObjectParameter("idDoan", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_ChiTietGiaoDich_Result>("sp_ChiTietGiaoDich", idDoanParameter);
+        }
     }
 }

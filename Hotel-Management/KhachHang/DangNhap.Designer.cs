@@ -31,8 +31,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.btnLogin = new DevComponents.DotNetBar.ButtonX();
             this.labelX3 = new DevComponents.DotNetBar.LabelX();
-            this.txtboxUserName = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.textBoxPassword = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.txtBoxUserName = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.txtBoxPassword = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.SuspendLayout();
             // 
             // btnLogin
@@ -65,42 +65,42 @@
             this.labelX3.Text = " HolyBird Resort";
             this.labelX3.TextAlignment = System.Drawing.StringAlignment.Center;
             // 
-            // txtboxUserName
+            // txtBoxUserName
             // 
-            this.txtboxUserName.BackColor = System.Drawing.Color.White;
-            // 
-            // 
-            // 
-            this.txtboxUserName.Border.Class = "TextBoxBorder";
-            this.txtboxUserName.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.txtboxUserName.DisabledBackColor = System.Drawing.Color.White;
-            this.txtboxUserName.ForeColor = System.Drawing.Color.Black;
-            this.txtboxUserName.Location = new System.Drawing.Point(296, 255);
-            this.txtboxUserName.Name = "txtboxUserName";
-            this.txtboxUserName.PreventEnterBeep = true;
-            this.txtboxUserName.Size = new System.Drawing.Size(164, 20);
-            this.txtboxUserName.TabIndex = 0;
-            this.txtboxUserName.WatermarkFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtboxUserName.WatermarkText = "Username";
-            this.txtboxUserName.TextChanged += new System.EventHandler(this.txtboxPWD_TextChanged);
-            // 
-            // textBoxPassword
-            // 
-            this.textBoxPassword.BackColor = System.Drawing.Color.White;
+            this.txtBoxUserName.BackColor = System.Drawing.Color.White;
             // 
             // 
             // 
-            this.textBoxPassword.Border.Class = "TextBoxBorder";
-            this.textBoxPassword.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.textBoxPassword.DisabledBackColor = System.Drawing.Color.White;
-            this.textBoxPassword.ForeColor = System.Drawing.Color.Black;
-            this.textBoxPassword.Location = new System.Drawing.Point(296, 281);
-            this.textBoxPassword.Name = "textBoxPassword";
-            this.textBoxPassword.PreventEnterBeep = true;
-            this.textBoxPassword.Size = new System.Drawing.Size(164, 20);
-            this.textBoxPassword.TabIndex = 0;
-            this.textBoxPassword.WatermarkFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxPassword.WatermarkText = "Password ";
+            this.txtBoxUserName.Border.Class = "TextBoxBorder";
+            this.txtBoxUserName.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtBoxUserName.DisabledBackColor = System.Drawing.Color.White;
+            this.txtBoxUserName.ForeColor = System.Drawing.Color.Black;
+            this.txtBoxUserName.Location = new System.Drawing.Point(296, 255);
+            this.txtBoxUserName.Name = "txtBoxUserName";
+            this.txtBoxUserName.PreventEnterBeep = true;
+            this.txtBoxUserName.Size = new System.Drawing.Size(164, 20);
+            this.txtBoxUserName.TabIndex = 0;
+            this.txtBoxUserName.WatermarkFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBoxUserName.WatermarkText = "Username";
+            this.txtBoxUserName.TextChanged += new System.EventHandler(this.txtboxPWD_TextChanged);
+            // 
+            // txtBoxPassword
+            // 
+            this.txtBoxPassword.BackColor = System.Drawing.Color.White;
+            // 
+            // 
+            // 
+            this.txtBoxPassword.Border.Class = "TextBoxBorder";
+            this.txtBoxPassword.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtBoxPassword.DisabledBackColor = System.Drawing.Color.White;
+            this.txtBoxPassword.ForeColor = System.Drawing.Color.Black;
+            this.txtBoxPassword.Location = new System.Drawing.Point(296, 281);
+            this.txtBoxPassword.Name = "txtBoxPassword";
+            this.txtBoxPassword.PreventEnterBeep = true;
+            this.txtBoxPassword.Size = new System.Drawing.Size(164, 20);
+            this.txtBoxPassword.TabIndex = 0;
+            this.txtBoxPassword.WatermarkFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBoxPassword.WatermarkText = "Password ";
             // 
             // Form1
             // 
@@ -110,9 +110,9 @@
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(501, 377);
-            this.Controls.Add(this.txtboxUserName);
+            this.Controls.Add(this.txtBoxUserName);
             this.Controls.Add(this.labelX3);
-            this.Controls.Add(this.textBoxPassword);
+            this.Controls.Add(this.txtBoxPassword);
             this.Controls.Add(this.btnLogin);
             this.Name = "Form1";
             this.Text = "Đăng nhập";
@@ -123,8 +123,8 @@
         #endregion
         private DevComponents.DotNetBar.ButtonX btnLogin;
         private DevComponents.DotNetBar.LabelX labelX3;
-        private DevComponents.DotNetBar.Controls.TextBoxX txtboxUserName;
-        private DevComponents.DotNetBar.Controls.TextBoxX textBoxPassword;
+        private DevComponents.DotNetBar.Controls.TextBoxX txtBoxUserName;
+        private DevComponents.DotNetBar.Controls.TextBoxX txtBoxPassword;
     }
 }
 

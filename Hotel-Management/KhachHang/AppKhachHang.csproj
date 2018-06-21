@@ -128,6 +128,9 @@
     <Compile Include="Entity\Phong.cs">
       <DependentUpon>ManageHotel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entity\sp_ChiTietGiaoDich_Result.cs">
+      <DependentUpon>ManageHotel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entity\sp_LayChiTietGiaoDichTheoDoan_Result.cs">
       <DependentUpon>ManageHotel.tt</DependentUpon>
     </Compile>

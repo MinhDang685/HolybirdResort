@@ -249,6 +249,9 @@
           <Parameter Name="idDoan" Type="int" Mode="In" />
           <Parameter Name="idTinhTrang" Type="int" Mode="In" />
         </Function>
+        <Function Name="sp_ChiTietGiaoDich" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idDoan" Type="int" Mode="In" />
+        </Function>
         <Function Name="sp_LayChiTietGiaoDichTheoDoan" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idDoan" Type="int" Mode="In" />
         </Function>
@@ -688,6 +691,9 @@
           <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_LayChiTietGiaoDichTheoDoan" ReturnType="Collection(ManageHotelModel.sp_LayChiTietGiaoDichTheoDoan_Result)">
+          <Parameter Name="idDoan" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_ChiTietGiaoDich" ReturnType="Collection(ManageHotelModel.sp_ChiTietGiaoDich_Result)">
             <Parameter Name="idDoan" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
@@ -748,6 +754,16 @@
           <Property Type="String" Name="CMND" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="HoTen" Nullable="true" MaxLength="100" />
           <Property Type="String" Name="MatKhau" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="sp_ChiTietGiaoDich_Result">
+          <Property Type="String" Name="MaDoan" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="HoTen" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="CMND" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="MaPhong" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="NgayBatDau" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="NgayKetThuc" Nullable="true" MaxLength="30" />
+          <Property Type="Int32" Name="DonGia" Nullable="true" />
+          <Property Type="Int32" Name="ThanhTien" Nullable="true" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -959,6 +975,20 @@
                 <ScalarProperty Name="CMND" ColumnName="CMND" />
                 <ScalarProperty Name="HoTen" ColumnName="HoTen" />
                 <ScalarProperty Name="MatKhau" ColumnName="MatKhau" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_ChiTietGiaoDich" FunctionName="ManageHotelModel.Store.sp_ChiTietGiaoDich">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ManageHotelModel.sp_ChiTietGiaoDich_Result">
+                <ScalarProperty Name="MaDoan" ColumnName="MaDoan" />
+                <ScalarProperty Name="HoTen" ColumnName="HoTen" />
+                <ScalarProperty Name="CMND" ColumnName="CMND" />
+                <ScalarProperty Name="MaPhong" ColumnName="MaPhong" />
+                <ScalarProperty Name="NgayBatDau" ColumnName="NgayBatDau" />
+                <ScalarProperty Name="NgayKetThuc" ColumnName="NgayKetThuc" />
+                <ScalarProperty Name="DonGia" ColumnName="DonGia" />
+                <ScalarProperty Name="ThanhTien" ColumnName="ThanhTien" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

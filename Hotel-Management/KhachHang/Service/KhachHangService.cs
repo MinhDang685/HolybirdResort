@@ -10,16 +10,17 @@ namespace ManageHotel.Service
 {
     public class KhachHangService
     {
-        public KhachHang getKhachHangByCMND(String CMND) {
+        public GiaoDich getAccount(String username)
+        {
             using (var db = new ManageHotelEntities())
             {
-                KhachHang khachhang = db.KhachHangs.Where(kh => kh.CMND == CMND).FirstOrDefault();
+                GiaoDich khachhang = db.GiaoDiches.Where(gt => gt.TenDangNhap == username).FirstOrDefault();
 
                 return khachhang;
             }
         }
-        public bool checkLoginUserName(String CMND, String Password){
-            KhachHang user = this.getKhachHangByCMND(CMND);
+        public bool checkLoginUserName(String username, String Password){
+            GiaoDich user = this.getAccount(username);
             if (user == null) {
                 return false;
             }

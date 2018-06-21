@@ -317,9 +317,19 @@ begin
 end
 go
 
-
-
-
+create procedure sp_ChiTietGiaoDich @idDoan int
+as
+begin
+	select gd.MaDoan, kh.HoTen, kh.CMND, p.MaPhong, CONVERT(varchar, ct.NgayBatDau, 103) AS NgayBatDau, CONVERT(varchar,ct.NgayKetThuc, 103) AS NgayKetThuc, p.DonGia, ct.ThanhTien
+	from ChiTietGiaoDich ct , KhachHang kh, Phong p, GiaoDich gd
+	where   ct.ID_KhachHang = kh.ID
+		AND ct.ID_MaPhong = p.ID
+		AND ct.ID_GiaoDich = gd.ID
+		AND gd.ID = @idDoan
+end
+go
+exec sp_ChiTietGiaoDich 1
+go
 
 insert into GiaoDich values('A001', 'userA001', '123', 1,5,4,'2018-06-26','2018-06-30',1,0)
 insert into KhachHang values(1,'A','123123','123')

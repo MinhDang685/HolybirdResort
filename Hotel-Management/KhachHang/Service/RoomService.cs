@@ -46,5 +46,14 @@ namespace ManageHotel.Service
 
             return p;
         }
+
+        public List<sp_ChiTietGiaoDich_Result> getChiTietGiaoDich(int idDoan) {
+
+            using (var db = new ManageHotelEntities())
+            {
+                List<sp_ChiTietGiaoDich_Result> result = db.sp_ChiTietGiaoDich(idDoan).ToList();
+                return result;
+            }
+        }
     }
 }

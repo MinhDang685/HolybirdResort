@@ -21,7 +21,7 @@ namespace Hotel_Management
         ServiceSearchRoom servicesearchroom = new ServiceSearchRoom();
         KhachHangService khachHangService = new KhachHangService();
         RoomService phongService = new RoomService();
-        int idDoan = 1;
+        int idDoan = -1;
         int tinhTrangGiaoDich = -1;
         sp_LayThongTinDoan_Result thongTinDoan;
         List<KhachHang> listKhachHang = new List<KhachHang>();
@@ -34,9 +34,10 @@ namespace Hotel_Management
         Dictionary<String, UserControlRoom> listRoomUserControl = new Dictionary<string, UserControlRoom>();
         BindingList<KhachHang> availableGuestList = new BindingList<KhachHang>();
         Dictionary<String, KhachHang> backupGuestList = new Dictionary<string, KhachHang>();
-        public DatPhong()
+        public DatPhong(int maDoan)
         {
             InitializeComponent();
+            this.idDoan = maDoan;
             dataGridViewDetail.Controls.Add(dtp);
             dtp.Visible = false;
             dtp.Format = DateTimePickerFormat.Custom;
@@ -320,6 +321,27 @@ namespace Hotel_Management
                     LoadThongTinChonPhongTrongChiTietGiaoDich();
                 }
             }
+            if (tabName.Equals("ribbonTabChiTiet"))
+            {
+                this.dataGridViewDetailGiaoDich.Rows.Clear();
+                this.dataGridViewDetailGiaoDich.ReadOnly = true;
+                RoomService roomservice = new RoomService();
+                List<sp_ChiTietGiaoDich_Result> details = roomservice.getChiTietGiaoDich(this.idDoan);
+                for (int i = 0; i < details.Count; i++) {
+                    String[] row = new String[]{
+                            details[i].MaDoan,
+                          details[i].HoTen,
+                          details[i].CMND,
+                          details[i].MaPhong,
+                          details[i].NgayBatDau,
+                          details[i].NgayKetThuc,
+                          details[i].DonGia.ToString(),
+                          details[i].ThanhTien.ToString()
+
+                        };
+                    this.dataGridViewDetailGiaoDich.Rows.Add(row);
+                }
+            }
         }
 
         private void LoadThongTinChonPhongTrongChiTietGiaoDich()
@@ -409,6 +431,16 @@ namespace Hotel_Management
                 }
             }
             return listChiTietGiaoDich;
+        }
+
+        private void DatPhong_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void ribbonTabItemMapGuestToRoom_Click(object sender, EventArgs e)
+        {
+
         }
 
     }
