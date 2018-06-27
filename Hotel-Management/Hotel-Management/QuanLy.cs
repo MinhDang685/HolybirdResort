@@ -215,6 +215,41 @@ namespace Hotel_Management
             gd = new GiaoDich();
         }
 
-        
+        private void btn_nhan_phong_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < GridHoatDong.RowCount; i++)
+            {
+                if (GridHoatDong.Rows[i].Cells[3].Selected)
+                {
+                    String maDoan = GridHoatDong.Rows[i].Cells[1].Value.ToString();
+                    gd = HE.GiaoDiches.Single(t => t.TenDangNhap.Equals(maDoan));
+                    String trangThai = GridHoatDong.Rows[i].Cells[2].Value.ToString();
+                    if (trangThai.Equals("đã đăng ký") || trangThai.Equals("đã mướn phòng"))
+                    {
+                        gd.TinhTrang = 3;
+                        HE.SaveChanges();
+                    }
+                }
+            }
+        }
+
+        private void huyGiaoDich(String maDoan)
+        {
+            gd = HE.GiaoDiches.Single(t => t.TenDangNhap.Equals(maDoan));
+            HE.GiaoDiches.Remove(gd);
+            HE.SaveChanges();
+        }
+
+        private void btn_huy_phong_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < GridHoatDong.RowCount; i++)
+            {
+                if (GridHoatDong.Rows[i].Cells[3].Selected)
+                {
+                    String maDoan = GridHoatDong.Rows[i].Cells[1].Value.ToString();
+                    huyGiaoDich(maDoan);
+                }
+            }
+        }
     }
 }
