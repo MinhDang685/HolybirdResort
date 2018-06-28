@@ -11,12 +11,15 @@ namespace Hotel_Management
 {
     using System;
     
-    public partial class sp_LayDanhSachDoan_Result
+    public partial class sp_ChiTietGiaoDich_Result
     {
-        public int ID { get; set; }
-        public Nullable<int> ID_GiaoDich { get; set; }
+        public string MaDoan { get; set; }
         public string HoTen { get; set; }
         public string CMND { get; set; }
-        public string MatKhau { get; set; }
+        public string MaPhong { get; set; }
+        public string NgayBatDau { get; set; }
+        public string NgayKetThuc { get; set; }
+        public Nullable<int> DonGia { get; set; }
+        public Nullable<int> ThanhTien { get; set; }
     }
 }

@@ -331,6 +331,53 @@ go
 exec sp_ChiTietGiaoDich 1
 go
 
+CREATE PROCEDURE [dbo].[sp_CapNhatIDTruongDoanChoGiaoDich]
+(@idtruongdoan INT, @id_giaodich INT)
+AS
+BEGIN
+	UPDATE GiaoDich
+	SET ID_NguoiDaiDien = @idtruongdoan
+	WHERE ID = @id_giaodich
+END
+GO
+
+CREATE PROCEDURE [dbo].[sp_LayIDKhachHangTheoCMND]
+(@cmnd VARCHAR(50))
+AS
+BEGIN
+	SELECT ID
+	FROM KhachHang
+	WHERE CMND = @cmnd
+END
+GO
+
+CREATE PROCEDURE [dbo].[sp_LuuThongTinKhachHang]
+(@id_giaodich INT, @hoten NVARCHAR(100), @cmnd VARCHAR(50))
+AS
+BEGIN
+	INSERT INTO KhachHang (ID_GiaoDich, HoTen, CMND)
+	VALUES (@id_giaodich, @hoten, @cmnd)
+END
+GO
+
+CREATE PROCEDURE [dbo].[sp_TaoMoiGiaoDich]
+(@madoan VARCHAR(50), @tendangnhap NVARCHAR(100), @matkhau NVARCHAR(100), @songuoi INT, @ngaybatdau DATETIME, @ngayketthuc DATETIME)
+AS
+BEGIN
+	INSERT INTO GiaoDich (MaDoan, TenDangNhap, MatKhau, SoNguoi, NgayBatDau, NgayKetThuc)
+	VALUES (@madoan, @tendangnhap, @matkhau, @songuoi, @ngaybatdau, @ngayketthuc)
+END
+GO
+
+CREATE PROCEDURE [dbo].[sp_TaoMoiGiaoDich]
+(@madoan VARCHAR(50), @tendangnhap NVARCHAR(100), @matkhau NVARCHAR(100), @songuoi INT, @ngaybatdau DATETIME, @ngayketthuc DATETIME)
+AS
+BEGIN
+	INSERT INTO GiaoDich (MaDoan, TenDangNhap, MatKhau, SoNguoi, NgayBatDau, NgayKetThuc)
+	VALUES (@madoan, @tendangnhap, @matkhau, @songuoi, @ngaybatdau, @ngayketthuc)
+END
+GO
+
 insert into GiaoDich values('A001', 'userA001', '123', 1,5,4,'2018-06-26','2018-06-30',1,0)
 insert into KhachHang values(1,'A','123123','123')
 insert into KhachHang values(1,'B','123456','123')

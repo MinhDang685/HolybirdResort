@@ -31,6 +31,7 @@ namespace Hotel_Management
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
+            
             //lấy 2 chuỗi mật khẩu + tài khoản người dùng nhập
             String InputUsername = txtSRNM.Text.ToString();
             String InputPassword = txtPWD.Text.ToString();

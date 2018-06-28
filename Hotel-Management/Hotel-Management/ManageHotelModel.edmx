@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="HOLYBIRDRESORTModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="HOLYBIRDRESORTModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="ChiTietGiaoDich">
           <Key>
             <PropertyRef Name="ID" />
@@ -63,6 +63,7 @@
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ThongTin" Type="nvarchar" MaxLength="100" />
+          <Property Name="SoLuongCho" Type="int" />
         </EntityType>
         <EntityType Name="KhachHang">
           <Key>
@@ -236,6 +237,89 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="fGetRoomPrice" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int">
+          <Parameter Name="roomId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="fRandomInteger" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int">
+          <Parameter Name="seed" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="from" Type="int" Mode="In" />
+          <Parameter Name="to" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_CapNhatChiTietGiaoDich" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="idGiaoDich" Type="int" Mode="In" />
+          <Parameter Name="idPhong" Type="int" Mode="In" />
+          <Parameter Name="idKhach" Type="int" Mode="In" />
+          <Parameter Name="ngayBatDau" Type="datetime" Mode="In" />
+          <Parameter Name="ngayKetThuc" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="sp_CapNhatIDTruongDoanChoGiaoDich" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idtruongdoan" Type="int" Mode="In" />
+          <Parameter Name="id_giaodich" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_CapNhatTinhTrangGiaoDich" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idDoan" Type="int" Mode="In" />
+          <Parameter Name="idTinhTrang" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_ChiTietGiaoDich" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idDoan" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_KhoiTaoDanhSachPhong" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="roomInAFloor" Type="int" Mode="In" />
+          <Parameter Name="totalFloor" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_LayChiTietGiaoDichTheoDoan" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idDoan" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_LayDanhSachDoan" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idDoan" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_LayIDKhachHangTheoCMND" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="cmnd" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="sp_LayThongTinDoan" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_LayThongTinPhong" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_LuuThongTinKhachHang" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_giaodich" Type="int" Mode="In" />
+          <Parameter Name="hoten" Type="nvarchar" Mode="In" />
+          <Parameter Name="cmnd" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="sp_SearchAvailableRoom" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="floor" Type="int" Mode="In" />
+          <Parameter Name="state" Type="int" Mode="In" />
+          <Parameter Name="level" Type="int" Mode="In" />
+          <Parameter Name="numberslot" Type="int" Mode="In" />
+          <Parameter Name="datestart" Type="varchar" Mode="In" />
+          <Parameter Name="dateend" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="sp_TaoMoiGiaoDich" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="madoan" Type="varchar" Mode="In" />
+          <Parameter Name="tendangnhap" Type="nvarchar" Mode="In" />
+          <Parameter Name="matkhau" Type="nvarchar" Mode="In" />
+          <Parameter Name="songuoi" Type="int" Mode="In" />
+          <Parameter Name="ngaybatdau" Type="datetime" Mode="In" />
+          <Parameter Name="ngayketthuc" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="sp_ThemChiTietGiaoDich" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idGiaoDich" Type="int" Mode="In" />
+          <Parameter Name="idPhong" Type="int" Mode="In" />
+          <Parameter Name="idKhach" Type="int" Mode="In" />
+          <Parameter Name="ngayBatDau" Type="datetime" Mode="In" />
+          <Parameter Name="ngayKetThuc" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="sp_TimIDGiaoDichTheoCMNDTruongDoan" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="cmnd" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_XoaChiTietGiaoDich" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_XoaChiTietGiaoDichTheoDoan" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="HOLYBIRDRESORTModelStoreContainer">
           <EntitySet Name="ChiTietGiaoDich" EntityType="Self.ChiTietGiaoDich" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DichVuPhong" EntityType="Self.DichVuPhong" Schema="dbo" store:Type="Tables" />
@@ -290,8 +374,7 @@
             <End Role="NhanVien" EntitySet="NhanVien" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="HOLYBIRDRESORTModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -363,6 +446,7 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ThongTin" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="SoLuongCho" Type="Int32" />
           <NavigationProperty Name="Phongs" Relationship="Self.FK__Phong__HinhThuc__173876EA" FromRole="HinhThuc" ToRole="Phong" />
         </EntityType>
         <EntityType Name="KhachHang">
@@ -599,7 +683,150 @@
             <End Role="TrangThaiPhong" EntitySet="TrangThaiPhongs" />
             <End Role="Phong" EntitySet="Phongs" />
           </AssociationSet>
+          <FunctionImport Name="sp_CapNhatChiTietGiaoDich">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="idGiaoDich" Mode="In" Type="Int32" />
+            <Parameter Name="idPhong" Mode="In" Type="Int32" />
+            <Parameter Name="idKhach" Mode="In" Type="Int32" />
+            <Parameter Name="ngayBatDau" Mode="In" Type="DateTime" />
+            <Parameter Name="ngayKetThuc" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="sp_CapNhatTinhTrangGiaoDich">
+            <Parameter Name="idDoan" Mode="In" Type="Int32" />
+            <Parameter Name="idTinhTrang" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_ChiTietGiaoDich" ReturnType="Collection(HOLYBIRDRESORTModel.sp_ChiTietGiaoDich_Result)">
+          <Parameter Name="idDoan" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_KhoiTaoDanhSachPhong">
+            <Parameter Name="roomInAFloor" Mode="In" Type="Int32" />
+            <Parameter Name="totalFloor" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_LayChiTietGiaoDichTheoDoan" ReturnType="Collection(HOLYBIRDRESORTModel.sp_LayChiTietGiaoDichTheoDoan_Result)">
+          <Parameter Name="idDoan" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_LayDanhSachDoan" ReturnType="Collection(HOLYBIRDRESORTModel.sp_LayDanhSachDoan_Result)">
+          <Parameter Name="idDoan" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_LayThongTinDoan" ReturnType="Collection(HOLYBIRDRESORTModel.sp_LayThongTinDoan_Result)">
+          <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_LayThongTinPhong" ReturnType="Collection(HOLYBIRDRESORTModel.sp_LayThongTinPhong_Result)">
+          <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_SearchAvailableRoom" ReturnType="Collection(HOLYBIRDRESORTModel.sp_SearchAvailableRoom_Result)">
+            <Parameter Name="floor" Mode="In" Type="Int32" />
+            <Parameter Name="state" Mode="In" Type="Int32" />
+            <Parameter Name="level" Mode="In" Type="Int32" />
+            <Parameter Name="numberslot" Mode="In" Type="Int32" />
+            <Parameter Name="datestart" Mode="In" Type="String" />
+            <Parameter Name="dateend" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_ThemChiTietGiaoDich">
+            <Parameter Name="idGiaoDich" Mode="In" Type="Int32" />
+            <Parameter Name="idPhong" Mode="In" Type="Int32" />
+            <Parameter Name="idKhach" Mode="In" Type="Int32" />
+            <Parameter Name="ngayBatDau" Mode="In" Type="DateTime" />
+            <Parameter Name="ngayKetThuc" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="sp_XoaChiTietGiaoDich">
+          <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_XoaChiTietGiaoDichTheoDoan">
+          <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_CapNhatIDTruongDoanChoGiaoDich">
+            <Parameter Name="idtruongdoan" Mode="In" Type="Int32" />
+            <Parameter Name="id_giaodich" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_LayIDKhachHangTheoCMND" ReturnType="Collection(Int32)">
+            <Parameter Name="cmnd" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_LuuThongTinKhachHang">
+            <Parameter Name="id_giaodich" Mode="In" Type="Int32" />
+            <Parameter Name="hoten" Mode="In" Type="String" />
+            <Parameter Name="cmnd" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_TaoMoiGiaoDich">
+            <Parameter Name="madoan" Mode="In" Type="String" />
+            <Parameter Name="tendangnhap" Mode="In" Type="String" />
+            <Parameter Name="matkhau" Mode="In" Type="String" />
+            <Parameter Name="songuoi" Mode="In" Type="Int32" />
+            <Parameter Name="ngaybatdau" Mode="In" Type="DateTime" />
+            <Parameter Name="ngayketthuc" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="sp_TimIDGiaoDichTheoCMNDTruongDoan" ReturnType="Collection(Int32)">
+            <Parameter Name="cmnd" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
+        <ComplexType Name="sp_ChiTietGiaoDich_Result">
+          <Property Type="String" Name="MaDoan" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="HoTen" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="CMND" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="MaPhong" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="NgayBatDau" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="NgayKetThuc" Nullable="true" MaxLength="30" />
+          <Property Type="Int32" Name="DonGia" Nullable="true" />
+          <Property Type="Int32" Name="ThanhTien" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_LayChiTietGiaoDichTheoDoan_Result">
+          <Property Type="Int32" Name="ID_GiaoDich" Nullable="true" />
+          <Property Type="Int32" Name="ID_MaPhong" Nullable="true" />
+          <Property Type="Int32" Name="ID_KhachHang" Nullable="true" />
+          <Property Type="DateTime" Name="NgayBatDau" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="NgayKetThuc" Nullable="true" Precision="23" />
+          <Property Type="String" Name="MaPhong" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="ViTriTang" Nullable="true" MaxLength="10" />
+          <Property Type="Int32" Name="DonGia" Nullable="true" />
+          <Property Type="Int32" Name="Hang" Nullable="true" />
+          <Property Type="Int32" Name="HinhThuc" Nullable="true" />
+          <Property Type="Int32" Name="TrangThai" Nullable="true" />
+          <Property Type="String" Name="CMND" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="HoTen" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="MatKhau" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="sp_LayDanhSachDoan_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="Int32" Name="ID_GiaoDich" Nullable="true" />
+          <Property Type="String" Name="HoTen" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="CMND" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="MatKhau" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="sp_LayThongTinDoan_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="MaDoan" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="TenDangNhap" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="MatKhau" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="ID_NguoiDaiDien" Nullable="true" />
+          <Property Type="Int32" Name="SoNguoi" Nullable="true" />
+          <Property Type="Int32" Name="SoPhong" Nullable="true" />
+          <Property Type="DateTime" Name="NgayBatDau" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="NgayKetThuc" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="TinhTrang" Nullable="true" />
+          <Property Type="Int32" Name="TongTien" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_LayThongTinPhong_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="MaPhong" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="ViTriTang" Nullable="true" MaxLength="10" />
+          <Property Type="Int32" Name="Hang" Nullable="true" />
+          <Property Type="Int32" Name="HinhThuc" Nullable="true" />
+          <Property Type="Int32" Name="DonGia" Nullable="true" />
+          <Property Type="Int32" Name="TrangThai" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_SearchAvailableRoom_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="MaPhong" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="ViTriTang" Nullable="true" MaxLength="10" />
+          <Property Type="Int32" Name="Hang" Nullable="true" />
+          <Property Type="Int32" Name="HinhThuc" Nullable="true" />
+          <Property Type="Int32" Name="DonGia" Nullable="true" />
+          <Property Type="Int32" Name="TrangThai" Nullable="true" />
+          <Property Type="String" Name="ThongTin" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="roomlevel" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="ngayBatDau" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="ngayKetThuc" Nullable="true" MaxLength="20" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -668,6 +895,7 @@
               <MappingFragment StoreEntitySet="HinhThuc">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="ThongTin" ColumnName="ThongTin" />
+                <ScalarProperty Name="SoLuongCho" ColumnName="SoLuongCho" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -729,6 +957,109 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_CapNhatChiTietGiaoDich" FunctionName="HOLYBIRDRESORTModel.Store.sp_CapNhatChiTietGiaoDich" />
+          <FunctionImportMapping FunctionImportName="sp_CapNhatTinhTrangGiaoDich" FunctionName="HOLYBIRDRESORTModel.Store.sp_CapNhatTinhTrangGiaoDich" />
+          <FunctionImportMapping FunctionImportName="sp_ChiTietGiaoDich" FunctionName="HOLYBIRDRESORTModel.Store.sp_ChiTietGiaoDich">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HOLYBIRDRESORTModel.sp_ChiTietGiaoDich_Result">
+                <ScalarProperty Name="MaDoan" ColumnName="MaDoan" />
+                <ScalarProperty Name="HoTen" ColumnName="HoTen" />
+                <ScalarProperty Name="CMND" ColumnName="CMND" />
+                <ScalarProperty Name="MaPhong" ColumnName="MaPhong" />
+                <ScalarProperty Name="NgayBatDau" ColumnName="NgayBatDau" />
+                <ScalarProperty Name="NgayKetThuc" ColumnName="NgayKetThuc" />
+                <ScalarProperty Name="DonGia" ColumnName="DonGia" />
+                <ScalarProperty Name="ThanhTien" ColumnName="ThanhTien" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_KhoiTaoDanhSachPhong" FunctionName="HOLYBIRDRESORTModel.Store.sp_KhoiTaoDanhSachPhong" />
+          <FunctionImportMapping FunctionImportName="sp_LayChiTietGiaoDichTheoDoan" FunctionName="HOLYBIRDRESORTModel.Store.sp_LayChiTietGiaoDichTheoDoan">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HOLYBIRDRESORTModel.sp_LayChiTietGiaoDichTheoDoan_Result">
+                <ScalarProperty Name="ID_GiaoDich" ColumnName="ID_GiaoDich" />
+                <ScalarProperty Name="ID_MaPhong" ColumnName="ID_MaPhong" />
+                <ScalarProperty Name="ID_KhachHang" ColumnName="ID_KhachHang" />
+                <ScalarProperty Name="NgayBatDau" ColumnName="NgayBatDau" />
+                <ScalarProperty Name="NgayKetThuc" ColumnName="NgayKetThuc" />
+                <ScalarProperty Name="MaPhong" ColumnName="MaPhong" />
+                <ScalarProperty Name="ViTriTang" ColumnName="ViTriTang" />
+                <ScalarProperty Name="DonGia" ColumnName="DonGia" />
+                <ScalarProperty Name="Hang" ColumnName="Hang" />
+                <ScalarProperty Name="HinhThuc" ColumnName="HinhThuc" />
+                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+                <ScalarProperty Name="CMND" ColumnName="CMND" />
+                <ScalarProperty Name="HoTen" ColumnName="HoTen" />
+                <ScalarProperty Name="MatKhau" ColumnName="MatKhau" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_LayDanhSachDoan" FunctionName="HOLYBIRDRESORTModel.Store.sp_LayDanhSachDoan">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HOLYBIRDRESORTModel.sp_LayDanhSachDoan_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ID_GiaoDich" ColumnName="ID_GiaoDich" />
+                <ScalarProperty Name="HoTen" ColumnName="HoTen" />
+                <ScalarProperty Name="CMND" ColumnName="CMND" />
+                <ScalarProperty Name="MatKhau" ColumnName="MatKhau" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_LayThongTinDoan" FunctionName="HOLYBIRDRESORTModel.Store.sp_LayThongTinDoan">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HOLYBIRDRESORTModel.sp_LayThongTinDoan_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="MaDoan" ColumnName="MaDoan" />
+                <ScalarProperty Name="TenDangNhap" ColumnName="TenDangNhap" />
+                <ScalarProperty Name="MatKhau" ColumnName="MatKhau" />
+                <ScalarProperty Name="ID_NguoiDaiDien" ColumnName="ID_NguoiDaiDien" />
+                <ScalarProperty Name="SoNguoi" ColumnName="SoNguoi" />
+                <ScalarProperty Name="SoPhong" ColumnName="SoPhong" />
+                <ScalarProperty Name="NgayBatDau" ColumnName="NgayBatDau" />
+                <ScalarProperty Name="NgayKetThuc" ColumnName="NgayKetThuc" />
+                <ScalarProperty Name="TinhTrang" ColumnName="TinhTrang" />
+                <ScalarProperty Name="TongTien" ColumnName="TongTien" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_LayThongTinPhong" FunctionName="HOLYBIRDRESORTModel.Store.sp_LayThongTinPhong">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HOLYBIRDRESORTModel.sp_LayThongTinPhong_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="MaPhong" ColumnName="MaPhong" />
+                <ScalarProperty Name="ViTriTang" ColumnName="ViTriTang" />
+                <ScalarProperty Name="Hang" ColumnName="Hang" />
+                <ScalarProperty Name="HinhThuc" ColumnName="HinhThuc" />
+                <ScalarProperty Name="DonGia" ColumnName="DonGia" />
+                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_SearchAvailableRoom" FunctionName="HOLYBIRDRESORTModel.Store.sp_SearchAvailableRoom">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HOLYBIRDRESORTModel.sp_SearchAvailableRoom_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="MaPhong" ColumnName="MaPhong" />
+                <ScalarProperty Name="ViTriTang" ColumnName="ViTriTang" />
+                <ScalarProperty Name="Hang" ColumnName="Hang" />
+                <ScalarProperty Name="HinhThuc" ColumnName="HinhThuc" />
+                <ScalarProperty Name="DonGia" ColumnName="DonGia" />
+                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+                <ScalarProperty Name="ThongTin" ColumnName="ThongTin" />
+                <ScalarProperty Name="roomlevel" ColumnName="roomlevel" />
+                <ScalarProperty Name="ngayBatDau" ColumnName="ngayBatDau" />
+                <ScalarProperty Name="ngayKetThuc" ColumnName="ngayKetThuc" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_ThemChiTietGiaoDich" FunctionName="HOLYBIRDRESORTModel.Store.sp_ThemChiTietGiaoDich" />
+          <FunctionImportMapping FunctionImportName="sp_XoaChiTietGiaoDich" FunctionName="HOLYBIRDRESORTModel.Store.sp_XoaChiTietGiaoDich" />
+          <FunctionImportMapping FunctionImportName="sp_XoaChiTietGiaoDichTheoDoan" FunctionName="HOLYBIRDRESORTModel.Store.sp_XoaChiTietGiaoDichTheoDoan" />
+          <FunctionImportMapping FunctionImportName="sp_CapNhatIDTruongDoanChoGiaoDich" FunctionName="HOLYBIRDRESORTModel.Store.sp_CapNhatIDTruongDoanChoGiaoDich" />
+          <FunctionImportMapping FunctionImportName="sp_LayIDKhachHangTheoCMND" FunctionName="HOLYBIRDRESORTModel.Store.sp_LayIDKhachHangTheoCMND" />
+          <FunctionImportMapping FunctionImportName="sp_LuuThongTinKhachHang" FunctionName="HOLYBIRDRESORTModel.Store.sp_LuuThongTinKhachHang" />
+          <FunctionImportMapping FunctionImportName="sp_TaoMoiGiaoDich" FunctionName="HOLYBIRDRESORTModel.Store.sp_TaoMoiGiaoDich" />
+          <FunctionImportMapping FunctionImportName="sp_TimIDGiaoDichTheoCMNDTruongDoan" FunctionName="HOLYBIRDRESORTModel.Store.sp_TimIDGiaoDichTheoCMNDTruongDoan" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
