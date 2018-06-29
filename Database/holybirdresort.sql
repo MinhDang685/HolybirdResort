@@ -62,7 +62,7 @@ insert into TinhTrangGiaoDich (TinhTrang) values (N'Đã bị hủy');
 
 create table GiaoDich(
 	ID int IDENTITY(1,1),
-	MaDoan varchar(50),
+	IdDoan int,
 	TenDangNhap nvarchar(100),
 	MatKhau nvarchar(100),
 	ID_NguoiDaiDien int,
@@ -304,7 +304,7 @@ as
 begin
 	update GiaoDich
 	set TinhTrang = @idTinhTrang
-	where ID = @idDoan
+	where IdDoan = @idDoan
 end
 go
 
