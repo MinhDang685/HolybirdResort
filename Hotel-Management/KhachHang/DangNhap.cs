@@ -1,4 +1,5 @@
 ﻿using ManageHotel;
+using ManageHotel.Entity;
 using ManageHotel.Service;
 using System;
 using System.Collections.Generic;
@@ -14,7 +15,7 @@ namespace Hotel_Management
 {
     public partial class Form1 : Form
     {
-        ComboboxItemService service  = new ComboboxItemService();
+        KhachHangService khachhangservice = new KhachHangService();
         public Form1()
         {
             InitializeComponent();
@@ -32,8 +33,22 @@ namespace Hotel_Management
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            List<String> tmp = service.getAllTang();
-            int a = 0;
+            String username = this.txtBoxUserName.Text;
+            String password = this.txtBoxPassword.Text;
+            if (this.khachhangservice.checkLoginUserName(username, password))
+            {
+                
+                GiaoDich giaodich = this.khachhangservice.getAccount(username);
+               DatPhong datphong = new DatPhong(giaodich.ID);
+
+               this.Hide();
+               datphong.Show();
+
+            }
+            else
+            {
+                MessageBox.Show(this,"Login fail. Please try again", "Error",MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

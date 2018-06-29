@@ -113,9 +113,9 @@ namespace Hotel_Management
                 gd.SoNguoi = GridThongTinDoan.RowCount - 1;
 
                 //chưa tính đến tongtien,tinh trang, sophong, id nguoi dai dien
-
-                HE.GiaoDiches.Add(gd);
-                HE.SaveChanges();
+                HE.sp_TaoMoiGiaoDich(gd.MaDoan,gd.TenDangNhap,gd.MatKhau,gd.SoNguoi,gd.NgayBatDau,gd.NgayKetThuc);
+                //HE.GiaoDiches.Add(gd);
+                //HE.SaveChanges();
 
             }
             catch
@@ -124,39 +124,55 @@ namespace Hotel_Management
             }
         }
 
+        private void RefreshDuLieu()
+        {
+            foreach(DataGridViewRow row in GridThongTinDoan.Rows)
+            {
+                row.Cells[1].Value = null;
+                row.Cells[2].Value = null;
+            }
+            ThoiDiemBatDau.ResetValue();
+            ThoiDiemKetThuc.ResetValue();
+        }
+
         private void LuuDanhSachDoanVaCapNhatGiaoDich()
         {
             //lấy id giao dịch vừa tạo để gán vào cho từng thành viên
 
             //tìm theo cmnd của trưởng đoàn là username
-            String CMNDTruongDoan = gd.TenDangNhap.ToString();
+            String CMNDTruongDoan = GridThongTinDoan.Rows[0].Cells[2].Value.ToString();
 
             try
             {
-                gd = HE.GiaoDiches.Single(t => t.TenDangNhap.Equals(CMNDTruongDoan));//đây là giao dịch sau khi đã có id
-
+                int ID_GiaoDich = (int)HE.sp_TimIDGiaoDichTheoCMNDTruongDoan(CMNDTruongDoan).Max();
+                
+                //gd = HE.GiaoDiches.Single(t => t.TenDangNhap.Equals(CMNDTruongDoan));//đây là giao dịch sau khi đã có id
+                
                 //gán id giao dịch cho trưởng đoàn và lưu thông tin trưởng đoàn trước để lấy id người đại diện
                 KhachHang TruongDoan = new KhachHang();
-                TruongDoan.ID_GiaoDich = gd.ID;
+                TruongDoan.ID_GiaoDich = ID_GiaoDich;
                 TruongDoan.HoTen = GridThongTinDoan.Rows[0].Cells[1].Value.ToString();
                 TruongDoan.CMND = GridThongTinDoan.Rows[0].Cells[2].Value.ToString();
 
                 //luu thông tin trưởng đoàn
-                HE.KhachHangs.Add(TruongDoan);
-                HE.SaveChanges();
+                HE.sp_LuuThongTinKhachHang(TruongDoan.ID_GiaoDich, TruongDoan.HoTen, TruongDoan.CMND);
+                //HE.KhachHangs.Add(TruongDoan);
+                //HE.SaveChanges();
 
                 //sau khi lưu thì lấy lại id của trưởng đoàn để cập nhật cho bảng giao dich
-                TruongDoan = HE.KhachHangs.Single(t => t.CMND.Equals(CMNDTruongDoan));
+                int ID_TruongDoan = (int)HE.sp_LayIDKhachHangTheoCMND(CMNDTruongDoan).Max();
+                //TruongDoan = HE.KhachHangs.Single(t => t.CMND.Equals(CMNDTruongDoan));
 
                 //cập nhật cho bảng giao dịch
-                gd.ID_NguoiDaiDien = TruongDoan.ID;
-                HE.SaveChanges();
+                HE.sp_CapNhatIDTruongDoanChoGiaoDich(ID_TruongDoan, ID_GiaoDich);
+                //gd.ID_NguoiDaiDien = TruongDoan.ID;
+                //HE.SaveChanges();
 
                 //gán ID giao dịch cho từng thành viên còn lại
                 for (int i = 1; i < GridThongTinDoan.RowCount - 1; i++)
                 {
                     KhachHang kh = new KhachHang();
-                    kh.ID_GiaoDich = gd.ID;
+                    kh.ID_GiaoDich = ID_GiaoDich;
                     kh.HoTen = GridThongTinDoan.Rows[i].Cells[1].Value.ToString();
                     if (GridThongTinDoan.Rows[i].Cells[2].Value == null)
                     {
@@ -167,10 +183,11 @@ namespace Hotel_Management
                         kh.CMND = GridThongTinDoan.Rows[i].Cells[2].Value.ToString();
                     }
 
-                    HE.KhachHangs.Add(kh);
-                    HE.SaveChanges();
+                    HE.sp_LuuThongTinKhachHang(kh.ID_GiaoDich, kh.HoTen, kh.CMND);
+                    //HE.KhachHangs.Add(kh);
+                    //HE.SaveChanges();
                 }
-
+                RefreshDuLieu();
                 MessageBox.Show(ThongBaoTaiKhoanDoan(gd));
             }
             catch

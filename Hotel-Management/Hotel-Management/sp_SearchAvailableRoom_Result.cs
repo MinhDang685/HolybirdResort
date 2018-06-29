@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ManageHotel.Entity
+namespace Hotel_Management
 {
     using System;
     

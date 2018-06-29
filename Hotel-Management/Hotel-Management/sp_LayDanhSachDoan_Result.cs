@@ -10,19 +10,13 @@
 namespace Hotel_Management
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class HinhThuc
+    public partial class sp_LayDanhSachDoan_Result
     {
-        public HinhThuc()
-        {
-            this.Phongs = new HashSet<Phong>();
-        }
-    
         public int ID { get; set; }
-        public string ThongTin { get; set; }
-        public Nullable<int> SoLuongCho { get; set; }
-    
-        public virtual ICollection<Phong> Phongs { get; set; }
+        public Nullable<int> ID_GiaoDich { get; set; }
+        public string HoTen { get; set; }
+        public string CMND { get; set; }
+        public string MatKhau { get; set; }
     }
 }

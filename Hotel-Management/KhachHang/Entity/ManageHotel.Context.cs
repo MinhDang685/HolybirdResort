@@ -40,6 +40,75 @@ namespace ManageHotel.Entity
         public virtual DbSet<TinhTrangGiaoDich> TinhTrangGiaoDiches { get; set; }
         public virtual DbSet<TrangThaiPhong> TrangThaiPhongs { get; set; }
     
+        public virtual int sp_CapNhatChiTietGiaoDich(Nullable<int> id, Nullable<int> idGiaoDich, Nullable<int> idPhong, Nullable<int> idKhach, Nullable<System.DateTime> ngayBatDau, Nullable<System.DateTime> ngayKetThuc)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            var idGiaoDichParameter = idGiaoDich.HasValue ?
+                new ObjectParameter("idGiaoDich", idGiaoDich) :
+                new ObjectParameter("idGiaoDich", typeof(int));
+    
+            var idPhongParameter = idPhong.HasValue ?
+                new ObjectParameter("idPhong", idPhong) :
+                new ObjectParameter("idPhong", typeof(int));
+    
+            var idKhachParameter = idKhach.HasValue ?
+                new ObjectParameter("idKhach", idKhach) :
+                new ObjectParameter("idKhach", typeof(int));
+    
+            var ngayBatDauParameter = ngayBatDau.HasValue ?
+                new ObjectParameter("ngayBatDau", ngayBatDau) :
+                new ObjectParameter("ngayBatDau", typeof(System.DateTime));
+    
+            var ngayKetThucParameter = ngayKetThuc.HasValue ?
+                new ObjectParameter("ngayKetThuc", ngayKetThuc) :
+                new ObjectParameter("ngayKetThuc", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_CapNhatChiTietGiaoDich", idParameter, idGiaoDichParameter, idPhongParameter, idKhachParameter, ngayBatDauParameter, ngayKetThucParameter);
+        }
+    
+        public virtual int sp_CapNhatTinhTrangGiaoDich(Nullable<int> idDoan, Nullable<int> idTinhTrang)
+        {
+            var idDoanParameter = idDoan.HasValue ?
+                new ObjectParameter("idDoan", idDoan) :
+                new ObjectParameter("idDoan", typeof(int));
+    
+            var idTinhTrangParameter = idTinhTrang.HasValue ?
+                new ObjectParameter("idTinhTrang", idTinhTrang) :
+                new ObjectParameter("idTinhTrang", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_CapNhatTinhTrangGiaoDich", idDoanParameter, idTinhTrangParameter);
+        }
+    
+        public virtual ObjectResult<sp_LayDanhSachDoan_Result> sp_LayDanhSachDoan(Nullable<int> idDoan)
+        {
+            var idDoanParameter = idDoan.HasValue ?
+                new ObjectParameter("idDoan", idDoan) :
+                new ObjectParameter("idDoan", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_LayDanhSachDoan_Result>("sp_LayDanhSachDoan", idDoanParameter);
+        }
+    
+        public virtual ObjectResult<sp_LayThongTinDoan_Result> sp_LayThongTinDoan(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_LayThongTinDoan_Result>("sp_LayThongTinDoan", idParameter);
+        }
+    
+        public virtual ObjectResult<sp_LayThongTinPhong_Result> sp_LayThongTinPhong(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_LayThongTinPhong_Result>("sp_LayThongTinPhong", idParameter);
+        }
+    
         public virtual ObjectResult<sp_SearchAvailableRoom_Result> sp_SearchAvailableRoom(Nullable<int> floor, Nullable<int> state, Nullable<int> level, Nullable<int> numberslot, string datestart, string dateend)
         {
             var floorParameter = floor.HasValue ?
@@ -67,6 +136,67 @@ namespace ManageHotel.Entity
                 new ObjectParameter("dateend", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_SearchAvailableRoom_Result>("sp_SearchAvailableRoom", floorParameter, stateParameter, levelParameter, numberslotParameter, datestartParameter, dateendParameter);
+        }
+    
+        public virtual int sp_ThemChiTietGiaoDich(Nullable<int> idGiaoDich, Nullable<int> idPhong, Nullable<int> idKhach, Nullable<System.DateTime> ngayBatDau, Nullable<System.DateTime> ngayKetThuc)
+        {
+            var idGiaoDichParameter = idGiaoDich.HasValue ?
+                new ObjectParameter("idGiaoDich", idGiaoDich) :
+                new ObjectParameter("idGiaoDich", typeof(int));
+    
+            var idPhongParameter = idPhong.HasValue ?
+                new ObjectParameter("idPhong", idPhong) :
+                new ObjectParameter("idPhong", typeof(int));
+    
+            var idKhachParameter = idKhach.HasValue ?
+                new ObjectParameter("idKhach", idKhach) :
+                new ObjectParameter("idKhach", typeof(int));
+    
+            var ngayBatDauParameter = ngayBatDau.HasValue ?
+                new ObjectParameter("ngayBatDau", ngayBatDau) :
+                new ObjectParameter("ngayBatDau", typeof(System.DateTime));
+    
+            var ngayKetThucParameter = ngayKetThuc.HasValue ?
+                new ObjectParameter("ngayKetThuc", ngayKetThuc) :
+                new ObjectParameter("ngayKetThuc", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_ThemChiTietGiaoDich", idGiaoDichParameter, idPhongParameter, idKhachParameter, ngayBatDauParameter, ngayKetThucParameter);
+        }
+    
+        public virtual int sp_XoaChiTietGiaoDich(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_XoaChiTietGiaoDich", idParameter);
+        }
+    
+        public virtual int sp_XoaChiTietGiaoDichTheoDoan(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_XoaChiTietGiaoDichTheoDoan", idParameter);
+        }
+    
+        public virtual ObjectResult<sp_LayChiTietGiaoDichTheoDoan_Result> sp_LayChiTietGiaoDichTheoDoan(Nullable<int> idDoan)
+        {
+            var idDoanParameter = idDoan.HasValue ?
+                new ObjectParameter("idDoan", idDoan) :
+                new ObjectParameter("idDoan", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_LayChiTietGiaoDichTheoDoan_Result>("sp_LayChiTietGiaoDichTheoDoan", idDoanParameter);
+        }
+    
+        public virtual ObjectResult<sp_ChiTietGiaoDich_Result> sp_ChiTietGiaoDich(Nullable<int> idDoan)
+        {
+            var idDoanParameter = idDoan.HasValue ?
+                new ObjectParameter("idDoan", idDoan) :
+                new ObjectParameter("idDoan", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_ChiTietGiaoDich_Result>("sp_ChiTietGiaoDich", idDoanParameter);
         }
     }
 }

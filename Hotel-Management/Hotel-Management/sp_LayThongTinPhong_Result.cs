@@ -7,11 +7,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ManageHotel.Entity
+namespace Hotel_Management
 {
     using System;
     
-    public partial class sp_SearchAvailableRoom_Result
+    public partial class sp_LayThongTinPhong_Result
     {
         public int ID { get; set; }
         public string MaPhong { get; set; }
@@ -20,9 +20,5 @@ namespace ManageHotel.Entity
         public Nullable<int> HinhThuc { get; set; }
         public Nullable<int> DonGia { get; set; }
         public Nullable<int> TrangThai { get; set; }
-        public string ThongTin { get; set; }
-        public string roomlevel { get; set; }
-        public string ngayBatDau { get; set; }
-        public string ngayKetThuc { get; set; }
     }
 }
