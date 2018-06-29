@@ -23,7 +23,7 @@ namespace Hotel_Management
 
         public QuanLy(NhanVien nv)
         {
-            
+
             InitializeComponent();
             CaiDatFormQuanLy(nv);
         }
@@ -57,7 +57,7 @@ namespace Hotel_Management
         {
 
         }
-        
+
         private void QuanLy_Load(object sender, EventArgs e)
         {
 
@@ -74,9 +74,9 @@ namespace Hotel_Management
 
             String NgayGioHienTai = DateTime.Now.ToString();
 
-            string[] temp = NgayGioHienTai.Split(new char[]{' ',':','/'});
+            string[] temp = NgayGioHienTai.Split(new char[] { ' ', ':', '/' });
 
-            for(int i=0;i<temp.Length;i++)
+            for (int i = 0; i < temp.Length; i++)
             {
                 MaDoan += temp[i];
             }
@@ -127,14 +127,14 @@ namespace Hotel_Management
         private void LuuDanhSachDoanVaCapNhatGiaoDich()
         {
             //lấy id giao dịch vừa tạo để gán vào cho từng thành viên
-            
+
             //tìm theo cmnd của trưởng đoàn là username
             String CMNDTruongDoan = gd.TenDangNhap.ToString();
 
             try
             {
                 gd = HE.GiaoDiches.Single(t => t.TenDangNhap.Equals(CMNDTruongDoan));//đây là giao dịch sau khi đã có id
-                
+
                 //gán id giao dịch cho trưởng đoàn và lưu thông tin trưởng đoàn trước để lấy id người đại diện
                 KhachHang TruongDoan = new KhachHang();
                 TruongDoan.ID_GiaoDich = gd.ID;
@@ -153,12 +153,12 @@ namespace Hotel_Management
                 HE.SaveChanges();
 
                 //gán ID giao dịch cho từng thành viên còn lại
-                for(int i=1;i<GridThongTinDoan.RowCount-1;i++)
+                for (int i = 1; i < GridThongTinDoan.RowCount - 1; i++)
                 {
                     KhachHang kh = new KhachHang();
                     kh.ID_GiaoDich = gd.ID;
                     kh.HoTen = GridThongTinDoan.Rows[i].Cells[1].Value.ToString();
-                    if (GridThongTinDoan.Rows[i].Cells[2].Value==null)
+                    if (GridThongTinDoan.Rows[i].Cells[2].Value == null)
                     {
                         kh.CMND = "";
                     }
@@ -181,8 +181,8 @@ namespace Hotel_Management
 
         private bool KiemTraTonTaiCMND(String CMND)
         {
-            KhachHang kh = HE.KhachHangs.Single(t=>t.CMND.Equals(CMND));
-            if(kh != null)
+            KhachHang kh = HE.KhachHangs.Single(t => t.CMND.Equals(CMND));
+            if (kh != null)
             {
                 return false; //CMND này chưa tồn tại
             }
@@ -198,7 +198,7 @@ namespace Hotel_Management
             {
                 //so sánh thời điểm
                 int i = DateTime.Compare((DateTime)ThoiDiemBatDau.Value, (DateTime)ThoiDiemKetThuc.Value);
-                if(i <= 0)
+                if (i <= 0)
                 {
                     TaoGiaoDichMoi();
                     LuuDanhSachDoanVaCapNhatGiaoDich();
@@ -215,6 +215,18 @@ namespace Hotel_Management
             gd = new GiaoDich();
         }
 
+        private void ThayDoiTrangThaiPhong(GiaoDich gd)
+        {
+            List<ChiTietGiaoDich> chiTietGDs = HE.ChiTietGiaoDiches.Where(t => t.ID_GiaoDich.Equals(gd.ID)).ToList();
+            for(int i = 0; i < chiTietGDs.Count; i++)
+            {
+                Phong p = HE.Phongs.Single(t => t.ID == chiTietGDs[i].ID_MaPhong);
+                if (p.TrangThai == 1)
+                    p.TrangThai = 2;
+                else p.TrangThai = 1;
+            }
+        }
+
         private void btn_nhan_phong_Click(object sender, EventArgs e)
         {
             for (int i = 0; i < GridHoatDong.RowCount; i++)
@@ -223,11 +235,19 @@ namespace Hotel_Management
                 {
                     String maDoan = GridHoatDong.Rows[i].Cells[1].Value.ToString();
                     gd = HE.GiaoDiches.Single(t => t.TenDangNhap.Equals(maDoan));
-                    String trangThai = GridHoatDong.Rows[i].Cells[2].Value.ToString();
-                    if (trangThai.Equals("đã đăng ký") || trangThai.Equals("đã mướn phòng"))
+                    if (gd.SoPhong == 0)
                     {
-                        gd.TinhTrang = 3;
-                        HE.SaveChanges();
+                        MessageBox.Show(maDoan + "Vui lòng đặt phòng trước khi nhận phòng");
+                    }
+                    else
+                    {
+                        String trangThai = GridHoatDong.Rows[i].Cells[2].Value.ToString();
+                        if (trangThai.Equals("Đã đăng ký") || trangThai.Equals("Đã mướn phòng"))
+                        {
+                            gd.TinhTrang = 3;
+                            ThayDoiTrangThaiPhong(gd);
+                            HE.SaveChanges();
+                        }
                     }
                 }
             }
