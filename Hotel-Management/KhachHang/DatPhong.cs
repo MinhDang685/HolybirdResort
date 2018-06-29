@@ -405,6 +405,7 @@ namespace Hotel_Management
             }
             khachHangService.capNhatTinhTrangGiaoDich(idDoan, 2);
             MessageBox.Show(buttonDatPhong.Text + " thành công !!!");
+            ribbonControl1.SelectedRibbonTabItem = ribbonTabChiTiet;
         }
 
         private List<ChiTietGiaoDich> GetChiTietGiaoDich()

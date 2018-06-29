@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\TheKiet\Desktop\HQT_CSDL\Final Project\Hotel-Management\KhachHang\Entity\ManageHotel.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\My-PC\Documents\doan\holybird resort\Hotel-Management\KhachHang\Entity\ManageHotel.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

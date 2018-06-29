@@ -62,7 +62,7 @@ insert into TinhTrangGiaoDich (TinhTrang) values (N'Đã bị hủy');
 
 create table GiaoDich(
 	ID int IDENTITY(1,1),
-	IdDoan int,
+	MaDoan varchar(50),
 	TenDangNhap nvarchar(100),
 	MatKhau nvarchar(100),
 	ID_NguoiDaiDien int,
@@ -304,7 +304,7 @@ as
 begin
 	update GiaoDich
 	set TinhTrang = @idTinhTrang
-	where IdDoan = @idDoan
+	where ID = @idDoan
 end
 go
 
@@ -357,15 +357,6 @@ AS
 BEGIN
 	INSERT INTO KhachHang (ID_GiaoDich, HoTen, CMND)
 	VALUES (@id_giaodich, @hoten, @cmnd)
-END
-GO
-
-CREATE PROCEDURE [dbo].[sp_TaoMoiGiaoDich]
-(@madoan VARCHAR(50), @tendangnhap NVARCHAR(100), @matkhau NVARCHAR(100), @songuoi INT, @ngaybatdau DATETIME, @ngayketthuc DATETIME)
-AS
-BEGIN
-	INSERT INTO GiaoDich (MaDoan, TenDangNhap, MatKhau, SoNguoi, NgayBatDau, NgayKetThuc)
-	VALUES (@madoan, @tendangnhap, @matkhau, @songuoi, @ngaybatdau, @ngayketthuc)
 END
 GO
 

@@ -237,6 +237,14 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="fGetRoomPrice" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int">
+          <Parameter Name="roomId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="fRandomInteger" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int">
+          <Parameter Name="seed" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="from" Type="int" Mode="In" />
+          <Parameter Name="to" Type="int" Mode="In" />
+        </Function>
         <Function Name="sp_CapNhatChiTietGiaoDich" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id" Type="int" Mode="In" />
           <Parameter Name="idGiaoDich" Type="int" Mode="In" />
@@ -245,6 +253,10 @@
           <Parameter Name="ngayBatDau" Type="datetime" Mode="In" />
           <Parameter Name="ngayKetThuc" Type="datetime" Mode="In" />
         </Function>
+        <Function Name="sp_CapNhatIDTruongDoanChoGiaoDich" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idtruongdoan" Type="int" Mode="In" />
+          <Parameter Name="id_giaodich" Type="int" Mode="In" />
+        </Function>
         <Function Name="sp_CapNhatTinhTrangGiaoDich" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idDoan" Type="int" Mode="In" />
           <Parameter Name="idTinhTrang" Type="int" Mode="In" />
@@ -252,17 +264,29 @@
         <Function Name="sp_ChiTietGiaoDich" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idDoan" Type="int" Mode="In" />
         </Function>
+        <Function Name="sp_KhoiTaoDanhSachPhong" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="roomInAFloor" Type="int" Mode="In" />
+          <Parameter Name="totalFloor" Type="int" Mode="In" />
+        </Function>
         <Function Name="sp_LayChiTietGiaoDichTheoDoan" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idDoan" Type="int" Mode="In" />
         </Function>
         <Function Name="sp_LayDanhSachDoan" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idDoan" Type="int" Mode="In" />
         </Function>
+        <Function Name="sp_LayIDKhachHangTheoCMND" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="cmnd" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="sp_LayThongTinDoan" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id" Type="int" Mode="In" />
         </Function>
         <Function Name="sp_LayThongTinPhong" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_LuuThongTinKhachHang" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_giaodich" Type="int" Mode="In" />
+          <Parameter Name="hoten" Type="nvarchar" Mode="In" />
+          <Parameter Name="cmnd" Type="varchar" Mode="In" />
         </Function>
         <Function Name="sp_SearchAvailableRoom" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="floor" Type="int" Mode="In" />
@@ -271,6 +295,14 @@
           <Parameter Name="numberslot" Type="int" Mode="In" />
           <Parameter Name="datestart" Type="varchar" Mode="In" />
           <Parameter Name="dateend" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="sp_TaoMoiGiaoDich" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="madoan" Type="varchar" Mode="In" />
+          <Parameter Name="tendangnhap" Type="nvarchar" Mode="In" />
+          <Parameter Name="matkhau" Type="nvarchar" Mode="In" />
+          <Parameter Name="songuoi" Type="int" Mode="In" />
+          <Parameter Name="ngaybatdau" Type="datetime" Mode="In" />
+          <Parameter Name="ngayketthuc" Type="datetime" Mode="In" />
         </Function>
         <Function Name="sp_ThemChiTietGiaoDich" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idGiaoDich" Type="int" Mode="In" />
@@ -694,7 +726,31 @@
           <Parameter Name="idDoan" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_ChiTietGiaoDich" ReturnType="Collection(ManageHotelModel.sp_ChiTietGiaoDich_Result)">
-            <Parameter Name="idDoan" Mode="In" Type="Int32" />
+          <Parameter Name="idDoan" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_CapNhatIDTruongDoanChoGiaoDich">
+            <Parameter Name="idtruongdoan" Mode="In" Type="Int32" />
+            <Parameter Name="id_giaodich" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_KhoiTaoDanhSachPhong">
+            <Parameter Name="roomInAFloor" Mode="In" Type="Int32" />
+            <Parameter Name="totalFloor" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_LayIDKhachHangTheoCMND" ReturnType="Collection(Int32)">
+            <Parameter Name="cmnd" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_LuuThongTinKhachHang">
+            <Parameter Name="id_giaodich" Mode="In" Type="Int32" />
+            <Parameter Name="hoten" Mode="In" Type="String" />
+            <Parameter Name="cmnd" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_TaoMoiGiaoDich">
+            <Parameter Name="madoan" Mode="In" Type="String" />
+            <Parameter Name="tendangnhap" Mode="In" Type="String" />
+            <Parameter Name="matkhau" Mode="In" Type="String" />
+            <Parameter Name="songuoi" Mode="In" Type="Int32" />
+            <Parameter Name="ngaybatdau" Mode="In" Type="DateTime" />
+            <Parameter Name="ngayketthuc" Mode="In" Type="DateTime" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="sp_LayDanhSachDoan_Result">
@@ -992,6 +1048,11 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_CapNhatIDTruongDoanChoGiaoDich" FunctionName="ManageHotelModel.Store.sp_CapNhatIDTruongDoanChoGiaoDich" />
+          <FunctionImportMapping FunctionImportName="sp_KhoiTaoDanhSachPhong" FunctionName="ManageHotelModel.Store.sp_KhoiTaoDanhSachPhong" />
+          <FunctionImportMapping FunctionImportName="sp_LayIDKhachHangTheoCMND" FunctionName="ManageHotelModel.Store.sp_LayIDKhachHangTheoCMND" />
+          <FunctionImportMapping FunctionImportName="sp_LuuThongTinKhachHang" FunctionName="ManageHotelModel.Store.sp_LuuThongTinKhachHang" />
+          <FunctionImportMapping FunctionImportName="sp_TaoMoiGiaoDich" FunctionName="ManageHotelModel.Store.sp_TaoMoiGiaoDich" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -198,5 +198,86 @@ namespace ManageHotel.Entity
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_ChiTietGiaoDich_Result>("sp_ChiTietGiaoDich", idDoanParameter);
         }
+    
+        public virtual int sp_CapNhatIDTruongDoanChoGiaoDich(Nullable<int> idtruongdoan, Nullable<int> id_giaodich)
+        {
+            var idtruongdoanParameter = idtruongdoan.HasValue ?
+                new ObjectParameter("idtruongdoan", idtruongdoan) :
+                new ObjectParameter("idtruongdoan", typeof(int));
+    
+            var id_giaodichParameter = id_giaodich.HasValue ?
+                new ObjectParameter("id_giaodich", id_giaodich) :
+                new ObjectParameter("id_giaodich", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_CapNhatIDTruongDoanChoGiaoDich", idtruongdoanParameter, id_giaodichParameter);
+        }
+    
+        public virtual int sp_KhoiTaoDanhSachPhong(Nullable<int> roomInAFloor, Nullable<int> totalFloor)
+        {
+            var roomInAFloorParameter = roomInAFloor.HasValue ?
+                new ObjectParameter("roomInAFloor", roomInAFloor) :
+                new ObjectParameter("roomInAFloor", typeof(int));
+    
+            var totalFloorParameter = totalFloor.HasValue ?
+                new ObjectParameter("totalFloor", totalFloor) :
+                new ObjectParameter("totalFloor", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_KhoiTaoDanhSachPhong", roomInAFloorParameter, totalFloorParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> sp_LayIDKhachHangTheoCMND(string cmnd)
+        {
+            var cmndParameter = cmnd != null ?
+                new ObjectParameter("cmnd", cmnd) :
+                new ObjectParameter("cmnd", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("sp_LayIDKhachHangTheoCMND", cmndParameter);
+        }
+    
+        public virtual int sp_LuuThongTinKhachHang(Nullable<int> id_giaodich, string hoten, string cmnd)
+        {
+            var id_giaodichParameter = id_giaodich.HasValue ?
+                new ObjectParameter("id_giaodich", id_giaodich) :
+                new ObjectParameter("id_giaodich", typeof(int));
+    
+            var hotenParameter = hoten != null ?
+                new ObjectParameter("hoten", hoten) :
+                new ObjectParameter("hoten", typeof(string));
+    
+            var cmndParameter = cmnd != null ?
+                new ObjectParameter("cmnd", cmnd) :
+                new ObjectParameter("cmnd", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_LuuThongTinKhachHang", id_giaodichParameter, hotenParameter, cmndParameter);
+        }
+    
+        public virtual int sp_TaoMoiGiaoDich(string madoan, string tendangnhap, string matkhau, Nullable<int> songuoi, Nullable<System.DateTime> ngaybatdau, Nullable<System.DateTime> ngayketthuc)
+        {
+            var madoanParameter = madoan != null ?
+                new ObjectParameter("madoan", madoan) :
+                new ObjectParameter("madoan", typeof(string));
+    
+            var tendangnhapParameter = tendangnhap != null ?
+                new ObjectParameter("tendangnhap", tendangnhap) :
+                new ObjectParameter("tendangnhap", typeof(string));
+    
+            var matkhauParameter = matkhau != null ?
+                new ObjectParameter("matkhau", matkhau) :
+                new ObjectParameter("matkhau", typeof(string));
+    
+            var songuoiParameter = songuoi.HasValue ?
+                new ObjectParameter("songuoi", songuoi) :
+                new ObjectParameter("songuoi", typeof(int));
+    
+            var ngaybatdauParameter = ngaybatdau.HasValue ?
+                new ObjectParameter("ngaybatdau", ngaybatdau) :
+                new ObjectParameter("ngaybatdau", typeof(System.DateTime));
+    
+            var ngayketthucParameter = ngayketthuc.HasValue ?
+                new ObjectParameter("ngayketthuc", ngayketthuc) :
+                new ObjectParameter("ngayketthuc", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_TaoMoiGiaoDich", madoanParameter, tendangnhapParameter, matkhauParameter, songuoiParameter, ngaybatdauParameter, ngayketthucParameter);
+        }
     }
 }
