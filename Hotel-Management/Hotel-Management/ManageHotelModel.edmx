@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="HOLYBIRDRESORTModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="HOLYBIRDRESORTModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="ChiTietGiaoDich">
           <Key>
             <PropertyRef Name="ID" />
@@ -330,6 +330,9 @@
         </Function>
         <Function Name="sp_TimIDGiaoDichTheoCMNDTruongDoan" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="cmnd" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_TimKiemGiaoDich" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="maDoan" Type="varchar" Mode="In" />
         </Function>
         <Function Name="sp_XoaChiTietGiaoDich" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id" Type="int" Mode="In" />
@@ -804,6 +807,9 @@
           <FunctionImport Name="sp_LayTinhTrangGiaoDich" EntitySet="TinhTrangGiaoDiches" ReturnType="Collection(HOLYBIRDRESORTModel.TinhTrangGiaoDich)">
           <Parameter Name="idTinhTrang" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="sp_TimKiemGiaoDich" EntitySet="GiaoDiches" ReturnType="Collection(HOLYBIRDRESORTModel.GiaoDich)">
+            <Parameter Name="maDoan" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="sp_ChiTietGiaoDich_Result">
           <Property Type="String" Name="MaDoan" Nullable="true" MaxLength="50" />
@@ -1108,6 +1114,7 @@
           <FunctionImportMapping FunctionImportName="sp_XoaDichVuPhong" FunctionName="HOLYBIRDRESORTModel.Store.sp_XoaDichVuPhong" />
           <FunctionImportMapping FunctionImportName="sp_LayTatCaGiaoDich" FunctionName="HOLYBIRDRESORTModel.Store.sp_LayTatCaGiaoDich" />
           <FunctionImportMapping FunctionImportName="sp_LayTinhTrangGiaoDich" FunctionName="HOLYBIRDRESORTModel.Store.sp_LayTinhTrangGiaoDich" />
+          <FunctionImportMapping FunctionImportName="sp_TimKiemGiaoDich" FunctionName="HOLYBIRDRESORTModel.Store.sp_TimKiemGiaoDich" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

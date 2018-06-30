@@ -404,5 +404,23 @@ namespace Hotel_Management
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<TinhTrangGiaoDich>("sp_LayTinhTrangGiaoDich", mergeOption, idTinhTrangParameter);
         }
+    
+        public virtual ObjectResult<GiaoDich> sp_TimKiemGiaoDich(string maDoan)
+        {
+            var maDoanParameter = maDoan != null ?
+                new ObjectParameter("maDoan", maDoan) :
+                new ObjectParameter("maDoan", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GiaoDich>("sp_TimKiemGiaoDich", maDoanParameter);
+        }
+    
+        public virtual ObjectResult<GiaoDich> sp_TimKiemGiaoDich(string maDoan, MergeOption mergeOption)
+        {
+            var maDoanParameter = maDoan != null ?
+                new ObjectParameter("maDoan", maDoan) :
+                new ObjectParameter("maDoan", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GiaoDich>("sp_TimKiemGiaoDich", mergeOption, maDoanParameter);
+        }
     }
 }

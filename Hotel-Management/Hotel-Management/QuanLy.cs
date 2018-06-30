@@ -20,7 +20,6 @@ namespace Hotel_Management
         public QuanLy()
         {
             InitializeComponent();
-            showGridHoatDong();
         }
 
         public QuanLy(NhanVien nv)
@@ -53,6 +52,14 @@ namespace Hotel_Management
 
         private void showGridHoatDong()
         {
+            if (GridHoatDong.RowCount > 1)
+            {
+                for (int i = 0; i < GridHoatDong.RowCount; i++)
+                {
+                    GridHoatDong.Rows.RemoveAt(0);
+                }
+            }
+            
             List<GiaoDich> giaoDichs = HE.sp_LayTatCaGiaoDich().ToList();
             for (int i = 0; i < giaoDichs.Count; i++)
             {
@@ -416,6 +423,7 @@ namespace Hotel_Management
                     }
                 }
             }
+            showGridHoatDong();
         }
 
         private void btn_huy_phong_Click(object sender, EventArgs e)
@@ -436,6 +444,7 @@ namespace Hotel_Management
                     
                 }
             }
+            showGridHoatDong();
         }
 
         private void btn_hoa_don_Click(object sender, EventArgs e)
@@ -473,6 +482,31 @@ namespace Hotel_Management
         private void QuanLy_FormClosed(object sender, FormClosedEventArgs e)
         {
             Application.Exit();
+        }
+
+        private void btnTimKiemGiaoDich_Click(object sender, EventArgs e)
+        {
+            string timKiem = "%" + tbTimKiemGiaoDich.Text + "%";
+            List<GiaoDich> giaoDichs = HE.sp_TimKiemGiaoDich(timKiem).ToList();
+            if (GridHoatDong.RowCount > 1)
+            {
+                for (int i = 0; i < GridHoatDong.RowCount; i++)
+                {
+                    GridHoatDong.Rows.RemoveAt(0);
+                }
+            }
+            for (int i = 0; i < giaoDichs.Count; i++)
+            {
+                string stt = (i + 1).ToString();
+                string maDoan = giaoDichs[i].MaDoan;
+                string tinhTrang = HE.sp_LayTinhTrangGiaoDich(giaoDichs[i].TinhTrang).Single().TinhTrang;
+                String[] row = new String[]{
+                          stt,
+                          maDoan,
+                          tinhTrang
+                        };
+                GridHoatDong.Rows.Add(row);
+            }
         }
     }
 }
