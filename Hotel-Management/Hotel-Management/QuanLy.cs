@@ -44,7 +44,7 @@ namespace Hotel_Management
             List<ChiTietGiaoDich> ctgds = HE.sp_LayChiTietGiaoDichTheoIdGiaoDich(gd1.ID).ToList();
             if (GridThanhToan.RowCount > 1)
             {
-                for (int i = 0; i < GridThanhToan.RowCount; i++)
+                for (int i = 0; i < GridThanhToan.RowCount - 1; i++)
                 {
                     GridThanhToan.Rows.RemoveAt(0);
                 }
@@ -77,7 +77,7 @@ namespace Hotel_Management
         {
             if (GridHoatDong.RowCount > 1)
             {
-                for (int i = 0; i < GridHoatDong.RowCount; i++)
+                for (int i = 0; i < GridHoatDong.RowCount - 1; i++)
                 {
                     GridHoatDong.Rows.RemoveAt(0);
                 }
@@ -426,7 +426,7 @@ namespace Hotel_Management
 
         private void btn_nhan_phong_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < GridHoatDong.RowCount; i++)
+            for (int i = 0; i < GridHoatDong.RowCount - 1; i++)
             {
                 if (GridHoatDong.Rows[i].Cells[3].Selected)
                 {
@@ -456,7 +456,7 @@ namespace Hotel_Management
 
         private void btn_huy_phong_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < GridHoatDong.RowCount; i++)
+            for (int i = 0; i < GridHoatDong.RowCount - 1; i++)
             {
                 if (GridHoatDong.Rows[i].Cells[3].Selected)
                 {
@@ -473,29 +473,28 @@ namespace Hotel_Management
 
         private void btn_hoa_don_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < GridThanhToan.RowCount; i++)
+            if (GridThanhToan.RowCount == 1)
+                MessageBox.Show("Chọn đoàn muốn thanh toán");
+            else
             {
-                int thanhTien = 0;
-                string maPhong = GridThanhToan.Rows[i].Cells[1].Value.ToString();
-                Phong phong = HE.sp_LayPhongTheoMaPhong(maPhong).Single();
-                if (GridThanhToan.Rows[i].Cells[3].Value != null && !GridThanhToan.Rows[i].Cells[3].Value.ToString().Equals(""))
+                int tongTien = 0;
+                for (int i = 0; i < GridThanhToan.RowCount - 1; i++)
                 {
-                    thanhTien = (int)phong.DonGia + Convert.ToInt32(GridThanhToan.Rows[i].Cells[3].Value);
+                    int thanhTien = 0;
+                    string maPhong = GridThanhToan.Rows[i].Cells[1].Value.ToString();
+                    Phong phong = HE.sp_LayPhongTheoMaPhong(maPhong).Single();
+                    if (GridThanhToan.Rows[i].Cells[3].Value != null && !GridThanhToan.Rows[i].Cells[3].Value.ToString().Equals(""))
+                    {
+                        thanhTien = (int)phong.DonGia + Convert.ToInt32(GridThanhToan.Rows[i].Cells[3].Value);
+                    }
+                    HE.sp_CapNhatChiTietGiaoDichKhiThanhToan(idGiaoDichThanhToan, phong.ID, thanhTien);
+                    HE.sp_CapNhatTrangThaiPhong(phong.ID, 1);
+                    tongTien += thanhTien;
                 }
-                HE.sp_CapNhatChiTietGiaoDichKhiThanhToan(idGiaoDichThanhToan, phong.ID, thanhTien);
-                HE.sp_CapNhatTrangThaiPhong(phong.ID, 1);
+                HE.sp_CapNhatTongTienGiaoDich(idGiaoDichThanhToan, tongTien);
                 ThanhToan formThanhToan = new ThanhToan();
                 formThanhToan.ShowDialog();
             }
-            //Đổi trạng thái phòng
-            /*for (int i = 0; i < GridThanhToan.RowCount; i++)
-            {
-                if (GridThanhToan.Rows[i].Cells[4].Selected)
-                {
-                    int idPhong = Convert.ToInt32(GridThanhToan.Rows[i].Cells[1].Value);
-
-                }
-            }*/
         }
 
         private void QuanLy_FormClosed(object sender, FormClosedEventArgs e)
@@ -509,7 +508,7 @@ namespace Hotel_Management
             List<GiaoDich> giaoDichs = HE.sp_TimKiemGiaoDich(timKiem).ToList();
             if (GridHoatDong.RowCount > 1)
             {
-                for (int i = 0; i < GridHoatDong.RowCount; i++)
+                for (int i = 0; i < GridHoatDong.RowCount - 1; i++)
                 {
                     GridHoatDong.Rows.RemoveAt(0);
                 }

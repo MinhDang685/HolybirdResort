@@ -37,11 +37,11 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.labelX3 = new DevComponents.DotNetBar.LabelX();
-            this.label4 = new System.Windows.Forms.Label();
+            this.lbMaDoanHoaDon = new System.Windows.Forms.Label();
             this.labelX4 = new DevComponents.DotNetBar.LabelX();
-            this.label5 = new System.Windows.Forms.Label();
+            this.lbDaiDienHoaDon = new System.Windows.Forms.Label();
             this.labelX5 = new DevComponents.DotNetBar.LabelX();
-            this.label6 = new System.Windows.Forms.Label();
+            this.lbThoiGianXuatHD = new System.Windows.Forms.Label();
             this.labelX6 = new DevComponents.DotNetBar.LabelX();
             this.label7 = new System.Windows.Forms.Label();
             this.labelX7 = new DevComponents.DotNetBar.LabelX();
@@ -54,7 +54,7 @@
             this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.labelX8 = new DevComponents.DotNetBar.LabelX();
-            this.label9 = new System.Windows.Forms.Label();
+            this.lbTongTienHoaDon = new System.Windows.Forms.Label();
             this.buttonX1 = new DevComponents.DotNetBar.ButtonX();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewX1)).BeginInit();
             this.SuspendLayout();
@@ -130,16 +130,16 @@
             this.labelX3.TabIndex = 1;
             this.labelX3.Text = "Mã đoàn";
             // 
-            // label4
+            // lbMaDoanHoaDon
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.label4.Location = new System.Drawing.Point(255, 87);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(67, 13);
-            this.label4.TabIndex = 2;
-            this.label4.Text = "APTX4869";
+            this.lbMaDoanHoaDon.AutoSize = true;
+            this.lbMaDoanHoaDon.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbMaDoanHoaDon.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.lbMaDoanHoaDon.Location = new System.Drawing.Point(255, 87);
+            this.lbMaDoanHoaDon.Name = "lbMaDoanHoaDon";
+            this.lbMaDoanHoaDon.Size = new System.Drawing.Size(67, 13);
+            this.lbMaDoanHoaDon.TabIndex = 2;
+            this.lbMaDoanHoaDon.Text = "APTX4869";
             // 
             // labelX4
             // 
@@ -154,16 +154,16 @@
             this.labelX4.TabIndex = 1;
             this.labelX4.Text = "Đại diện";
             // 
-            // label5
+            // lbDaiDienHoaDon
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.label5.Location = new System.Drawing.Point(441, 87);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(73, 13);
-            this.label5.TabIndex = 2;
-            this.label5.Text = "Anh Trường";
+            this.lbDaiDienHoaDon.AutoSize = true;
+            this.lbDaiDienHoaDon.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbDaiDienHoaDon.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.lbDaiDienHoaDon.Location = new System.Drawing.Point(441, 87);
+            this.lbDaiDienHoaDon.Name = "lbDaiDienHoaDon";
+            this.lbDaiDienHoaDon.Size = new System.Drawing.Size(73, 13);
+            this.lbDaiDienHoaDon.TabIndex = 2;
+            this.lbDaiDienHoaDon.Text = "Anh Trường";
             // 
             // labelX5
             // 
@@ -178,16 +178,16 @@
             this.labelX5.TabIndex = 1;
             this.labelX5.Text = "Hóa đơn xuất lúc";
             // 
-            // label6
+            // lbThoiGianXuatHD
             // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.label6.Location = new System.Drawing.Point(104, 349);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(127, 13);
-            this.label6.TabIndex = 2;
-            this.label6.Text = "23/05/2018 12:59:30 SA";
+            this.lbThoiGianXuatHD.AutoSize = true;
+            this.lbThoiGianXuatHD.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbThoiGianXuatHD.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.lbThoiGianXuatHD.Location = new System.Drawing.Point(104, 349);
+            this.lbThoiGianXuatHD.Name = "lbThoiGianXuatHD";
+            this.lbThoiGianXuatHD.Size = new System.Drawing.Size(127, 13);
+            this.lbThoiGianXuatHD.TabIndex = 2;
+            this.lbThoiGianXuatHD.Text = "23/05/2018 12:59:30 SA";
             // 
             // labelX6
             // 
@@ -324,16 +324,16 @@
             this.labelX8.TabIndex = 5;
             this.labelX8.Text = "Tổng";
             // 
-            // label9
+            // lbTongTienHoaDon
             // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Arial Black", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.label9.Location = new System.Drawing.Point(59, 308);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(116, 27);
-            this.label9.TabIndex = 2;
-            this.label9.Text = "98600000";
+            this.lbTongTienHoaDon.AutoSize = true;
+            this.lbTongTienHoaDon.Font = new System.Drawing.Font("Arial Black", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbTongTienHoaDon.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.lbTongTienHoaDon.Location = new System.Drawing.Point(59, 308);
+            this.lbTongTienHoaDon.Name = "lbTongTienHoaDon";
+            this.lbTongTienHoaDon.Size = new System.Drawing.Size(116, 27);
+            this.lbTongTienHoaDon.TabIndex = 2;
+            this.lbTongTienHoaDon.Text = "98600000";
             // 
             // buttonX1
             // 
@@ -352,20 +352,20 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(540, 367);
             this.Controls.Add(this.buttonX1);
-            this.Controls.Add(this.label9);
+            this.Controls.Add(this.lbTongTienHoaDon);
             this.Controls.Add(this.labelX8);
             this.Controls.Add(this.dataGridViewX1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.label5);
+            this.Controls.Add(this.lbDaiDienHoaDon);
             this.Controls.Add(this.labelX4);
-            this.Controls.Add(this.label4);
+            this.Controls.Add(this.lbMaDoanHoaDon);
             this.Controls.Add(this.labelX3);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.labelX7);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.labelX6);
-            this.Controls.Add(this.label6);
+            this.Controls.Add(this.lbThoiGianXuatHD);
             this.Controls.Add(this.labelX5);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.labelX2);
@@ -386,11 +386,11 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private DevComponents.DotNetBar.LabelX labelX3;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label lbMaDoanHoaDon;
         private DevComponents.DotNetBar.LabelX labelX4;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label lbDaiDienHoaDon;
         private DevComponents.DotNetBar.LabelX labelX5;
-        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label lbThoiGianXuatHD;
         private DevComponents.DotNetBar.LabelX labelX6;
         private System.Windows.Forms.Label label7;
         private DevComponents.DotNetBar.LabelX labelX7;
@@ -403,7 +403,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
         private DevComponents.DotNetBar.LabelX labelX8;
-        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label lbTongTienHoaDon;
         private DevComponents.DotNetBar.ButtonX buttonX1;
     }
 }

@@ -475,5 +475,18 @@ namespace Hotel_Management
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_CapNhatChiTietGiaoDichKhiThanhToan", idGiaoDichThanhToanParameter, idMaPhongParameter, thanhTienParameter);
         }
+    
+        public virtual int sp_CapNhatTongTienGiaoDich(Nullable<int> idGiaoDich, Nullable<int> tongTien)
+        {
+            var idGiaoDichParameter = idGiaoDich.HasValue ?
+                new ObjectParameter("idGiaoDich", idGiaoDich) :
+                new ObjectParameter("idGiaoDich", typeof(int));
+    
+            var tongTienParameter = tongTien.HasValue ?
+                new ObjectParameter("tongTien", tongTien) :
+                new ObjectParameter("tongTien", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_CapNhatTongTienGiaoDich", idGiaoDichParameter, tongTienParameter);
+        }
     }
 }

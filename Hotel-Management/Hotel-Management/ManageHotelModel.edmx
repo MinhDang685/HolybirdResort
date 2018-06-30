@@ -266,6 +266,10 @@
           <Parameter Name="idDoan" Type="int" Mode="In" />
           <Parameter Name="idTinhTrang" Type="int" Mode="In" />
         </Function>
+        <Function Name="sp_CapNhatTongTienGiaoDich" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idGiaoDich" Type="int" Mode="In" />
+          <Parameter Name="tongTien" Type="int" Mode="In" />
+        </Function>
         <Function Name="sp_CapNhatTrangThaiPhong" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idPhong" Type="int" Mode="In" />
           <Parameter Name="idTrangThai" Type="int" Mode="In" />
@@ -825,12 +829,16 @@
           <Parameter Name="maDoan" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_LayPhongTheoMaPhong" EntitySet="Phongs" ReturnType="Collection(HOLYBIRDRESORTModel.Phong)">
-            <Parameter Name="maPhong" Mode="In" Type="String" />
+          <Parameter Name="maPhong" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_CapNhatChiTietGiaoDichKhiThanhToan">
             <Parameter Name="idGiaoDichThanhToan" Mode="In" Type="Int32" />
             <Parameter Name="idMaPhong" Mode="In" Type="Int32" />
             <Parameter Name="thanhTien" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_CapNhatTongTienGiaoDich">
+            <Parameter Name="idGiaoDich" Mode="In" Type="Int32" />
+            <Parameter Name="tongTien" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="sp_ChiTietGiaoDich_Result">
@@ -1140,6 +1148,7 @@
           <FunctionImportMapping FunctionImportName="sp_LayGiaoDichTheoMaDoanDayDu" FunctionName="HOLYBIRDRESORTModel.Store.sp_LayGiaoDichTheoMaDoanDayDu" />
           <FunctionImportMapping FunctionImportName="sp_LayPhongTheoMaPhong" FunctionName="HOLYBIRDRESORTModel.Store.sp_LayPhongTheoMaPhong" />
           <FunctionImportMapping FunctionImportName="sp_CapNhatChiTietGiaoDichKhiThanhToan" FunctionName="HOLYBIRDRESORTModel.Store.sp_CapNhatChiTietGiaoDichKhiThanhToan" />
+          <FunctionImportMapping FunctionImportName="sp_CapNhatTongTienGiaoDich" FunctionName="HOLYBIRDRESORTModel.Store.sp_CapNhatTongTienGiaoDich" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

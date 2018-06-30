@@ -360,7 +360,7 @@ BEGIN
 END
 GO
 
-ALTER PROCEDURE [dbo].[sp_TaoMoiGiaoDich]
+CREATE PROCEDURE [dbo].[sp_TaoMoiGiaoDich]
 (@madoan VARCHAR(50), @tendangnhap NVARCHAR(100), @matkhau NVARCHAR(100), @songuoi INT, @sophong INT
 , @ngaybatdau DATETIME, @ngayketthuc DATETIME, @tinhtrang INT, @tongtien INT)
 AS
@@ -437,6 +437,51 @@ begin
 	select * 
 	from TinhTrangGiaoDich
 	where ID = @idTinhTrang
+end
+go
+
+create procedure sp_TimKiemGiaoDich @maDoan VARCHAR(50)
+as
+begin
+	select * 
+	from GiaoDich
+	where MaDoan like @maDoan
+end
+go
+
+create procedure sp_LayGiaoDichTheoMaDoanDayDu @maDoan VARCHAR(50)
+as
+begin
+	select * 
+	from GiaoDich
+	where MaDoan = @maDoan
+end
+go
+
+create procedure sp_LayPhongTheoMaPhong @maPhong VARCHAR(10)
+as
+begin
+	select * 
+	from Phong
+	where MaPhong = @maPhong
+end
+go
+
+create procedure sp_CapNhatChiTietGiaoDichKhiThanhToan @idGiaoDichThanhToan int, @idMaPhong int, @thanhTien int
+as
+begin
+	update ChiTietGiaoDich 
+	set ThanhTien = @thanhTien
+	where ID_GiaoDich = @idGiaoDichThanhToan and ID_MaPhong = @idMaPhong
+end
+go
+
+create procedure sp_CapNhatTongTienGiaoDich @idGiaoDich int,  @tongTien int
+as
+begin
+	update GiaoDich
+	set TongTien = @tongTien
+	where ID = @idGiaoDich
 end
 go
 
