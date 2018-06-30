@@ -137,6 +137,9 @@
     <Compile Include="sp_LayDanhSachDoan_Result.cs">
       <DependentUpon>ManageHotelModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="sp_LayGiaoDichTheoMaDoan_Result.cs">
+      <DependentUpon>ManageHotelModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="sp_LayThongTinDoan_Result.cs">
       <DependentUpon>ManageHotelModel.tt</DependentUpon>
     </Compile>
