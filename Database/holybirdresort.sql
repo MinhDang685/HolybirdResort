@@ -278,7 +278,7 @@ begin
 	declare @thanhTien int
 	declare @start int = DATEDIFF(dd, '12/30/1899', @ngayBatDau)
 	declare @end int = DATEDIFF(dd, '12/30/1899', @ngayKetThuc)
-	set @thanhTien = dbo.fGetRoomPrice(@idPhong) * (@start - @end + 1)
+	set @thanhTien = dbo.fGetRoomPrice(@idPhong) * (@end - @start + 1)
 	insert into ChiTietGiaoDich 
 				(ID_GiaoDich, ID_MaPhong, ID_KhachHang, NgayBatDau, NgayKetThuc, ThanhTien)
 		values (@idGiaoDich, @idPhong, @idKhach, @ngayBatDau, @ngayKetThuc, @thanhTien)
