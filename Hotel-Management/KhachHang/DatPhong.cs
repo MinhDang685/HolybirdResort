@@ -148,7 +148,7 @@ namespace Hotel_Management
                 this.cbbHang.Items.Add(item);
             }
         }
-
+        String dateFrom, dateTo;
         private void buttonX1_Click(object sender, EventArgs e)
         {
             if (dateTimeFrom.Value > dateTimeTo.Value)
@@ -161,8 +161,8 @@ namespace Hotel_Management
             int tang = Int32.Parse(((ItemCombobox)this.cbbTang.SelectedItem).Value.ToString());
             int songuoi = Int32.Parse(((ItemCombobox)this.cbbSoNguoi.SelectedItem).Value.ToString());
             int state = 1;
-            String dateFrom = this.dateTimeFrom.Value.ToString("yyyy/MM/dd");
-            String dateTo = this.dateTimeTo.Value.ToString("yyyy/MM/dd");
+            dateFrom = this.dateTimeFrom.Value.ToString("yyyy/MM/dd");
+            dateTo = this.dateTimeTo.Value.ToString("yyyy/MM/dd");
             List<sp_SearchAvailableRoom_Result> result = servicesearchroom.SearchAvailableRoom(tang, state, hang, songuoi, dateFrom, dateTo);
             AddToRoomList(result);
             FillDateinDridView(result);
@@ -216,8 +216,8 @@ namespace Hotel_Management
                             maPhong,
                             "",
                             "",
-                            this.dateTimeFrom.Value.ToString("dd/MM/yyyy"),
-                            this.dateTimeTo.Value.ToString("dd/MM/yyyy")
+                            dateFrom,
+                            dateTo
                         };
                     this.dataGridViewDetail.Rows.Add(row);
                 }
@@ -475,6 +475,11 @@ namespace Hotel_Management
         }
 
         private void ribbonTabItemMapGuestToRoom_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dataGridViewDetail_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }
