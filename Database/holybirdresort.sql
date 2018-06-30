@@ -494,6 +494,33 @@ begin
 end
 go
 
+create procedure sp_LayGiaoDichTheoId @id int
+as
+begin
+	select * 
+	from GiaoDich
+	where ID = @id
+end
+go
+
+create procedure sp_LayTenNguoiDaiDienTheoId @id int
+as
+begin
+	select *
+	from KhachHang
+	where ID = @id
+end
+go
+
+create procedure sp_LayChiTietGiaoDichTheoIdPhong @idPhong int, @idGiaoDich int
+as
+begin
+	select *
+	from ChiTietGiaoDich
+	where ID_MaPhong = @idPhong and ID_GiaoDich = @idGiaoDich
+end
+go
+
 insert into GiaoDich values('A001', 'userA001', '123', 1,5,4,'2018-06-26','2018-06-30',1,0)
 insert into KhachHang values(1,'A','123123','123')
 insert into KhachHang values(1,'B','123456','123')
