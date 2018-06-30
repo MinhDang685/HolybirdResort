@@ -260,7 +260,7 @@ namespace Hotel_Management
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_LuuThongTinKhachHang", id_giaodichParameter, hotenParameter, cmndParameter);
         }
     
-        public virtual int sp_TaoMoiGiaoDich(string madoan, string tendangnhap, string matkhau, Nullable<int> songuoi, Nullable<System.DateTime> ngaybatdau, Nullable<System.DateTime> ngayketthuc)
+        public virtual int sp_TaoMoiGiaoDich(string madoan, string tendangnhap, string matkhau, Nullable<int> songuoi, Nullable<int> sophong, Nullable<System.DateTime> ngaybatdau, Nullable<System.DateTime> ngayketthuc, Nullable<int> tinhtrang, Nullable<int> tongtien)
         {
             var madoanParameter = madoan != null ?
                 new ObjectParameter("madoan", madoan) :
@@ -278,6 +278,10 @@ namespace Hotel_Management
                 new ObjectParameter("songuoi", songuoi) :
                 new ObjectParameter("songuoi", typeof(int));
     
+            var sophongParameter = sophong.HasValue ?
+                new ObjectParameter("sophong", sophong) :
+                new ObjectParameter("sophong", typeof(int));
+    
             var ngaybatdauParameter = ngaybatdau.HasValue ?
                 new ObjectParameter("ngaybatdau", ngaybatdau) :
                 new ObjectParameter("ngaybatdau", typeof(System.DateTime));
@@ -286,7 +290,15 @@ namespace Hotel_Management
                 new ObjectParameter("ngayketthuc", ngayketthuc) :
                 new ObjectParameter("ngayketthuc", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_TaoMoiGiaoDich", madoanParameter, tendangnhapParameter, matkhauParameter, songuoiParameter, ngaybatdauParameter, ngayketthucParameter);
+            var tinhtrangParameter = tinhtrang.HasValue ?
+                new ObjectParameter("tinhtrang", tinhtrang) :
+                new ObjectParameter("tinhtrang", typeof(int));
+    
+            var tongtienParameter = tongtien.HasValue ?
+                new ObjectParameter("tongtien", tongtien) :
+                new ObjectParameter("tongtien", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_TaoMoiGiaoDich", madoanParameter, tendangnhapParameter, matkhauParameter, songuoiParameter, sophongParameter, ngaybatdauParameter, ngayketthucParameter, tinhtrangParameter, tongtienParameter);
         }
     
         public virtual ObjectResult<Nullable<int>> sp_TimIDGiaoDichTheoCMNDTruongDoan(string cmnd)

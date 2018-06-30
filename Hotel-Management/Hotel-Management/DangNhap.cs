@@ -49,7 +49,7 @@ namespace Hotel_Management
                 {
                     QuanLy ql = new QuanLy(NV);
                     ql.Show();
-                    
+                    this.Hide();
                 }
             }
             catch // tài khoản ko tồn tại

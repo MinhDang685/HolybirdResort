@@ -133,8 +133,14 @@ namespace Hotel_Management
 
                 gd.SoNguoi = GridThongTinDoan.RowCount - 1;
 
+                gd.SoPhong = 0;
+
+                gd.TinhTrang = 1;
+
+                gd.TongTien = 0;
+
                 //chưa tính đến tongtien,tinh trang, sophong, id nguoi dai dien
-                HE.sp_TaoMoiGiaoDich(gd.MaDoan, gd.TenDangNhap, gd.MatKhau, gd.SoNguoi, gd.NgayBatDau, gd.NgayKetThuc);
+                HE.sp_TaoMoiGiaoDich(gd.MaDoan, gd.TenDangNhap, gd.MatKhau, gd.SoNguoi, gd.SoPhong, gd.NgayBatDau, gd.NgayKetThuc, gd.TinhTrang, gd.TongTien);
                 //HE.GiaoDiches.Add(gd);
                 //HE.SaveChanges();
 
@@ -260,35 +266,113 @@ namespace Hotel_Management
             return CacKhachHangCoCMNDDaTonTai;
         }
 
+        private bool KiemTraTenKhachHangTrong()
+        {
+            for(int i=1; i< GridThongTinDoan.RowCount-1;i++)
+            {
+                if(GridThongTinDoan.Rows[i].Cells[1].Value == null)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        private bool KiemTraCMNDKhachHangTrungNhau()
+        {
+            for(int i=0 ;i <GridThongTinDoan.RowCount-2;i++)
+            {
+                for(int u=i+1;u<GridThongTinDoan.RowCount-1;u++)
+                {
+                    if (GridThongTinDoan.Rows[i].Cells[2].Value != null && GridThongTinDoan.Rows[u].Cells[2].Value != null)
+                    {
+                        if (GridThongTinDoan.Rows[i].Cells[2].Value.ToString().Trim() == GridThongTinDoan.Rows[u].Cells[2].Value.ToString().Trim())
+                        {
+                            return true;
+                        }
+                    }
+                }
+            }
+            return false;
+        }
+
+        private bool KiemTraChuoiCMNDVietBangSo(String CMND)
+        {
+            for(int i=0;i<CMND.Length;i++)
+            {
+                if(CMND[i] <48 || CMND[i] > 57)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        private bool KiemTraCMNDCacKhachHangVietBangSo()
+        {
+            for(int i=0;i< GridThongTinDoan.RowCount-1;i++)
+            {
+                if(GridThongTinDoan.Rows[i].Cells[2].Value != null)
+                {
+                    if(!KiemTraChuoiCMNDVietBangSo(GridThongTinDoan.Rows[i].Cells[2].Value.ToString()))
+                    {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+
         private void btnTaoGiaoDich_Click(object sender, EventArgs e)
         {
             if (GridThongTinDoan.Rows[0].Cells[2].Value != null && GridThongTinDoan.Rows[0].Cells[1].Value != null)
             {
-                //so sánh thời điểm
-                int TD = DateTime.Compare((DateTime)ThoiDiemBatDau.Value, (DateTime)ThoiDiemKetThuc.Value);
-                if (TD <= 0)
+                if(KiemTraTenKhachHangTrong())//kiểm tra xem có tên khách hàng nào trống không
                 {
-                    List<KhachHang> CacKhachHangCoCMNDDaTonTai = new List<KhachHang>();
-                    CacKhachHangCoCMNDDaTonTai = KiemTraKhachHangCoCMNDDaTonTai();
-                    if (CacKhachHangCoCMNDDaTonTai.Count <= 0) // kiểm tra xem có khách hàng nào có CMND đã tồn tại hay không
+                    if(!KiemTraCMNDKhachHangTrungNhau())
                     {
-                        TaoGiaoDichMoi();
-                        LuuDanhSachDoanVaCapNhatGiaoDich();
+                        if(KiemTraCMNDCacKhachHangVietBangSo())
+                        {
+                            //so sánh thời điểm
+                            int TD = DateTime.Compare((DateTime)ThoiDiemBatDau.Value, (DateTime)ThoiDiemKetThuc.Value);
+                            if (TD <= 0)
+                            {
+                                List<KhachHang> CacKhachHangCoCMNDDaTonTai = new List<KhachHang>();
+                                CacKhachHangCoCMNDDaTonTai = KiemTraKhachHangCoCMNDDaTonTai();
+                                if (CacKhachHangCoCMNDDaTonTai.Count <= 0) // kiểm tra xem có khách hàng nào có CMND đã tồn tại hay không
+                                {
+                                    TaoGiaoDichMoi();
+                                    LuuDanhSachDoanVaCapNhatGiaoDich();
+                                }
+                                else
+                                {
+                                    String ThongBao = "STT của các khách hàng có CMND đã tồn tại:";
+                                    for (int i = 0; i < CacKhachHangCoCMNDDaTonTai.Count; i++)
+                                    {
+                                        String temp = "\n" + CacKhachHangCoCMNDDaTonTai[i].ID;
+                                        ThongBao += temp;
+                                    }
+                                    MessageBox.Show(ThongBao);
+                                }
+                            }
+                            else
+                            {
+                                MessageBox.Show("Thời điểm kết thúc phải sau thời điểm bắt đầu!");
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("Có ít nhất một CMND trong danh sách khách hàng không đúng quy định");
+                        }
                     }
                     else
                     {
-                        String ThongBao = "STT của các khách hàng có CMND đã tồn tại:";
-                        for (int i = 0; i < CacKhachHangCoCMNDDaTonTai.Count; i++)
-                        {
-                            String temp = "\n" + CacKhachHangCoCMNDDaTonTai[i].ID;
-                            ThongBao += temp;
-                        }
-                        MessageBox.Show(ThongBao);
+                        MessageBox.Show("trong danh sach khách hàng đang đăng kí, có cặp CMND trùng nhau");
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Thời điểm kết thúc phải sau thời điểm bắt đầu!");
+                    MessageBox.Show("Tên các khách hàng không được bỏ trống");
                 }
             }
             else
@@ -384,6 +468,11 @@ namespace Hotel_Management
                 }
                 break;
             }*/
+        }
+
+        private void QuanLy_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

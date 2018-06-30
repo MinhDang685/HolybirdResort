@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="HOLYBIRDRESORTModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="HOLYBIRDRESORTModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="ChiTietGiaoDich">
           <Key>
             <PropertyRef Name="ID" />
@@ -315,8 +315,11 @@
           <Parameter Name="tendangnhap" Type="nvarchar" Mode="In" />
           <Parameter Name="matkhau" Type="nvarchar" Mode="In" />
           <Parameter Name="songuoi" Type="int" Mode="In" />
+          <Parameter Name="sophong" Type="int" Mode="In" />
           <Parameter Name="ngaybatdau" Type="datetime" Mode="In" />
           <Parameter Name="ngayketthuc" Type="datetime" Mode="In" />
+          <Parameter Name="tinhtrang" Type="int" Mode="In" />
+          <Parameter Name="tongtien" Type="int" Mode="In" />
         </Function>
         <Function Name="sp_ThemChiTietGiaoDich" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idGiaoDich" Type="int" Mode="In" />
@@ -772,8 +775,11 @@
             <Parameter Name="tendangnhap" Mode="In" Type="String" />
             <Parameter Name="matkhau" Mode="In" Type="String" />
             <Parameter Name="songuoi" Mode="In" Type="Int32" />
+            <Parameter Name="sophong" Mode="In" Type="Int32" />
             <Parameter Name="ngaybatdau" Mode="In" Type="DateTime" />
             <Parameter Name="ngayketthuc" Mode="In" Type="DateTime" />
+            <Parameter Name="tinhtrang" Mode="In" Type="Int32" />
+            <Parameter Name="tongtien" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_TimIDGiaoDichTheoCMNDTruongDoan" ReturnType="Collection(Int32)">
           <Parameter Name="cmnd" Mode="In" Type="String" />
@@ -796,7 +802,7 @@
           </FunctionImport>
           <FunctionImport Name="sp_LayTatCaGiaoDich" EntitySet="GiaoDiches" ReturnType="Collection(HOLYBIRDRESORTModel.GiaoDich)" />
           <FunctionImport Name="sp_LayTinhTrangGiaoDich" EntitySet="TinhTrangGiaoDiches" ReturnType="Collection(HOLYBIRDRESORTModel.TinhTrangGiaoDich)">
-            <Parameter Name="idTinhTrang" Mode="In" Type="Int32" />
+          <Parameter Name="idTinhTrang" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="sp_ChiTietGiaoDich_Result">

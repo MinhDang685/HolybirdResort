@@ -360,12 +360,13 @@ BEGIN
 END
 GO
 
-CREATE PROCEDURE [dbo].[sp_TaoMoiGiaoDich]
-(@madoan VARCHAR(50), @tendangnhap NVARCHAR(100), @matkhau NVARCHAR(100), @songuoi INT, @ngaybatdau DATETIME, @ngayketthuc DATETIME)
+ALTER PROCEDURE [dbo].[sp_TaoMoiGiaoDich]
+(@madoan VARCHAR(50), @tendangnhap NVARCHAR(100), @matkhau NVARCHAR(100), @songuoi INT, @sophong INT
+, @ngaybatdau DATETIME, @ngayketthuc DATETIME, @tinhtrang INT, @tongtien INT)
 AS
 BEGIN
-	INSERT INTO GiaoDich (MaDoan, TenDangNhap, MatKhau, SoNguoi, NgayBatDau, NgayKetThuc)
-	VALUES (@madoan, @tendangnhap, @matkhau, @songuoi, @ngaybatdau, @ngayketthuc)
+	INSERT INTO GiaoDich (MaDoan, TenDangNhap, MatKhau, SoNguoi, SoPhong, NgayBatDau, NgayKetThuc, TinhTrang, TongTien)
+	VALUES (@madoan, @tendangnhap, @matkhau, @songuoi, @sophong, @ngaybatdau, @ngayketthuc, @tinhtrang, @tongtien)
 END
 GO
 
