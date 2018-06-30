@@ -15,7 +15,7 @@ namespace Hotel_Management
 {
     public partial class DatPhong : DevComponents.DotNetBar.RibbonForm
     {
-        DateTimePicker dtp = new DateTimePicker();
+        //DateTimePicker dtp = new DateTimePicker();
         Rectangle _Rectangle;
         ComboboxItemService servicecombobox = new ComboboxItemService();
         ServiceSearchRoom servicesearchroom = new ServiceSearchRoom();
@@ -38,11 +38,11 @@ namespace Hotel_Management
         {
             InitializeComponent();
             this.idDoan = maDoan;
-            dataGridViewDetail.Controls.Add(dtp);
-            dtp.Visible = false;
-            dtp.Format = DateTimePickerFormat.Custom;
-            dtp.CustomFormat = "dd/MM/yyyy";
-            dtp.TextChanged += new EventHandler(dtp_TextChange);
+            //dataGridViewDetail.Controls.Add(dtp);
+            //dtp.Visible = false;
+            //dtp.Format = DateTimePickerFormat.Custom;
+            //dtp.CustomFormat = "dd/MM/yyyy";
+            //dtp.TextChanged += new EventHandler(dtp_TextChange);
 
         }
 
@@ -55,27 +55,27 @@ namespace Hotel_Management
         {
             switch (dataGridViewDetail.Columns[e.ColumnIndex].Name)
             {
-                case "Column1":
-                    _Rectangle = dataGridViewDetail.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, true);
-                    dtp.Size = new Size(_Rectangle.Width, _Rectangle.Height);
-                    dtp.Location = new Point(_Rectangle.X, _Rectangle.Y);
-                    dtp.Visible = true;
-                    break;
-                case "Column10":
-                    _Rectangle = dataGridViewDetail.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, true);
-                    dtp.Size = new Size(_Rectangle.Width, _Rectangle.Height);
-                    dtp.Location = new Point(_Rectangle.X, _Rectangle.Y);
-                    dtp.Visible = true;
-                    break;
+                //case "Column1":
+                //    _Rectangle = dataGridViewDetail.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, true);
+                //    dtp.Size = new Size(_Rectangle.Width, _Rectangle.Height);
+                //    dtp.Location = new Point(_Rectangle.X, _Rectangle.Y);
+                //    dtp.Visible = true;
+                //    break;
+                //case "Column10":
+                //    _Rectangle = dataGridViewDetail.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, true);
+                //    dtp.Size = new Size(_Rectangle.Width, _Rectangle.Height);
+                //    dtp.Location = new Point(_Rectangle.X, _Rectangle.Y);
+                //    dtp.Visible = true;
+                //    break;
                 case "remove":
                     this.dataGridViewDetail.Rows.RemoveAt(e.RowIndex);
                     break;
             }
         }
-        private void dtp_TextChange(object sender, EventArgs e)
-        {
-            dataGridViewDetail.CurrentCell.Value = dtp.Text.ToString();
-        }
+        //private void dtp_TextChange(object sender, EventArgs e)
+        //{
+        //    dataGridViewDetail.CurrentCell.Value = dtp.Text.ToString();
+        //}
 
         private void DatPhong_Load(object sender, EventArgs e)
         {
@@ -89,7 +89,7 @@ namespace Hotel_Management
         private int GetIdDoan()
         {
             //ma doan dang dang nhap
-            return 1;
+            return idDoan;
         }
 
         private void LoadThongTinPhongDaChon()
