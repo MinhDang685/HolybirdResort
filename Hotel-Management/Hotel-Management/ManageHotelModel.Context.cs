@@ -488,5 +488,67 @@ namespace Hotel_Management
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_CapNhatTongTienGiaoDich", idGiaoDichParameter, tongTienParameter);
         }
+    
+        public virtual ObjectResult<GiaoDich> sp_LayGiaoDichTheoId(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GiaoDich>("sp_LayGiaoDichTheoId", idParameter);
+        }
+    
+        public virtual ObjectResult<GiaoDich> sp_LayGiaoDichTheoId(Nullable<int> id, MergeOption mergeOption)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GiaoDich>("sp_LayGiaoDichTheoId", mergeOption, idParameter);
+        }
+    
+        public virtual ObjectResult<KhachHang> sp_LayTenNguoiDaiDienTheoId(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<KhachHang>("sp_LayTenNguoiDaiDienTheoId", idParameter);
+        }
+    
+        public virtual ObjectResult<KhachHang> sp_LayTenNguoiDaiDienTheoId(Nullable<int> id, MergeOption mergeOption)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<KhachHang>("sp_LayTenNguoiDaiDienTheoId", mergeOption, idParameter);
+        }
+    
+        public virtual ObjectResult<ChiTietGiaoDich> sp_LayChiTietGiaoDichTheoIdPhong(Nullable<int> idPhong, Nullable<int> idGiaoDich)
+        {
+            var idPhongParameter = idPhong.HasValue ?
+                new ObjectParameter("idPhong", idPhong) :
+                new ObjectParameter("idPhong", typeof(int));
+    
+            var idGiaoDichParameter = idGiaoDich.HasValue ?
+                new ObjectParameter("idGiaoDich", idGiaoDich) :
+                new ObjectParameter("idGiaoDich", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ChiTietGiaoDich>("sp_LayChiTietGiaoDichTheoIdPhong", idPhongParameter, idGiaoDichParameter);
+        }
+    
+        public virtual ObjectResult<ChiTietGiaoDich> sp_LayChiTietGiaoDichTheoIdPhong(Nullable<int> idPhong, Nullable<int> idGiaoDich, MergeOption mergeOption)
+        {
+            var idPhongParameter = idPhong.HasValue ?
+                new ObjectParameter("idPhong", idPhong) :
+                new ObjectParameter("idPhong", typeof(int));
+    
+            var idGiaoDichParameter = idGiaoDich.HasValue ?
+                new ObjectParameter("idGiaoDich", idGiaoDich) :
+                new ObjectParameter("idGiaoDich", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ChiTietGiaoDich>("sp_LayChiTietGiaoDichTheoIdPhong", mergeOption, idPhongParameter, idGiaoDichParameter);
+        }
     }
 }

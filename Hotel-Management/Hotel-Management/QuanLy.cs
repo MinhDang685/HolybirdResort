@@ -44,10 +44,7 @@ namespace Hotel_Management
             List<ChiTietGiaoDich> ctgds = HE.sp_LayChiTietGiaoDichTheoIdGiaoDich(gd1.ID).ToList();
             if (GridThanhToan.RowCount > 1)
             {
-                for (int i = 0; i < GridThanhToan.RowCount - 1; i++)
-                {
-                    GridThanhToan.Rows.RemoveAt(0);
-                }
+                GridThanhToan.Rows.Clear();
             }
 
             for (int i = 0; i < ctgds.Count; i++)
@@ -75,12 +72,9 @@ namespace Hotel_Management
 
         private void showGridHoatDong()
         {
-            if (GridHoatDong.RowCount > 1)
+            if (GridHoatDong.RowCount > 0)
             {
-                for (int i = 0; i < GridHoatDong.RowCount - 1; i++)
-                {
-                    GridHoatDong.Rows.RemoveAt(0);
-                }
+                GridHoatDong.Rows.Clear();
             }
             
             List<GiaoDich> giaoDichs = HE.sp_LayTatCaGiaoDich().ToList();
@@ -100,8 +94,8 @@ namespace Hotel_Management
 
         private void ribbonTabItem3_Click(object sender, EventArgs e)
         {
-            panel3.Show();
             showGridHoatDong();
+            panel3.Show();
         }
 
         private void ribbonControl1_Click(object sender, EventArgs e)
@@ -438,8 +432,7 @@ namespace Hotel_Management
                     }
                     else
                     {
-                        String trangThai = GridHoatDong.Rows[i].Cells[2].Value.ToString();
-                        if (trangThai.Equals("Đã đăng ký") || trangThai.Equals("Đã mướn phòng"))
+                        if (gd1.TinhTrang == 1 || gd1.TinhTrang == 2)
                         {
                             HE.sp_CapNhatTinhTrangGiaoDich(gd1.ID, 3);
                             ThayDoiTrangThaiPhong(gd1);
@@ -477,23 +470,42 @@ namespace Hotel_Management
                 MessageBox.Show("Chọn đoàn muốn thanh toán");
             else
             {
-                int tongTien = 0;
-                for (int i = 0; i < GridThanhToan.RowCount - 1; i++)
+                if(HE.sp_LayGiaoDichTheoMaDoan(tbTimKiemGiaoDichThanhToan.Text).Single().TinhTrang == 3)
                 {
-                    int thanhTien = 0;
-                    string maPhong = GridThanhToan.Rows[i].Cells[1].Value.ToString();
-                    Phong phong = HE.sp_LayPhongTheoMaPhong(maPhong).Single();
-                    if (GridThanhToan.Rows[i].Cells[3].Value != null && !GridThanhToan.Rows[i].Cells[3].Value.ToString().Equals(""))
+                    int tongTien = 0;
+                    for (int i = 0; i < GridThanhToan.RowCount - 1; i++)
                     {
-                        thanhTien = (int)phong.DonGia + Convert.ToInt32(GridThanhToan.Rows[i].Cells[3].Value);
+                        int thanhTien = 0;
+                        int soNgay = 1;
+                        string maPhong = GridThanhToan.Rows[i].Cells[1].Value.ToString();
+                        Phong phong = HE.sp_LayPhongTheoMaPhong(maPhong).Single();
+                        ChiTietGiaoDich ctgd = HE.sp_LayChiTietGiaoDichTheoIdPhong(phong.ID, idGiaoDichThanhToan).Single();
+                        if (ctgd.NgayBatDau != null && ctgd.NgayKetThuc != null)
+                        {
+                            TimeSpan time = (TimeSpan)(ctgd.NgayKetThuc - ctgd.NgayBatDau);
+                            soNgay = time.Days;
+                        }
+                        if (GridThanhToan.Rows[i].Cells[3].Value != null && !GridThanhToan.Rows[i].Cells[3].Value.ToString().Equals(""))
+                        {
+                            thanhTien = (int)phong.DonGia * soNgay + Convert.ToInt32(GridThanhToan.Rows[i].Cells[3].Value);
+                        }
+                        else
+                        {
+                            thanhTien = (int)phong.DonGia * soNgay;
+                        }
+                        HE.sp_CapNhatTinhTrangGiaoDich(idGiaoDichThanhToan, 4);
+                        HE.sp_CapNhatChiTietGiaoDichKhiThanhToan(idGiaoDichThanhToan, phong.ID, thanhTien);
+                        HE.sp_CapNhatTrangThaiPhong(phong.ID, 1);
+                        tongTien += thanhTien;
                     }
-                    HE.sp_CapNhatChiTietGiaoDichKhiThanhToan(idGiaoDichThanhToan, phong.ID, thanhTien);
-                    HE.sp_CapNhatTrangThaiPhong(phong.ID, 1);
-                    tongTien += thanhTien;
+                    HE.sp_CapNhatTongTienGiaoDich(idGiaoDichThanhToan, tongTien);
+                    ThanhToan formThanhToan = new ThanhToan(idGiaoDichThanhToan);
+                    formThanhToan.ShowDialog();
                 }
-                HE.sp_CapNhatTongTienGiaoDich(idGiaoDichThanhToan, tongTien);
-                ThanhToan formThanhToan = new ThanhToan();
-                formThanhToan.ShowDialog();
+                else
+                {
+                    MessageBox.Show("Giao dịch không thể thanh toán");
+                }
             }
         }
 
@@ -506,12 +518,9 @@ namespace Hotel_Management
         {
             string timKiem = "%" + tbTimKiemGiaoDich.Text + "%";
             List<GiaoDich> giaoDichs = HE.sp_TimKiemGiaoDich(timKiem).ToList();
-            if (GridHoatDong.RowCount > 1)
+            if (GridHoatDong.RowCount > 0)
             {
-                for (int i = 0; i < GridHoatDong.RowCount - 1; i++)
-                {
-                    GridHoatDong.Rows.RemoveAt(0);
-                }
+                GridHoatDong.Rows.Clear();
             }
             for (int i = 0; i < giaoDichs.Count; i++)
             {
@@ -530,9 +539,22 @@ namespace Hotel_Management
         private void btnTimKiemGiaoDichThanhToan_Click(object sender, EventArgs e)
         {
             string maDoan = tbTimKiemGiaoDichThanhToan.Text;
-            GiaoDich gd1 = HE.sp_LayGiaoDichTheoMaDoanDayDu(maDoan).Single();
-            idGiaoDichThanhToan = gd1.ID;
-            showGridThanhToan(gd1);
+            if(maDoan != "")
+            {
+                List<GiaoDich> lgd1 = HE.sp_LayGiaoDichTheoMaDoanDayDu(maDoan).ToList();
+                if (lgd1.Count > 0)
+                {
+                    GiaoDich gd2 = lgd1.Single();
+                    idGiaoDichThanhToan = gd2.ID;
+                    showGridThanhToan(gd2);
+                }
+                else
+                {
+                    MessageBox.Show("Không tìm thấy giao dịch");
+                }
+            }
+            else
+                MessageBox.Show("Nhập mã đoàn muốn tìm kiếm");
         }
     }
 }
