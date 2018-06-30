@@ -379,24 +379,65 @@ BEGIN
 END
 GO
 
-create procedure sp_CapNhatSoPhongGiaoDich @idDoan int, @soPhong int
+create procedure sp_LayGiaoDichTheoMaDoan @maDoan VARCHAR(50)
 as
 begin
-	update GiaoDich
-	set SoPhong = @soPhong
-	where ID = @idDoan
+	select *
+	from GiaoDich
+	where MaDoan = @maDoan 
 end
 go
 
-create procedure sp_CapNhatTinhTrangPhong @idPhong int, @tinhTrang int
+create procedure sp_LayChiTietGiaoDichTheoIdGiaoDich @idGiaoDich int
+as
+begin
+	select *
+	from ChiTietGiaoDich
+	where ID_GiaoDich = @idGiaoDich
+end
+go
+
+create procedure sp_CapNhatTrangThaiPhong @idPhong int, @idTrangThai int
 as
 begin
 	update Phong
-	set TrangThai = @tinhTrang
+	set TrangThai = @idTrangThai
 	where ID = @idPhong
 end
 go
 
+create procedure sp_XoaGiaoDich @idGiaoDich int
+as
+begin
+	delete from GiaoDich
+	where ID = @idGiaoDich
+end
+go
+
+create procedure sp_XoaDichVuPhong @idChiTietGiaoDich int
+as
+begin
+	delete from DichVuPhong
+	where ID_ChiTietGiaoDich = @idChiTietGiaoDich
+end
+go
+
+create procedure sp_LayTatCaGiaoDich
+as
+begin
+	select * 
+	from GiaoDich
+end
+go
+
+create procedure sp_LayTinhTrangGiaoDich @idTinhTrang int
+as
+begin
+	select * 
+	from TinhTrangGiaoDich
+	where ID = @idTinhTrang
+end
+go
 
 insert into GiaoDich values('A001', 'userA001', '123', 1,5,4,'2018-06-26','2018-06-30',1,0)
 insert into KhachHang values(1,'A','123123','123')
