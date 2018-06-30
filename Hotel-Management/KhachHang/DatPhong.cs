@@ -206,9 +206,14 @@ namespace Hotel_Management
                 bool checkCell = this.dataGridViewPhongSearch.Rows[i].Cells[6].Value != null?true:false;
                 if (checkCell)
                 {
+                    String maPhong = this.dataGridViewPhongSearch.Rows[i].Cells[1].Value.ToString();
+                    if (checkExistedInSelectedRoomGrid(maPhong))
+                    {
+                        continue;
+                    }
                     String[] row = new String[]{
                             "",  
-                            this.dataGridViewPhongSearch.Rows[i].Cells[1].Value.ToString(),
+                            maPhong,
                             "",
                             "",
                             this.dateTimeFrom.Value.ToString("dd/MM/yyyy"),
@@ -217,6 +222,17 @@ namespace Hotel_Management
                     this.dataGridViewDetail.Rows.Add(row);
                 }
             }
+        }
+
+        private Boolean checkExistedInSelectedRoomGrid(String maPhong)
+        {
+            for (int i = 0; i < this.dataGridViewDetail.Rows.Count; i++)
+            {
+                String _maPhong = this.dataGridViewDetail.Rows[i].Cells[1].Value.ToString();
+                if (_maPhong == maPhong)
+                    return true;
+            }
+            return false;
         }
 
         private void flowLayoutPanelRoomList_ControlAdded(object sender, ControlEventArgs e)
@@ -305,6 +321,7 @@ namespace Hotel_Management
             String tabName = (sender as RibbonControl).SelectedRibbonTabItem.Name;
             if (tabName.Equals("ribbonTabItemMapGuestToRoom"))
             {
+                thongTinDoan = khachHangService.layThongTinDoan(GetIdDoan());
                 listRoomUserControl.Clear();
                 listKhachHang.Clear();
                 listGuestUserControl.Clear();
@@ -327,7 +344,7 @@ namespace Hotel_Management
                     LoadThongTinChonPhongTrongChiTietGiaoDich();
                 }
             }
-            if (tabName.Equals("ribbonTabChiTiet"))
+            else if (tabName.Equals("ribbonTabChiTiet"))
             {
                 this.dataGridViewDetailGiaoDich.Rows.Clear();
                 this.dataGridViewDetailGiaoDich.ReadOnly = true;
@@ -399,19 +416,31 @@ namespace Hotel_Management
                 MessageBox.Show("Vui lòng chọn phòng cho tất cả các thành viên trong đoàn");
                 return;
             }
-            List<ChiTietGiaoDich> listGiaoDich = GetChiTietGiaoDich();
+            List<ChiTietGiaoDich> listChiTietGiaoDich = GetChiTietGiaoDich();
             int tinhTrangGiaoDich = (int)thongTinDoan.TinhTrang;
             if (tinhTrangGiaoDich > 1)
             {
                 khachHangService.xoaChiTietGiaoDichTheoMaDoan(idDoan);
             }
-            foreach (var giaoDich in listGiaoDich)
+            foreach (var chiTietGiaoDich in listChiTietGiaoDich)
             {
-                khachHangService.themChiTietGiaoDich(giaoDich);
+                khachHangService.themChiTietGiaoDich(chiTietGiaoDich);
             }
             khachHangService.capNhatTinhTrangGiaoDich(idDoan, 2);
+            int soPhong = TinhSoPhongCoNguoi();
+            khachHangService.capNhatSoPhong(idDoan, soPhong);
             MessageBox.Show(buttonDatPhong.Text + " thành công !!!");
             ribbonControl1.SelectedRibbonTabItem = ribbonTabChiTiet;
+        }
+
+        private int TinhSoPhongCoNguoi()
+        {
+            int count = 0;
+            foreach (UserControlRoom roomUserControl in listRoomUserControl.Values)
+            {
+                if (roomUserControl.getGuestCount() > 0) count++;
+            }
+            return count;
         }
 
         private List<ChiTietGiaoDich> GetChiTietGiaoDich()

@@ -279,5 +279,18 @@ namespace ManageHotel.Entity
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_TaoMoiGiaoDich", madoanParameter, tendangnhapParameter, matkhauParameter, songuoiParameter, ngaybatdauParameter, ngayketthucParameter);
         }
+    
+        public virtual int sp_CapNhatSoPhongGiaoDich(Nullable<int> idDoan, Nullable<int> soPhong)
+        {
+            var idDoanParameter = idDoan.HasValue ?
+                new ObjectParameter("idDoan", idDoan) :
+                new ObjectParameter("idDoan", typeof(int));
+    
+            var soPhongParameter = soPhong.HasValue ?
+                new ObjectParameter("soPhong", soPhong) :
+                new ObjectParameter("soPhong", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_CapNhatSoPhongGiaoDich", idDoanParameter, soPhongParameter);
+        }
     }
 }

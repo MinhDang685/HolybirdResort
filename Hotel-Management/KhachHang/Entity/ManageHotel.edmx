@@ -257,6 +257,10 @@
           <Parameter Name="idtruongdoan" Type="int" Mode="In" />
           <Parameter Name="id_giaodich" Type="int" Mode="In" />
         </Function>
+        <Function Name="sp_CapNhatSoPhongGiaoDich" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idDoan" Type="int" Mode="In" />
+          <Parameter Name="soPhong" Type="int" Mode="In" />
+        </Function>
         <Function Name="sp_CapNhatTinhTrangGiaoDich" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idDoan" Type="int" Mode="In" />
           <Parameter Name="idTinhTrang" Type="int" Mode="In" />
@@ -737,7 +741,7 @@
             <Parameter Name="totalFloor" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_LayIDKhachHangTheoCMND" ReturnType="Collection(Int32)">
-            <Parameter Name="cmnd" Mode="In" Type="String" />
+          <Parameter Name="cmnd" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_LuuThongTinKhachHang">
             <Parameter Name="id_giaodich" Mode="In" Type="Int32" />
@@ -751,6 +755,10 @@
             <Parameter Name="songuoi" Mode="In" Type="Int32" />
             <Parameter Name="ngaybatdau" Mode="In" Type="DateTime" />
             <Parameter Name="ngayketthuc" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="sp_CapNhatSoPhongGiaoDich">
+            <Parameter Name="idDoan" Mode="In" Type="Int32" />
+            <Parameter Name="soPhong" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="sp_LayDanhSachDoan_Result">
@@ -1053,6 +1061,7 @@
           <FunctionImportMapping FunctionImportName="sp_LayIDKhachHangTheoCMND" FunctionName="ManageHotelModel.Store.sp_LayIDKhachHangTheoCMND" />
           <FunctionImportMapping FunctionImportName="sp_LuuThongTinKhachHang" FunctionName="ManageHotelModel.Store.sp_LuuThongTinKhachHang" />
           <FunctionImportMapping FunctionImportName="sp_TaoMoiGiaoDich" FunctionName="ManageHotelModel.Store.sp_TaoMoiGiaoDich" />
+          <FunctionImportMapping FunctionImportName="sp_CapNhatSoPhongGiaoDich" FunctionName="ManageHotelModel.Store.sp_CapNhatSoPhongGiaoDich" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

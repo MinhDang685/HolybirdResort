@@ -126,5 +126,13 @@ namespace ManageHotel.Service
                 db.sp_CapNhatTinhTrangGiaoDich(idDoan, tinhTrang);
             }
         }
+
+        public void capNhatSoPhong(int idDoan, int soPhong)
+        {
+            using (var db = new ManageHotelEntities())
+            {
+                db.sp_CapNhatSoPhongGiaoDich(idDoan, soPhong);
+            }
+        }
     }
 }

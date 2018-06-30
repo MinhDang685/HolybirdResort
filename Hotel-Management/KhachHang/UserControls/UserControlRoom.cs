@@ -50,7 +50,7 @@ namespace ManageHotel.UserControls
         {
             labelGuestCount.Text = getGuestCount() + "/" + this.max;
         }
-        int getGuestCount()
+        public int getGuestCount()
         {
             return this.flowLayoutPanel1.Controls.Count;
         }
