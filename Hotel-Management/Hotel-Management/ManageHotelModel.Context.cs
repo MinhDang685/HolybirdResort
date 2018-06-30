@@ -422,5 +422,58 @@ namespace Hotel_Management
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GiaoDich>("sp_TimKiemGiaoDich", mergeOption, maDoanParameter);
         }
+    
+        public virtual ObjectResult<GiaoDich> sp_LayGiaoDichTheoMaDoanDayDu(string maDoan)
+        {
+            var maDoanParameter = maDoan != null ?
+                new ObjectParameter("maDoan", maDoan) :
+                new ObjectParameter("maDoan", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GiaoDich>("sp_LayGiaoDichTheoMaDoanDayDu", maDoanParameter);
+        }
+    
+        public virtual ObjectResult<GiaoDich> sp_LayGiaoDichTheoMaDoanDayDu(string maDoan, MergeOption mergeOption)
+        {
+            var maDoanParameter = maDoan != null ?
+                new ObjectParameter("maDoan", maDoan) :
+                new ObjectParameter("maDoan", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GiaoDich>("sp_LayGiaoDichTheoMaDoanDayDu", mergeOption, maDoanParameter);
+        }
+    
+        public virtual ObjectResult<Phong> sp_LayPhongTheoMaPhong(string maPhong)
+        {
+            var maPhongParameter = maPhong != null ?
+                new ObjectParameter("maPhong", maPhong) :
+                new ObjectParameter("maPhong", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Phong>("sp_LayPhongTheoMaPhong", maPhongParameter);
+        }
+    
+        public virtual ObjectResult<Phong> sp_LayPhongTheoMaPhong(string maPhong, MergeOption mergeOption)
+        {
+            var maPhongParameter = maPhong != null ?
+                new ObjectParameter("maPhong", maPhong) :
+                new ObjectParameter("maPhong", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Phong>("sp_LayPhongTheoMaPhong", mergeOption, maPhongParameter);
+        }
+    
+        public virtual int sp_CapNhatChiTietGiaoDichKhiThanhToan(Nullable<int> idGiaoDichThanhToan, Nullable<int> idMaPhong, Nullable<int> thanhTien)
+        {
+            var idGiaoDichThanhToanParameter = idGiaoDichThanhToan.HasValue ?
+                new ObjectParameter("idGiaoDichThanhToan", idGiaoDichThanhToan) :
+                new ObjectParameter("idGiaoDichThanhToan", typeof(int));
+    
+            var idMaPhongParameter = idMaPhong.HasValue ?
+                new ObjectParameter("idMaPhong", idMaPhong) :
+                new ObjectParameter("idMaPhong", typeof(int));
+    
+            var thanhTienParameter = thanhTien.HasValue ?
+                new ObjectParameter("thanhTien", thanhTien) :
+                new ObjectParameter("thanhTien", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_CapNhatChiTietGiaoDichKhiThanhToan", idGiaoDichThanhToanParameter, idMaPhongParameter, thanhTienParameter);
+        }
     }
 }

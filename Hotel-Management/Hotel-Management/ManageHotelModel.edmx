@@ -253,6 +253,11 @@
           <Parameter Name="ngayBatDau" Type="datetime" Mode="In" />
           <Parameter Name="ngayKetThuc" Type="datetime" Mode="In" />
         </Function>
+        <Function Name="sp_CapNhatChiTietGiaoDichKhiThanhToan" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idGiaoDichThanhToan" Type="int" Mode="In" />
+          <Parameter Name="idMaPhong" Type="int" Mode="In" />
+          <Parameter Name="thanhTien" Type="int" Mode="In" />
+        </Function>
         <Function Name="sp_CapNhatIDTruongDoanChoGiaoDich" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idtruongdoan" Type="int" Mode="In" />
           <Parameter Name="id_giaodich" Type="int" Mode="In" />
@@ -284,8 +289,14 @@
         <Function Name="sp_LayGiaoDichTheoMaDoan" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="maDoan" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="sp_LayGiaoDichTheoMaDoanDayDu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="maDoan" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="sp_LayIDKhachHangTheoCMND" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="cmnd" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="sp_LayPhongTheoMaPhong" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="maPhong" Type="varchar" Mode="In" />
         </Function>
         <Function Name="sp_LayTatCaGiaoDich" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="sp_LayThongTinDoan" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -808,7 +819,18 @@
           <Parameter Name="idTinhTrang" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_TimKiemGiaoDich" EntitySet="GiaoDiches" ReturnType="Collection(HOLYBIRDRESORTModel.GiaoDich)">
-            <Parameter Name="maDoan" Mode="In" Type="String" />
+          <Parameter Name="maDoan" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_LayGiaoDichTheoMaDoanDayDu" EntitySet="GiaoDiches" ReturnType="Collection(HOLYBIRDRESORTModel.GiaoDich)">
+          <Parameter Name="maDoan" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_LayPhongTheoMaPhong" EntitySet="Phongs" ReturnType="Collection(HOLYBIRDRESORTModel.Phong)">
+            <Parameter Name="maPhong" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_CapNhatChiTietGiaoDichKhiThanhToan">
+            <Parameter Name="idGiaoDichThanhToan" Mode="In" Type="Int32" />
+            <Parameter Name="idMaPhong" Mode="In" Type="Int32" />
+            <Parameter Name="thanhTien" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="sp_ChiTietGiaoDich_Result">
@@ -1115,6 +1137,9 @@
           <FunctionImportMapping FunctionImportName="sp_LayTatCaGiaoDich" FunctionName="HOLYBIRDRESORTModel.Store.sp_LayTatCaGiaoDich" />
           <FunctionImportMapping FunctionImportName="sp_LayTinhTrangGiaoDich" FunctionName="HOLYBIRDRESORTModel.Store.sp_LayTinhTrangGiaoDich" />
           <FunctionImportMapping FunctionImportName="sp_TimKiemGiaoDich" FunctionName="HOLYBIRDRESORTModel.Store.sp_TimKiemGiaoDich" />
+          <FunctionImportMapping FunctionImportName="sp_LayGiaoDichTheoMaDoanDayDu" FunctionName="HOLYBIRDRESORTModel.Store.sp_LayGiaoDichTheoMaDoanDayDu" />
+          <FunctionImportMapping FunctionImportName="sp_LayPhongTheoMaPhong" FunctionName="HOLYBIRDRESORTModel.Store.sp_LayPhongTheoMaPhong" />
+          <FunctionImportMapping FunctionImportName="sp_CapNhatChiTietGiaoDichKhiThanhToan" FunctionName="HOLYBIRDRESORTModel.Store.sp_CapNhatChiTietGiaoDichKhiThanhToan" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

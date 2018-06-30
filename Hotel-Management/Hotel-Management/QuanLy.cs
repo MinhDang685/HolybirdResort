@@ -16,6 +16,7 @@ namespace Hotel_Management
     {
         private HOLYBIRDRESORTEntities HE = new HOLYBIRDRESORTEntities();
         private NhanVien NV = null;
+        int idGiaoDichThanhToan = 0;
 
         public QuanLy()
         {
@@ -38,10 +39,32 @@ namespace Hotel_Management
             lbTenNhanVien.Text = NV.TenDangNhap.ToString();
         }
 
+        private void showGridThanhToan(GiaoDich gd1)
+        {
+            List<ChiTietGiaoDich> ctgds = HE.sp_LayChiTietGiaoDichTheoIdGiaoDich(gd1.ID).ToList();
+            if (GridThanhToan.RowCount > 1)
+            {
+                for (int i = 0; i < GridThanhToan.RowCount; i++)
+                {
+                    GridThanhToan.Rows.RemoveAt(0);
+                }
+            }
+
+            for (int i = 0; i < ctgds.Count; i++)
+            {
+                string stt = (i + 1).ToString();
+                string maPhong = HE.sp_LayThongTinPhong(ctgds[i].ID_MaPhong).Single().MaPhong;
+                String[] row = new String[]{
+                          stt,
+                          maPhong
+                        };
+                GridThanhToan.Rows.Add(row);
+            }
+        }
+
         private void ribbonTabItem2_Click(object sender, EventArgs e)
         {
             panel1.Show();
-
         }
 
         private void ribbonTabItem1_Click(object sender, EventArgs e)
@@ -419,7 +442,12 @@ namespace Hotel_Management
                         if (trangThai.Equals("Đã đăng ký") || trangThai.Equals("Đã mướn phòng"))
                         {
                             HE.sp_CapNhatTinhTrangGiaoDich(gd1.ID, 3);
-                            ThayDoiTrangThaiPhong(gd1);                        }
+                            ThayDoiTrangThaiPhong(gd1);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Không thể nhận phòng nữa");
+                        }
                     }
                 }
             }
@@ -434,14 +462,10 @@ namespace Hotel_Management
                 {
                     String maDoan = GridHoatDong.Rows[i].Cells[1].Value.ToString();
                     GiaoDich gd1 = HE.sp_LayGiaoDichTheoMaDoan(maDoan).Single();
-                    HE.sp_XoaGiaoDich(gd1.ID);
-                    List<ChiTietGiaoDich> ctgd = HE.sp_LayChiTietGiaoDichTheoDoan(gd1.ID).ToList();
-                    HE.sp_XoaChiTietGiaoDichTheoDoan(gd1.ID);
-                    for (int j = 0; j < ctgd.Count; j++)
-                    {
-                        HE.sp_XoaDichVuPhong(ctgd.ElementAt(j).ID);
-                    }
-                    
+                    if (gd1.TinhTrang == 1 || gd1.TinhTrang == 2)
+                        HE.sp_CapNhatTinhTrangGiaoDich(gd1.ID, 5);
+                    else
+                        MessageBox.Show("Không thể hủy giao dịch này nữa");
                 }
             }
             showGridHoatDong();
@@ -449,9 +473,20 @@ namespace Hotel_Management
 
         private void btn_hoa_don_Click(object sender, EventArgs e)
         {
-            //In hóa đơn
-
-
+            for (int i = 0; i < GridThanhToan.RowCount; i++)
+            {
+                int thanhTien = 0;
+                string maPhong = GridThanhToan.Rows[i].Cells[1].Value.ToString();
+                Phong phong = HE.sp_LayPhongTheoMaPhong(maPhong).Single();
+                if (GridThanhToan.Rows[i].Cells[3].Value != null && !GridThanhToan.Rows[i].Cells[3].Value.ToString().Equals(""))
+                {
+                    thanhTien = (int)phong.DonGia + Convert.ToInt32(GridThanhToan.Rows[i].Cells[3].Value);
+                }
+                HE.sp_CapNhatChiTietGiaoDichKhiThanhToan(idGiaoDichThanhToan, phong.ID, thanhTien);
+                HE.sp_CapNhatTrangThaiPhong(phong.ID, 1);
+                ThanhToan formThanhToan = new ThanhToan();
+                formThanhToan.ShowDialog();
+            }
             //Đổi trạng thái phòng
             /*for (int i = 0; i < GridThanhToan.RowCount; i++)
             {
@@ -460,22 +495,6 @@ namespace Hotel_Management
                     int idPhong = Convert.ToInt32(GridThanhToan.Rows[i].Cells[1].Value);
 
                 }
-            }*/
-        }
-
-        private void btn_thanh_toan_Click(object sender, EventArgs e)
-        {
-            /*for (int i = 0; i < GridHoatDong.RowCount; i++)
-            {
-                if (GridHoatDong.Rows[i].Cells[3].Selected)
-                {
-                    String maDoan = GridHoatDong.Rows[i].Cells[1].Value.ToString();
-                    GiaoDich gd1 = HE.sp_LayGiaoDichTheoMaDoan(maDoan).Single();
-                    String tongTien = HE.sp_LayTongTienCuaGiaoDich(gd1.ID).ToString();
-                    lbThanhTien.Text = tongTien;
-                    ribbonTabItem2_Click(sender, e);
-                }
-                break;
             }*/
         }
 
@@ -507,6 +526,14 @@ namespace Hotel_Management
                         };
                 GridHoatDong.Rows.Add(row);
             }
+        }
+
+        private void btnTimKiemGiaoDichThanhToan_Click(object sender, EventArgs e)
+        {
+            string maDoan = tbTimKiemGiaoDichThanhToan.Text;
+            GiaoDich gd1 = HE.sp_LayGiaoDichTheoMaDoanDayDu(maDoan).Single();
+            idGiaoDichThanhToan = gd1.ID;
+            showGridThanhToan(gd1);
         }
     }
 }
