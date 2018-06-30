@@ -104,13 +104,22 @@ namespace Hotel_Management
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_KhoiTaoDanhSachPhong", roomInAFloorParameter, totalFloorParameter);
         }
     
-        public virtual ObjectResult<sp_LayChiTietGiaoDichTheoDoan_Result> sp_LayChiTietGiaoDichTheoDoan(Nullable<int> idDoan)
+        public virtual ObjectResult<ChiTietGiaoDich> sp_LayChiTietGiaoDichTheoDoan(Nullable<int> idDoan)
         {
             var idDoanParameter = idDoan.HasValue ?
                 new ObjectParameter("idDoan", idDoan) :
                 new ObjectParameter("idDoan", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_LayChiTietGiaoDichTheoDoan_Result>("sp_LayChiTietGiaoDichTheoDoan", idDoanParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ChiTietGiaoDich>("sp_LayChiTietGiaoDichTheoDoan", idDoanParameter);
+        }
+    
+        public virtual ObjectResult<ChiTietGiaoDich> sp_LayChiTietGiaoDichTheoDoan(Nullable<int> idDoan, MergeOption mergeOption)
+        {
+            var idDoanParameter = idDoan.HasValue ?
+                new ObjectParameter("idDoan", idDoan) :
+                new ObjectParameter("idDoan", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ChiTietGiaoDich>("sp_LayChiTietGiaoDichTheoDoan", mergeOption, idDoanParameter);
         }
     
         public virtual ObjectResult<sp_LayDanhSachDoan_Result> sp_LayDanhSachDoan(Nullable<int> idDoan)
@@ -287,6 +296,101 @@ namespace Hotel_Management
                 new ObjectParameter("cmnd", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("sp_TimIDGiaoDichTheoCMNDTruongDoan", cmndParameter);
+        }
+    
+        public virtual ObjectResult<GiaoDich> sp_LayGiaoDichTheoMaDoan(string maDoan)
+        {
+            var maDoanParameter = maDoan != null ?
+                new ObjectParameter("maDoan", maDoan) :
+                new ObjectParameter("maDoan", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GiaoDich>("sp_LayGiaoDichTheoMaDoan", maDoanParameter);
+        }
+    
+        public virtual ObjectResult<GiaoDich> sp_LayGiaoDichTheoMaDoan(string maDoan, MergeOption mergeOption)
+        {
+            var maDoanParameter = maDoan != null ?
+                new ObjectParameter("maDoan", maDoan) :
+                new ObjectParameter("maDoan", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GiaoDich>("sp_LayGiaoDichTheoMaDoan", mergeOption, maDoanParameter);
+        }
+    
+        public virtual ObjectResult<ChiTietGiaoDich> sp_LayChiTietGiaoDichTheoIdGiaoDich(Nullable<int> idGiaoDich)
+        {
+            var idGiaoDichParameter = idGiaoDich.HasValue ?
+                new ObjectParameter("idGiaoDich", idGiaoDich) :
+                new ObjectParameter("idGiaoDich", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ChiTietGiaoDich>("sp_LayChiTietGiaoDichTheoIdGiaoDich", idGiaoDichParameter);
+        }
+    
+        public virtual ObjectResult<ChiTietGiaoDich> sp_LayChiTietGiaoDichTheoIdGiaoDich(Nullable<int> idGiaoDich, MergeOption mergeOption)
+        {
+            var idGiaoDichParameter = idGiaoDich.HasValue ?
+                new ObjectParameter("idGiaoDich", idGiaoDich) :
+                new ObjectParameter("idGiaoDich", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ChiTietGiaoDich>("sp_LayChiTietGiaoDichTheoIdGiaoDich", mergeOption, idGiaoDichParameter);
+        }
+    
+        public virtual int sp_CapNhatTrangThaiPhong(Nullable<int> idPhong, Nullable<int> idTrangThai)
+        {
+            var idPhongParameter = idPhong.HasValue ?
+                new ObjectParameter("idPhong", idPhong) :
+                new ObjectParameter("idPhong", typeof(int));
+    
+            var idTrangThaiParameter = idTrangThai.HasValue ?
+                new ObjectParameter("idTrangThai", idTrangThai) :
+                new ObjectParameter("idTrangThai", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_CapNhatTrangThaiPhong", idPhongParameter, idTrangThaiParameter);
+        }
+    
+        public virtual int sp_XoaGiaoDich(Nullable<int> idGiaoDich)
+        {
+            var idGiaoDichParameter = idGiaoDich.HasValue ?
+                new ObjectParameter("idGiaoDich", idGiaoDich) :
+                new ObjectParameter("idGiaoDich", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_XoaGiaoDich", idGiaoDichParameter);
+        }
+    
+        public virtual int sp_XoaDichVuPhong(Nullable<int> idChiTietGiaoDich)
+        {
+            var idChiTietGiaoDichParameter = idChiTietGiaoDich.HasValue ?
+                new ObjectParameter("idChiTietGiaoDich", idChiTietGiaoDich) :
+                new ObjectParameter("idChiTietGiaoDich", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_XoaDichVuPhong", idChiTietGiaoDichParameter);
+        }
+    
+        public virtual ObjectResult<GiaoDich> sp_LayTatCaGiaoDich()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GiaoDich>("sp_LayTatCaGiaoDich");
+        }
+    
+        public virtual ObjectResult<GiaoDich> sp_LayTatCaGiaoDich(MergeOption mergeOption)
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GiaoDich>("sp_LayTatCaGiaoDich", mergeOption);
+        }
+    
+        public virtual ObjectResult<TinhTrangGiaoDich> sp_LayTinhTrangGiaoDich(Nullable<int> idTinhTrang)
+        {
+            var idTinhTrangParameter = idTinhTrang.HasValue ?
+                new ObjectParameter("idTinhTrang", idTinhTrang) :
+                new ObjectParameter("idTinhTrang", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<TinhTrangGiaoDich>("sp_LayTinhTrangGiaoDich", idTinhTrangParameter);
+        }
+    
+        public virtual ObjectResult<TinhTrangGiaoDich> sp_LayTinhTrangGiaoDich(Nullable<int> idTinhTrang, MergeOption mergeOption)
+        {
+            var idTinhTrangParameter = idTinhTrang.HasValue ?
+                new ObjectParameter("idTinhTrang", idTinhTrang) :
+                new ObjectParameter("idTinhTrang", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<TinhTrangGiaoDich>("sp_LayTinhTrangGiaoDich", mergeOption, idTinhTrangParameter);
         }
     }
 }
