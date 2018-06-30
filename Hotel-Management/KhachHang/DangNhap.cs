@@ -50,5 +50,10 @@ namespace Hotel_Management
                 MessageBox.Show(this,"Login fail. Please try again", "Error",MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void txtBoxPassword_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

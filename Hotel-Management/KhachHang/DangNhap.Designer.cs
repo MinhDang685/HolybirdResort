@@ -96,11 +96,14 @@
             this.txtBoxPassword.ForeColor = System.Drawing.Color.Black;
             this.txtBoxPassword.Location = new System.Drawing.Point(296, 281);
             this.txtBoxPassword.Name = "txtBoxPassword";
+            this.txtBoxPassword.PasswordChar = '*';
             this.txtBoxPassword.PreventEnterBeep = true;
             this.txtBoxPassword.Size = new System.Drawing.Size(164, 20);
             this.txtBoxPassword.TabIndex = 0;
+            this.txtBoxPassword.UseSystemPasswordChar = true;
             this.txtBoxPassword.WatermarkFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBoxPassword.WatermarkText = "Password ";
+            this.txtBoxPassword.TextChanged += new System.EventHandler(this.txtBoxPassword_TextChanged);
             // 
             // Form1
             // 

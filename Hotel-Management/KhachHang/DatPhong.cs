@@ -113,7 +113,9 @@ namespace Hotel_Management
             this.cbbHang.SelectedIndex = 0;
             this.cbbTang.SelectedIndex = 0;
             this.cbbSoNguoi.SelectedIndex = 0;
+            this.dateTimeFrom.MinDate = DateTime.Now;
             this.dateTimeFrom.Value = DateTime.Now;
+            this.dateTimeTo.MinDate = DateTime.Now;
             this.dateTimeTo.Value = DateTime.Now;
         }
 
@@ -149,7 +151,11 @@ namespace Hotel_Management
 
         private void buttonX1_Click(object sender, EventArgs e)
         {
-
+            if (dateTimeFrom.Value > dateTimeTo.Value)
+            {
+                MessageBox.Show("Vui lòng nhập lại ngày bắt đầu và ngày kết thúc cho phù hợp");
+                return;
+            }
             this.dataGridViewPhongSearch.Rows.Clear();
             int hang = Int32.Parse(((ItemCombobox)this.cbbHang.SelectedItem).Value.ToString());
             int tang = Int32.Parse(((ItemCombobox)this.cbbTang.SelectedItem).Value.ToString());
@@ -206,7 +212,7 @@ namespace Hotel_Management
                             "",
                             "",
                             this.dateTimeFrom.Value.ToString("dd/MM/yyyy"),
-                            this.dateTimeFrom.Value.ToString("dd/MM/yyyy")
+                            this.dateTimeTo.Value.ToString("dd/MM/yyyy")
                         };
                     this.dataGridViewDetail.Rows.Add(row);
                 }
@@ -443,6 +449,8 @@ namespace Hotel_Management
         {
 
         }
+        
+
 
     }
 }
