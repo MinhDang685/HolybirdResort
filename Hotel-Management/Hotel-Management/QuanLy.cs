@@ -37,6 +37,14 @@ namespace Hotel_Management
         {
             NV = nv;
             lbTenNhanVien.Text = NV.TenDangNhap.ToString();
+
+            if(NV.ID_HeThong==2)
+            {
+                TabThanhToan.Enabled = false;
+                TabTraCuu.Enabled = false;
+            }
+
+            ribbonTabItem1.Select();
         }
 
         private void showGridThanhToan(GiaoDich gd1)
