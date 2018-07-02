@@ -55,7 +55,6 @@ namespace Hotel_Management
                           maPhong,
                           donGia.ToString(),
                           thoiGian.ToString(),
-                          "",
                           thanhTien.ToString()
                         };
                 GridHoaDon.Rows.Add(row);

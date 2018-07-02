@@ -47,15 +47,14 @@
             this.labelX7 = new DevComponents.DotNetBar.LabelX();
             this.label8 = new System.Windows.Forms.Label();
             this.GridHoaDon = new DevComponents.DotNetBar.Controls.DataGridViewX();
+            this.labelX8 = new DevComponents.DotNetBar.LabelX();
+            this.lbTongTienHoaDon = new System.Windows.Forms.Label();
+            this.btn_hoan_thanh = new DevComponents.DotNetBar.ButtonX();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.labelX8 = new DevComponents.DotNetBar.LabelX();
-            this.lbTongTienHoaDon = new System.Windows.Forms.Label();
-            this.btn_hoan_thanh = new DevComponents.DotNetBar.ButtonX();
             ((System.ComponentModel.ISupportInitialize)(this.GridHoaDon)).BeginInit();
             this.SuspendLayout();
             // 
@@ -254,14 +253,13 @@
             this.Column2,
             this.Column3,
             this.Column4,
-            this.Column5,
             this.Column6});
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(21)))), ((int)(((byte)(110)))));
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.GridHoaDon.DefaultCellStyle = dataGridViewCellStyle2;
             this.GridHoaDon.EnableHeadersVisualStyles = false;
@@ -278,37 +276,6 @@
             this.GridHoaDon.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.GridHoaDon.Size = new System.Drawing.Size(529, 191);
             this.GridHoaDon.TabIndex = 4;
-            // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "STT";
-            this.Column1.Name = "Column1";
-            // 
-            // Column2
-            // 
-            this.Column2.HeaderText = "Phòng";
-            this.Column2.Name = "Column2";
-            // 
-            // Column3
-            // 
-            this.Column3.HeaderText = "Đơn giá";
-            this.Column3.Name = "Column3";
-            // 
-            // Column4
-            // 
-            this.Column4.HeaderText = "Thời gian";
-            this.Column4.Name = "Column4";
-            this.Column4.ReadOnly = true;
-            // 
-            // Column5
-            // 
-            this.Column5.HeaderText = "Thiệt hại tài sản";
-            this.Column5.Name = "Column5";
-            // 
-            // Column6
-            // 
-            this.Column6.HeaderText = "Thành tiền";
-            this.Column6.Name = "Column6";
             // 
             // labelX8
             // 
@@ -346,6 +313,32 @@
             this.btn_hoan_thanh.TabIndex = 6;
             this.btn_hoan_thanh.Text = "Hoàn thành";
             this.btn_hoan_thanh.Click += new System.EventHandler(this.btn_hoan_thanh_Click);
+            // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "STT";
+            this.Column1.Name = "Column1";
+            // 
+            // Column2
+            // 
+            this.Column2.HeaderText = "Phòng";
+            this.Column2.Name = "Column2";
+            // 
+            // Column3
+            // 
+            this.Column3.HeaderText = "Đơn giá";
+            this.Column3.Name = "Column3";
+            // 
+            // Column4
+            // 
+            this.Column4.HeaderText = "Thời gian";
+            this.Column4.Name = "Column4";
+            this.Column4.ReadOnly = true;
+            // 
+            // Column6
+            // 
+            this.Column6.HeaderText = "Thành tiền";
+            this.Column6.Name = "Column6";
             // 
             // ThanhToan
             // 
@@ -397,14 +390,13 @@
         private DevComponents.DotNetBar.LabelX labelX7;
         private System.Windows.Forms.Label label8;
         private DevComponents.DotNetBar.Controls.DataGridViewX GridHoaDon;
+        private DevComponents.DotNetBar.LabelX labelX8;
+        private System.Windows.Forms.Label lbTongTienHoaDon;
+        private DevComponents.DotNetBar.ButtonX btn_hoan_thanh;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
-        private DevComponents.DotNetBar.LabelX labelX8;
-        private System.Windows.Forms.Label lbTongTienHoaDon;
-        private DevComponents.DotNetBar.ButtonX btn_hoan_thanh;
     }
 }
