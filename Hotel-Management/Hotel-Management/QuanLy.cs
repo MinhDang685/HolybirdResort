@@ -546,10 +546,11 @@ namespace Hotel_Management
 
         private void btnTimKiemGiaoDichThanhToan_Click(object sender, EventArgs e)
         {
+            var HE1 = new HOLYBIRDRESORTEntities();
             string maDoan = tbTimKiemGiaoDichThanhToan.Text;
             if(maDoan != "")
             {
-                List<GiaoDich> lgd1 = HE.sp_LayGiaoDichTheoMaDoanDayDu(maDoan).ToList();
+                List<GiaoDich> lgd1 = HE1.sp_LayGiaoDichTheoMaDoanDayDu(maDoan).ToList();
                 if (lgd1.Count > 0)
                 {
                     GiaoDich gd2 = lgd1.Single();
